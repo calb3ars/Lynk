@@ -90,5 +90,14 @@ Vivian's primary responsibilities will be:
   + Emulator
   + Webpage
 
+## Future implementations
+- Google Place Search API
+- Loading Screen Animation
+- Pull reviews
+- Book through our app
+- Location Services Alert
+- Sidebar for Account Settings
+
+
 [results]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1491179096/flex/resultsDetail_tnzmjd.jpg
 [mapform]: http://res.cloudinary.com/dogzxn5h4/image/upload/c_scale,w_400/v1491179099/flex/mapForm_ynluyp.jpg
