@@ -77,8 +77,9 @@ Vivian's primary responsibilities will be:
 
 **Wednesday & Thursday**
 - Integration (Everyone)
-  + Google Maps and Lyft/Uber APIs
-  + Link to app by passing the data
+  + Google Maps: get latitude & longitude for current location and destination
+  + Lyft/Uber APIs: use google map lat & long to perform GET requests for ride info.
+  + Link to chosen app (Lyft/Uber) and passing the location data
   + Filtering and sorting of data
 
 **Friday**
