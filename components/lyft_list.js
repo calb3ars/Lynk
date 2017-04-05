@@ -28,5 +28,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-end',
+    shadowColor: '#0B4F6C',
+    shadowOffset: {
+      width: 0.5,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
   },
 });

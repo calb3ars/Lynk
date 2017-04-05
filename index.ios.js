@@ -26,7 +26,7 @@ export default class lynk extends Component {
 
     return (
       <View style={styles.container}>
-        <Image source={pic} style={{width: 375, height: 110}}/>
+        <Image source={pic} style={styles.logos}/>
         <RideResults />
     </View>
 
@@ -37,9 +37,13 @@ export default class lynk extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#D6FFE7',
-    marginTop: 20
+    backgroundColor: '#0B4F6C',
+    marginTop: 20,
+  },
 
+  logos: {
+    width: 375,
+    height: 140
   },
 
   listingsList: {

@@ -64,12 +64,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: '#0B4F6C'
   },
-
-  UberList: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-  }
-
-
 });
