@@ -28,6 +28,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-start',
-    marginLeft: 40,
+    // marginLeft: 40,
+    shadowColor: '#0B4F6C',
+    shadowOffset: {
+      width: 1,
+      height: 10
+    },
+    shadowOpacity: 0.1,
   },
 });

@@ -21,30 +21,33 @@ export default class LyftRideItem extends Component {
 
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   // backgroundColor: '#D6FFE7',
-  //   marginTop: 20
-  //
-  // },
-  //
-  // listingsList: {
-  //   flexDirection: 'row',
-  //   alignSelf: 'center',
-  // },
-
   listing: {
+    paddingTop: 10,
+    paddingRight: 20,
+    paddingBottom: 10,
+    width: 190,
     marginTop: 20,
     marginBottom: 20,
+    // borderWidth: 2,
+    // borderColor: '#0B4F6C',
+    // borderRightWidth: 0,
+    // shadowColor: '#0B4F6C',
+    shadowColor: '#083f56',
+    shadowOffset: {
+      height: 0
+    },
+    shadowOpacity: 0.4,
   },
 
   type: {
-    color: '#087E8B',
+    // color: '#087E8B',
+    color: '#D6FFE7',
     fontSize: 18,
   },
 
   cost: {
-    color: '#0B4F6C',
+    // color: '#0B4F6C',
+    color: '#D6FFE7',
     fontSize: 48,
   },
 
@@ -60,11 +63,12 @@ const styles = StyleSheet.create({
   },
 
   time: {
+    color: '#D6FFE7',
     fontSize: 16,
   },
 
   lyftListing: {
-    marginRight: 20
+    // marginRight: 20
   },
 
   lyftRideType: {
