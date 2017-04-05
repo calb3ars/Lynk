@@ -9,8 +9,10 @@ import {
   View
 } from 'react-native';
 
+
 export default class RideResults extends Component {
   render() {
+
     let ride1 = {
       display_name: 'Lyft Line',
       estimated_cost_cents_min: 475,
