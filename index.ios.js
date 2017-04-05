@@ -4,6 +4,8 @@
  * @flow
  */
 import React, { Component } from 'react';
+// import MapView from 'react-native-maps';
+// import RideItem from './components/ride_item';
 import LyftRideItem from './components/lyft_ride_item';
 import UberRideItem from './components/uber_ride_item';
 import LyftList from './components/lyft_list';
