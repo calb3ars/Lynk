@@ -4,13 +4,10 @@
  * @flow
  */
 import React, { Component } from 'react';
-<<<<<<< HEAD
 // import MapView from 'react-native-maps';
-import RideItem from './components/ride_item';
-=======
+// import RideItem from './components/ride_item';
 import LyftRideItem from './components/lyft_ride_item';
 import UberRideItem from './components/uber_ride_item';
->>>>>>> edadd1e03ff8bde396a94d287214646f5e9fe7c4
 import LyftList from './components/lyft_list';
 import UberList from './components/uber_list';
 import RideResults from './components/ride_results';
