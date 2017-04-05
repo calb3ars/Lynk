@@ -4,6 +4,10 @@
  * @flow
  */
 import React, { Component } from 'react';
+import RideItem from './components/ride_item';
+import LyftList from './components/lyft_list';
+import UberList from './components/uber_list';
+import RideResults from './components/ride_results';
 import {
   AppRegistry,
   StyleSheet,
@@ -12,18 +16,18 @@ import {
   View
 } from 'react-native';
 
-class LyftRides extends Component {
-  render() {
-    return(
-      <View style={styles.lyftListing, styles.listing}>
-        <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
-        <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.estimated_cost_cents_max / 100}</Text>
-        <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>
-        <Text style={[styles.lyftRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.estimated_duration_seconds / 60)} min</Text>
-      </View>
-    );
-  }
-}
+// class LyftRides extends Component {
+//   render() {
+//     return(
+//       <View style={styles.lyftListing, styles.listing}>
+//         <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
+//         <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.estimated_cost_cents_max / 100}</Text>
+//         <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>
+//         <Text style={[styles.lyftRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.estimated_duration_seconds / 60)} min</Text>
+//       </View>
+//     );
+//   }
+// }
 
 export default class lynk extends Component {
   render() {
@@ -31,56 +35,27 @@ export default class lynk extends Component {
       uri: 'https://2ecyvk3piszv4e6gv2yz9867-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/uber-and-lyft-side-by-side.png'
     };
 
-    let ride1 = {
-      display_name: 'Lyft Line',
-      estimated_cost_cents_min: 475,
-      estimated_cost_cents_max: 475,
-      primetime_percentage: "0%",
-      estimated_duration_seconds: 913
-    };
-
-    let ride2 = {
-      display_name: 'Lyft',
-      estimated_cost_cents_min: 1052,
-      estimated_cost_cents_max: 1755,
-      primetime_percentage: "25%",
-      estimated_duration_seconds: 913
-    };
-
-    let ride3 = {
-      display_name: 'UberPool',
-      estimated_cost_cents_min: 475,
-      estimated_cost_cents_max: 475,
-      primetime_percentage: "0%",
-      estimated_duration_seconds: 913
-    };
-
-    let ride4 = {
-      display_name: 'UberX',
-      estimated_cost_cents_min: 1052,
-      estimated_cost_cents_max: 1755,
-      primetime_percentage: "25%",
-      estimated_duration_seconds: 913
-    };
 
     return (
       <View style={styles.container}>
         <Image source={pic} style={{width: 375, height: 110}}/>
-        <View style={styles.listingsList}>
-          <View style={styles.lyft}>
-            <LyftRides ride={ride1} />
-            <LyftRides ride={ride2} />
-          </View>
-          <View style={styles.uber}>
-            <LyftRides ride={ride3} />
-            <LyftRides ride={ride4} />
-          </View>
-        </View>
+        <RideResults />
     </View>
 
     );
   }
 }
+
+// <View style={styles.listingsList}>
+//   <View style={styles.lyft}>
+//     <RideItem ride={ride1} />
+//     <RideItem ride={ride2} />
+//   </View>
+//   <View style={styles.uber}>
+//     <RideItem ride={ride3} />
+//     <RideItem ride={ride4} />
+//   </View>
+// </View>
 
 const styles = StyleSheet.create({
   container: {
@@ -95,55 +70,55 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  listing: {
-    marginTop: 20,
-    marginBottom: 20,
-  },
-
-  type: {
-    color: '#087E8B',
-    fontSize: 18,
-  },
-
-  cost: {
-    color: '#0B4F6C',
-    fontSize: 48,
-  },
-
-  dollar: {
-    fontSize: 20,
-
-  },
-
-  bonus: {
-    color: '#FF5A5F',
-    fontSize: 14,
-    marginTop: -2
-  },
-
-  time: {
-    fontSize: 16,
-  },
-
-  lyftListing: {
-    marginRight: 20
-  },
-
-  lyftRideType: {
-    textAlign: 'right'
-  },
-
-  lyftCost: {
-    textAlign: 'right'
-  },
-
-  lyftPrimeTime: {
-    textAlign: 'right'
-  },
-
-  lyftRideTime: {
-    textAlign: 'right'
-  },
+  // listing: {
+  //   marginTop: 20,
+  //   marginBottom: 20,
+  // },
+  //
+  // type: {
+  //   color: '#087E8B',
+  //   fontSize: 18,
+  // },
+  //
+  // cost: {
+  //   color: '#0B4F6C',
+  //   fontSize: 48,
+  // },
+  //
+  // dollar: {
+  //   fontSize: 20,
+  //
+  // },
+  //
+  // bonus: {
+  //   color: '#FF5A5F',
+  //   fontSize: 14,
+  //   marginTop: -2
+  // },
+  //
+  // time: {
+  //   fontSize: 16,
+  // },
+  //
+  // lyftListing: {
+  //   marginRight: 20
+  // },
+  //
+  // lyftRideType: {
+  //   textAlign: 'right'
+  // },
+  //
+  // lyftCost: {
+  //   textAlign: 'right'
+  // },
+  //
+  // lyftPrimeTime: {
+  //   textAlign: 'right'
+  // },
+  //
+  // lyftRideTime: {
+  //   textAlign: 'right'
+  // },
 
 
 
