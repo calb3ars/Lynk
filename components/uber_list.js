@@ -16,9 +16,18 @@ export default class UberList extends Component {
     ));
 
     return (
-      <View style={{alignItems: 'center', marginTop: 20}}>
+      <View style={styles.UberList}>
         {list}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  UberList: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginLeft: 40,
+  },
+});

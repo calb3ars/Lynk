@@ -29,18 +29,18 @@ export default class RideResults extends Component {
 
     let ride3 = {
       display_name: 'UberPool',
-      low_estimate: 475,
-      high_estimate: 475,
+      low_estimate: 13,
+      high_estimate: 15,
       primetime_percentage: "0%",
-      duration: 913
+      duration: 1080
     };
 
     let ride4 = {
       display_name: 'UberX',
-      low_estimate: 1052,
-      high_estimate: 1755,
+      low_estimate: 17,
+      high_estimate: 13,
       primetime_percentage: "25%",
-      duration: 913
+      duration: 1080
     };
 
     let lyftRides = [ride1, ride2];
@@ -48,10 +48,28 @@ export default class RideResults extends Component {
     let uberRides = [ride3, ride4];
 
     return (
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <LyftList rides={lyftRides} />
-        <UberList rides={uberRides} />
+      <View style={styles.rideResults}>
+        <LyftList style={[styles.rideResults, styles.lyftList]} rides={lyftRides} />
+        <UberList style={[styles.rideResults, styles.uberList]}rides={uberRides} />
       </View>
-    )
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  rideResults: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 20,
+    justifyContent: 'center',
+    // backgroundColor: '#0B4F6C'
+  },
+
+  UberList: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  }
+
+
+});

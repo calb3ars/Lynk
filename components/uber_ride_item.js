@@ -6,6 +6,9 @@ import {
   View
 } from 'react-native';
 
+// Uses Uber Ride Estimates - price - API endpoint
+// Endpoint Doesn't include Surge pricing
+//
 export default class UberRideItem extends Component {
   render() {
     return(
@@ -38,36 +41,38 @@ const styles = StyleSheet.create({
 
   dollar: {
     fontSize: 20,
-
   },
 
   bonus: {
     color: '#FF5A5F',
     fontSize: 14,
-    marginTop: -2
+    marginTop: -2,
+
   },
 
   time: {
     fontSize: 16,
+    textAlign: 'left',
   },
 
   uberListing: {
-    marginRight: 20
+    marginRight: 20,
+    textAlign: 'left',
   },
 
   uberRideType: {
-    textAlign: 'right'
+    textAlign: 'left',
   },
 
   uberCost: {
-    textAlign: 'right'
+    textAlign: 'left',
   },
 
   uberPrimeTime: {
-    textAlign: 'right'
+    textAlign: 'left'
   },
 
   uberRideTime: {
-    textAlign: 'right'
+    textAlign: 'left'
   },
 });

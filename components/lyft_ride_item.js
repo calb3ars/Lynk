@@ -11,7 +11,7 @@ export default class LyftRideItem extends Component {
     return(
       <View style={styles.lyftListing, styles.listing}>
         <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
-        <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.estimated_cost_cents_max / 100}</Text>
+        <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
         <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>
         <Text style={[styles.lyftRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.estimated_duration_seconds / 60)} min</Text>
       </View>

@@ -16,9 +16,17 @@ export default class LyftList extends Component {
     ));
 
     return (
-      <View style={{alignItems: 'center', marginTop: 20}}>
+      <View style={styles.LyftList}>
         {list}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  LyftList: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
+});
