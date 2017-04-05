@@ -24,11 +24,11 @@ export default class UberRideItem extends Component {
 
 const styles = StyleSheet.create({
   listing: {
-    paddingTop: 10,
+    paddingTop: 15,
     paddingLeft: 20,
-    paddingBottom: 10,
+    paddingBottom: 15,
     width: 190,
-    marginTop: 20,
+    marginTop: 0,
     marginBottom: 20,
     // shadowColor: '#0B4F6C',
     shadowColor: '#083f56',

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
   logos: {
     width: 375,
-    height: 140
+    height: 180
   },
 
   listingsList: {
