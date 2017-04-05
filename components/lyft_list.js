@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import RideItem from './components/ride_item';
-import RideItem from './ride_item';
+import LyftRideItem from './lyft_ride_item';
 import {
   StyleSheet,
   Text,
@@ -12,13 +12,21 @@ export default class LyftList extends Component {
     let list = [];
 
     this.props.rides.forEach((ride, idx) => (
-      list.push(<RideItem key={idx} ride={ride} />)
-    ))
+      list.push(<LyftRideItem key={idx} ride={ride} />)
+    ));
 
     return (
-      <View style={{alignItems: 'center', marginTop: 20}}>
+      <View style={styles.LyftList}>
         {list}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  LyftList: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
+});

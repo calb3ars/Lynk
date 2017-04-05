@@ -4,8 +4,13 @@
  * @flow
  */
 import React, { Component } from 'react';
+<<<<<<< HEAD
 // import MapView from 'react-native-maps';
 import RideItem from './components/ride_item';
+=======
+import LyftRideItem from './components/lyft_ride_item';
+import UberRideItem from './components/uber_ride_item';
+>>>>>>> edadd1e03ff8bde396a94d287214646f5e9fe7c4
 import LyftList from './components/lyft_list';
 import UberList from './components/uber_list';
 import RideResults from './components/ride_results';
@@ -37,7 +42,7 @@ export default class lynk extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#D6FFE7',
+    backgroundColor: '#D6FFE7',
     marginTop: 20
 
   },
@@ -49,44 +54,3 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('lynk', () => lynk);
-
-// Sample API Response
-//   "cost_estimates": [
-//     {
-//       "ride_type": "lyft_plus",
-//       "estimated_duration_seconds": 913,
-//       "estimated_distance_miles": 3.29,
-//       "estimated_cost_cents_max": 2355,
-//       "primetime_percentage": "25%",
-//       "currency": "USD",
-//       "estimated_cost_cents_min": 1561,
-//       "display_name": "Lyft Plus",
-//       "primetime_confirmation_token": null,
-//       "is_valid_estimate": true
-//     },
-//     {
-//       "ride_type": "lyft_line",
-//       "estimated_duration_seconds": 913,
-//       "estimated_distance_miles": 3.29,
-//       "estimated_cost_cents_max": 475,
-//       "primetime_percentage": "0%",
-//       "currency": "USD",
-//       "estimated_cost_cents_min": 475,
-//       "display_name": "Lyft Line",
-//       "primetime_confirmation_token": null,
-//       "is_valid_estimate": true
-//     },
-//     {
-//       "ride_type": "lyft",
-//       "estimated_duration_seconds": 913,
-//       "estimated_distance_miles": 3.29,
-//       "estimated_cost_cents_max": 1755,
-//       "primetime_percentage": "25%",
-//       "currency": "USD",
-//       "estimated_cost_cents_min": 1052,
-//       "display_name": "Lyft",
-//       "primetime_confirmation_token": null,
-//       "is_valid_estimate": true
-//     }
-//   ]
-// }
