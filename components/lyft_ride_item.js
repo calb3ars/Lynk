@@ -26,11 +26,12 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 15,
     width: 190,
-    marginBottom: 20,
+    marginBottom: 15,
     // borderWidth: 2,
     // borderColor: '#0B4F6C',
     // borderRightWidth: 0,
     // shadowColor: '#0B4F6C',
+    backgroundColor: '#0B4F6C',
     shadowColor: '#083f56',
     shadowOffset: {
       height: 0

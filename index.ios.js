@@ -39,7 +39,7 @@ export default class lynk extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B4F6C',
+    backgroundColor: '#041f2b',
     marginTop: 20,
   },
 

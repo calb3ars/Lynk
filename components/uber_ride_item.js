@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     width: 190,
     marginTop: 0,
-    marginBottom: 20,
+    marginBottom: 15,
+    backgroundColor: '#0B4F6C',
     // shadowColor: '#0B4F6C',
     shadowColor: '#083f56',
     shadowOffset: {
