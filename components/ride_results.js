@@ -29,18 +29,18 @@ export default class RideResults extends Component {
 
     let ride3 = {
       display_name: 'UberPool',
-      estimated_cost_cents_min: 475,
-      estimated_cost_cents_max: 475,
+      low_estimate: 475,
+      high_estimate: 475,
       primetime_percentage: "0%",
-      estimated_duration_seconds: 913
+      duration: 913
     };
 
     let ride4 = {
       display_name: 'UberX',
-      estimated_cost_cents_min: 1052,
-      estimated_cost_cents_max: 1755,
+      low_estimate: 1052,
+      high_estimate: 1755,
       primetime_percentage: "25%",
-      estimated_duration_seconds: 913
+      duration: 913
     };
 
     let lyftRides = [ride1, ride2];

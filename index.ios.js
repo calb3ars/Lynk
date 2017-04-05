@@ -4,7 +4,8 @@
  * @flow
  */
 import React, { Component } from 'react';
-import RideItem from './components/ride_item';
+import LyftRideItem from './components/lyft_ride_item';
+import UberRideItem from './components/uber_ride_item';
 import LyftList from './components/lyft_list';
 import UberList from './components/uber_list';
 import RideResults from './components/ride_results';

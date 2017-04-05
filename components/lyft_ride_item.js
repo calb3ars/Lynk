@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-export default class RideItem extends Component {
+export default class LyftRideItem extends Component {
   render() {
     return(
       <View style={styles.lyftListing, styles.listing}>

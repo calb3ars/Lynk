@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import RideItem from './components/ride_item';
-import RideItem from './ride_item';
+import UberRideItem from './uber_ride_item';
 import {
   StyleSheet,
   Text,
@@ -12,8 +12,8 @@ export default class UberList extends Component {
     let list = [];
 
     this.props.rides.forEach((ride, idx) => (
-      list.push(<RideItem key={idx} ride={ride} />)
-    ))
+      list.push(<UberRideItem key={idx} ride={ride} />)
+    ));
 
     return (
       <View style={{alignItems: 'center', marginTop: 20}}>
