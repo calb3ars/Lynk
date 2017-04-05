@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 
-class Map extends Component {
+class MyMap extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -39,4 +39,5 @@ const styles = StyleSheet.create({
     left: 0,
   }
 });
-export default Map;
+
+export default MyMap;
