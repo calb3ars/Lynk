@@ -1,0 +1,39 @@
+import React, { Component } from 'react';
+// import RideItem from './components/ride_item';
+import UberRideItem from './uber_ride_item';
+import {
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+
+export default class UberList extends Component {
+  render(){
+    let list = [];
+
+    this.props.rides.forEach((ride, idx) => (
+      list.push(<UberRideItem key={idx} ride={ride} />)
+    ));
+
+    return (
+      <View style={styles.UberList}>
+        {list}
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  UberList: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    // marginLeft: 40,
+    shadowColor: '#0B4F6C',
+    shadowOffset: {
+      width: 1,
+      height: 10
+    },
+    shadowOpacity: 0.1,
+  },
+});
