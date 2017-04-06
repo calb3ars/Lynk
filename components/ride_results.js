@@ -12,47 +12,50 @@ import {
 
 
 export default class RideResults extends Component {
+
   render() {
-    let lyftData = {
-      "cost_estimates": [
-        {
-          "ride_type": "lyft_plus",
-          "estimated_duration_seconds": 913,
-          "estimated_distance_miles": 3.29,
-          "estimated_cost_cents_max": 2355,
-          "primetime_percentage": "25%",
-          "currency": "USD",
-          "estimated_cost_cents_min": 1561,
-          "display_name": "Lyft Plus",
-          "primetime_confirmation_token": null,
-          "is_valid_estimate": true
-        },
-        {
-          "ride_type": "lyft_line",
-          "estimated_duration_seconds": 913,
-          "estimated_distance_miles": 3.29,
-          "estimated_cost_cents_max": 475,
-          "primetime_percentage": "0%",
-          "currency": "USD",
-          "estimated_cost_cents_min": 475,
-          "display_name": "Lyft Line",
-          "primetime_confirmation_token": null,
-          "is_valid_estimate": true
-        },
-        {
-          "ride_type": "lyft",
-          "estimated_duration_seconds": 913,
-          "estimated_distance_miles": 3.29,
-          "estimated_cost_cents_max": 1755,
-          "primetime_percentage": "25%",
-          "currency": "USD",
-          "estimated_cost_cents_min": 1052,
-          "display_name": "Lyft",
-          "primetime_confirmation_token": null,
-          "is_valid_estimate": true
-        }
-      ]
-    }
+    console.log(this.props.lyftRides);
+
+    // let lyftData = {
+    //   "cost_estimates": [
+    //     {
+    //       "ride_type": "lyft_plus",
+    //       "estimated_duration_seconds": 913,
+    //       "estimated_distance_miles": 3.29,
+    //       "estimated_cost_cents_max": 2355,
+    //       "primetime_percentage": "25%",
+    //       "currency": "USD",
+    //       "estimated_cost_cents_min": 1561,
+    //       "display_name": "Lyft Plus",
+    //       "primetime_confirmation_token": null,
+    //       "is_valid_estimate": true
+    //     },
+    //     {
+    //       "ride_type": "lyft_line",
+    //       "estimated_duration_seconds": 913,
+    //       "estimated_distance_miles": 3.29,
+    //       "estimated_cost_cents_max": 475,
+    //       "primetime_percentage": "0%",
+    //       "currency": "USD",
+    //       "estimated_cost_cents_min": 475,
+    //       "display_name": "Lyft Line",
+    //       "primetime_confirmation_token": null,
+    //       "is_valid_estimate": true
+    //     },
+    //     {
+    //       "ride_type": "lyft",
+    //       "estimated_duration_seconds": 913,
+    //       "estimated_distance_miles": 3.29,
+    //       "estimated_cost_cents_max": 1755,
+    //       "primetime_percentage": "25%",
+    //       "currency": "USD",
+    //       "estimated_cost_cents_min": 1052,
+    //       "display_name": "Lyft",
+    //       "primetime_confirmation_token": null,
+    //       "is_valid_estimate": true
+    //     }
+    //   ]
+    // }
 
     let uberData = {
       "prices": [
@@ -158,46 +161,12 @@ export default class RideResults extends Component {
       ]
     }
 
-    let ride1 = {
-      display_name: 'Lyft Line',
-      estimated_cost_cents_min: 475,
-      estimated_cost_cents_max: 475,
-      primetime_percentage: "0%",
-      estimated_duration_seconds: 913
-    };
-
-    let ride2 = {
-      display_name: 'Lyft',
-      estimated_cost_cents_min: 1052,
-      estimated_cost_cents_max: 1755,
-      primetime_percentage: "25%",
-      estimated_duration_seconds: 913
-    };
-
-    let ride3 = {
-      display_name: 'UberPool',
-      low_estimate: 13,
-      high_estimate: 15,
-      primetime_percentage: "0%",
-      duration: 1080
-    };
-
-    let ride4 = {
-      display_name: 'UberX',
-      low_estimate: 17,
-      high_estimate: 13,
-      primetime_percentage: "25%",
-      duration: 1080
-    };
-    debugger;
-    // let lyftRides = [ride1, ride2];
-    let lyftRides = Parsers.LyftParser(lyftData);
-    // let uberRides = [ride3, ride4];
+    // let lyftRides = Parsers.LyftParser(lyftData);
     let uberRides = Parsers.UberParser(uberData);
 
     return (
       <View style={styles.rideResults}>
-        <LyftList style={[styles.rideResults, styles.lyftList]} rides={lyftRides} />
+        <LyftList style={[styles.rideResults, styles.lyftList]} rides={this.props.lyftRides} />
         <UberList style={[styles.rideResults, styles.uberList]} rides={uberRides} />
       </View>
     );
@@ -210,6 +179,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 20,
     justifyContent: 'center',
-    // backgroundColor: '#0B4F6C'
   },
 });
