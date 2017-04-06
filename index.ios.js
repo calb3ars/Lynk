@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 // import MapView from 'react-native-maps';
 // import RideItem from './components/ride_item';
 import LyftRideItem from './components/lyft_ride_item';
@@ -11,52 +11,76 @@ import UberRideItem from './components/uber_ride_item';
 import LyftList from './components/lyft_list';
 import UberList from './components/uber_list';
 import RideResults from './components/ride_results';
+import Navbar from './map_view_component.js';
 import {
   AppRegistry,
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  NavigatorIOS,
+  StatusBar
 } from 'react-native';
 import MapView from 'react-native-maps';
 
 import MyMap from './map_view_component.js';
 
+
+// tintColor='ghostwhite'
+// barTintColor='ghostwhite'
 export default class lynk extends Component {
   render() {
-   return (
-      <MyMap />
+    return (
+        <NavigatorIOS
+          titleTextColor='gray'
+          initialRoute={{
+            component: MyMap,
+            title: 'Welcome to Lynk'
+          }}
+          style={styles.wrapper}/>
     );
   }
 }
-
+// title: 'My Map'
+// <View style={styles.container}>
+// </View>
+// <MyMap />
 const styles = StyleSheet.create({
-   map: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
+  wrapper: {
+    flex: 1
   }
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#F5FCFF',
+//   },
+//    map: {
+//     position: 'absolute',
+//     top: 0,
+//     bottom: 0,
+//     right: 0,
+//     left: 0,
+//   }
 });
-    
+
 //      let pic = {
 //       uri: 'https://2ecyvk3piszv4e6gv2yz9867-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/uber-and-lyft-side-by-side.png'
 //     };
-    
-    
+
+
 //     <View style={styles.container}>
 //         <Image source={pic} style={styles.logos}/>
 //         <RideResults />
 //     </View>
-   
+
 
 //   container: {
 //     flex: 1,
 //     backgroundColor: '#0B4F6C',
 //     marginTop: 20,
 //   },
-    
+
 //   logos: {
 //     width: 375,
 //     height: 140
