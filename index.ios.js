@@ -13,85 +13,15 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-// import MyMap from 'map_view_component.jsx';
-
-class MyMap extends Component {
-  render() {
-    return (
-      <View style={styles.mapContainer}>
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          mapType='standard'
-          showsUserLocation={true}>
-        </MapView>
-      </View>
-    );
-  }
-}
+import MyMap from './map_view_component.js';
 
 export default class lynk extends Component {
   render() {
     return (
-
-      <View style={styles.container}>
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          mapType='standard'
-          showsUserLocation={true}>
-        </MapView>
-        <Text style={{fontSize: 20, textAlign: 'center'}}>Guess who got the map to render on LYNK!</Text>
-      </View>
+      <MyMap />
     );
   }
 }
-// <Text style={styles.welcome}>
-//   Welcome to React Native!
-// </Text>
-// <Text style={styles.instructions}>
-//   To get started, edit index.ios.js
-// </Text>
-// <Text style={styles.instructions}>
-//   Press Cmd+R to reload,{'\n'}
-//   Cmd+D or shake for dev menu
-// </Text>
-
-// <View style={styles.container}>
-//   <Text style={{fontSize: 20, textAlign: 'center'}}>Hello!</Text>
-// </View>
-// <MapView
-//   style={styles.map}
-//   initialRegion={{
-//     latitude: 37.78825,
-//     longitude: -122.4324,
-//     latitudeDelta: 0.0922,
-//     longitudeDelta: 0.0421,
-//   }}
-//   mapType='standard'
-//   showsUserLocation={true}>
-// </MapView>
-
-// <MapView
-//   style={styles.map}
-//   initialRegion={{
-//     latitude: 37.78825,
-//     longitude: -122.4324,
-//     latitudeDelta: 0.0922,
-//     longitudeDelta: 0.0421,
-//   }}
-//   mapType='standard'
-//   showsUserLocation={true}/>
 
 const styles = StyleSheet.create({
   container: {
@@ -100,30 +30,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  // container: {
-  //   flex: 1
-  // },
-  // container: {
-  //   position: 'absolute',
-  //   top: 0,
-  //   left: 0,
-  //   right: 0,
-  //   bottom: 0,
-  //   flex: 1,
-  //   justifyContent: 'flex-end',
-  //   alignItems: 'center',
-  // },
-
   map: {
     position: 'absolute',
     top: 0,

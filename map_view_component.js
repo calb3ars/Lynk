@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MapView from 'react-native-maps';
 import {
+  StyleSheet,
   View,
   Text
 } from 'react-native';
@@ -26,10 +27,12 @@ class MyMap extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   map: {
     position: 'absolute',
