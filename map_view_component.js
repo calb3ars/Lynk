@@ -6,18 +6,26 @@ import {
   Text,
   NavigatorIOS,
   TouchableHighlight,
-  StatusBar
+  StatusBar,
+  TextInput
 } from 'react-native';
+import InputForm from './input_form.js';
 import NextPg from './next_pg.js';
 
-
 class MyMap extends Component {
+  constructor() {
+    super();
+    // this.state = {currentLocation: "Current Location", destination: "Destination"};
+    this.state = { text: 'Current Location'};
+  }
+
   _handleBackPress() {
     this.props.navigator.pop();
   }
 
   _handleNextPress(nextRoute) {
     this.props.navigator.push(nextRoute);
+    this.state.setState({currentLocation: "123 Spear St. San Francisco, CA"});
   }
 
   render() {
@@ -25,6 +33,7 @@ class MyMap extends Component {
       component: NextPg,
       title: 'Lynk'
     };
+    const currentLocation = this.state.currentLocation;
 
     return (
       <View style={styles.container}>
@@ -43,6 +52,12 @@ class MyMap extends Component {
           showsUserLocation={true}
           zoomEnabled={true}>
         </MapView>
+        <View style={{borderBottomColor: 'black'}}>
+          <TextInput
+            style={styles.inputForm}
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text} />
+        </View>
         <TouchableHighlight style={styles.touchable} onPress={() => this._handleNextPress(nextRoute)}>
           <Text style={styles.text}>See you on the next page!</Text>
         </TouchableHighlight>
@@ -67,20 +82,34 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingTop: 10,
-    paddingBottom: 20,
-    paddingRight: 20,
-    paddingLeft: 20,
+    paddingBottom: 10,
+    paddingRight: 10,
+    paddingLeft: 10,
     fontSize: 20,
     borderWidth: 1,
+    borderRadius: 5,
     borderColor: 'black',
     backgroundColor: 'ghostwhite'
   },
   touchable: {
     // flex: 1,
-    top: 300,
+    top: 275,
     right: 0,
     left: 0,
-    bottom: 0,
+    bottom: 0
+  },
+  inputForm: {
+    height: 40,
+    width: 300,
+    borderColor: 'gray',
+    borderWidth: 1,
+    backgroundColor: 'ghostwhite',
+    // justifyContent: 'center'
+    textAlign: 'center',
+    top: 200,
+    right: 0,
+    left: 0,
+    bottom: 0
   }
 });
 

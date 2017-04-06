@@ -26,16 +26,17 @@ import MapView from 'react-native-maps';
 import MyMap from './map_view_component.js';
 
 
-// tintColor='ghostwhite'
 // barTintColor='ghostwhite'
 export default class lynk extends Component {
   render() {
     return (
         <NavigatorIOS
           titleTextColor='gray'
+          tintColor='gray'
+
           initialRoute={{
             component: MyMap,
-            title: 'Welcome to Lynk'
+            title: 'Map'
           }}
           style={styles.wrapper}/>
     );
