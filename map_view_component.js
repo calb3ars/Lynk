@@ -7,16 +7,17 @@ import {
   NavigatorIOS,
   TouchableHighlight,
   StatusBar,
-  TextInput
+  TextInput,
 } from 'react-native';
 import InputForm from './input_form.js';
 import NextPg from './next_pg.js';
+import  Button  from 'react-native-button';
 
 class MyMap extends Component {
   constructor() {
     super();
     // this.state = {currentLocation: "Current Location", destination: "Destination"};
-    this.state = { text: 'Current Location'};
+    this.state = { currentLocation: 'Current Location', destination: 'Destination' };
   }
 
   _handleBackPress() {
@@ -25,7 +26,7 @@ class MyMap extends Component {
 
   _handleNextPress(nextRoute) {
     this.props.navigator.push(nextRoute);
-    this.state.setState({currentLocation: "123 Spear St. San Francisco, CA"});
+    // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
   }
 
   render() {
@@ -33,7 +34,6 @@ class MyMap extends Component {
       component: NextPg,
       title: 'Lynk'
     };
-    const currentLocation = this.state.currentLocation;
 
     return (
       <View style={styles.container}>
@@ -55,16 +55,28 @@ class MyMap extends Component {
         <View style={{borderBottomColor: 'black'}}>
           <TextInput
             style={styles.inputForm}
-            onChangeText={(text) => this.setState({text})}
-            value={this.state.text} />
+            onChangeText={(currentLocation) => this.setState({currentLocation})}
+            value={this.state.currentLocation} />
+          <TextInput
+            style={styles.inputForm}
+            onChangeText={(destination) => this.setState({destination})}
+            value={this.state.destination} />
         </View>
-        <TouchableHighlight style={styles.touchable} onPress={() => this._handleNextPress(nextRoute)}>
-          <Text style={styles.text}>See you on the next page!</Text>
-        </TouchableHighlight>
+          <Button
+            onPress={() => this._handleNextPress(nextRoute)}
+            containerStyle={styles.buttonContainer}
+            style={{color: 'white', fontSize: 18}}>
+            Press Me!
+          </Button>
       </View>
     );
   }
 }
+// <TouchableHighlight
+//   style={styles.touchable}
+//   onPress={() => this._handleNextPress(nextRoute)}
+//   >
+// </TouchableHighlight>
 
 const styles = StyleSheet.create({
   container: {
@@ -80,33 +92,32 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
   },
-  text: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingRight: 10,
-    paddingLeft: 10,
-    fontSize: 20,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: 'black',
-    backgroundColor: 'ghostwhite'
-  },
-  touchable: {
-    // flex: 1,
-    top: 275,
-    right: 0,
-    left: 0,
-    bottom: 0
-  },
   inputForm: {
-    height: 40,
-    width: 300,
+    height: 35,
+    width: 280,
     borderColor: 'gray',
     borderWidth: 1,
+    borderRadius: 4,
     backgroundColor: 'ghostwhite',
     // justifyContent: 'center'
     textAlign: 'center',
-    top: 200,
+    top: 230,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    marginTop: 10
+  },
+  button: {
+
+  },
+  buttonContainer: {
+    padding: 10,
+    height: 35,
+    width: 280,
+    overflow: 'hidden',
+    borderRadius: 4,
+    backgroundColor: 'grey',
+    top: 240,
     right: 0,
     left: 0,
     bottom: 0
