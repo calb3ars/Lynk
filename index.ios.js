@@ -4,13 +4,8 @@
  * @flow
  */
 import React, { Component } from 'react';
-// import MapView from 'react-native-maps';
-// import RideItem from './components/ride_item';
-import LyftRideItem from './components/lyft_ride_item';
-import UberRideItem from './components/uber_ride_item';
-import LyftList from './components/lyft_list';
-import UberList from './components/uber_list';
-import RideResults from './components/ride_results';
+// import Results from './components/results';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -24,6 +19,7 @@ import MyMap from './map_view_component.js';
 
 export default class lynk extends Component {
   render() {
+
    return (
       <MyMap />
     );
