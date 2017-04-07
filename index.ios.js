@@ -11,7 +11,7 @@ import UberRideItem from './components/uber_ride_item';
 import LyftList from './components/lyft_list';
 import UberList from './components/uber_list';
 import RideResults from './components/ride_results';
-import Navbar from './map_view_component.js';
+import Navbar from './components/map_view_component';
 // import Results from './components/results';
 
 
@@ -26,7 +26,7 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-import MyMap from './map_view_component.js';
+import MyMap from './components/map_view_component';
 
 
 // barTintColor='#4682b4'

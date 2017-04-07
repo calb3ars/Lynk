@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import MapView from 'react-native-maps';
+// import NextPg from './next_pg.js';
+import Results from './results';
+import Button  from 'react-native-button';
 import {
   StyleSheet,
   View,
@@ -10,15 +13,15 @@ import {
   TextInput,
   KeyboardAvoidingView
 } from 'react-native';
-import NextPg from './next_pg.js';
-import  Button  from 'react-native-button';
+
+
 
 class MyMap extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      currentLocation: 'Current Location', 
+      currentLocation: 'Current Location',
       destination: 'Destination',
       region:
         new MapView.AnimatedRegion({
@@ -31,7 +34,7 @@ class MyMap extends Component {
 
     this.onRegionChange = this.onRegionChange.bind(this);
   }
-  
+
     _handleBackPress() {
     this.props.navigator.pop();
   }
@@ -65,8 +68,8 @@ class MyMap extends Component {
 
   render() {
     const nextRoute = {
-      component: NextPg,
-      title: 'Lynk'
+      component: Results,
+      title: 'Results'
     }
     let marker = {
       latlng: {
@@ -100,7 +103,7 @@ class MyMap extends Component {
             title={marker.title}
             description={marker.description}
           />
-      
+
       </MapView.Animated>
       <View style={{borderBottomColor: 'black'}}>
           <TextInput
