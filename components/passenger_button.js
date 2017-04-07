@@ -47,18 +47,17 @@ class PassengerButton extends Component {
           selectedOption={this.state.selectedOption}
           textAlign={'center'}
 
-          tint= {'#FF5A5F'}
-          backTint= {'#0B4F6C'}
+          tint= {'#26C4E0'}
+          backTint= {'#233D4D'}
 
-          selectedTint= {'#0B4F6C'}
-          selectedBackgroundColor= {'#D6FFE7'}
+          selectedTint= {'#ABF2EB'}
+          selectedBackgroundColor= {'#387691'}
 
           separatorTint= {'#083f56'}
           separatorWidth= {2}
 
           containerBorderTint= {'#083f56'}
           containerBorderWidth= {2}
-          containerBorderRadius= {4}
 
           optionStyle={{
             fontSize: 20,
@@ -68,13 +67,10 @@ class PassengerButton extends Component {
             shadowOffset: {
               height: 2
             },
-            shadowOpacity: 0.075,
+            shadowOpacity: 0.1,
           }}
 
-          containerStyle= {{
-            marginLeft: 10,
-            marginRight: 10,
-          }}
+
         />
     );
   }
@@ -83,11 +79,8 @@ class PassengerButton extends Component {
 const styles = StyleSheet.create({
   passengerContainerStyle: {
     // position: 'absolute',
-    marginTop: 40,
-    height: 50,
-    width: 400,
-    borderRadius: 0,
-    marginLeft: 8,
+    height: 45,
+
   },
 
 });

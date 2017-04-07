@@ -109,15 +109,20 @@ class Form extends Component {
         <TextInput
           style={styles.inputForm}
           placeholder="Current Location"
+          placeholderTextColor= '#26C4E0'
           onChangeText={(currentLocation) => this.setState({currentLocation})}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
+          placeholderTextColor= '#26C4E0'
           onChangeText={(destination) => this.setState({destination})}
           value={this.state.destination} />
       </View>
+      <View style={styles.passengerContainer}>
+        <Text style={styles.passengerText}># Passengers</Text>
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
+      </View>
         <Button
           disabled={this.unfilledForm}
           onPress={() => this.handleButtonPress(nextRoute)}
@@ -134,13 +139,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'center'
   },
   formContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 350
   },
   map: {
     position: 'absolute',
@@ -152,31 +157,42 @@ const styles = StyleSheet.create({
   inputForm: {
     height: 35,
     width: 310,
-    borderColor: 'gray',
+    borderColor: '#083f56',
+    color: '#26C4E0',
     borderWidth: 1,
     borderRadius: 4,
-    backgroundColor: 'ghostwhite',
+    backgroundColor: '#083f56',
     // justifyContent: 'center'
     textAlign: 'center',
-    top: 200,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    marginTop: 12
+    marginTop: 10,
+  },
+  passengerContainer: {
+    backgroundColor: '#083f56',
+    width: 310,
+    borderRadius: 4,
+    marginTop: 10
+  },
+  passengerText: {
+    textAlign: 'center',
+    // fontWeight: 'bold',
+    fontSize: 18,
+    padding: 5,
+    color: '#26C4E0',
+    borderRadius: 4,
   },
   button: {
-    color: 'white',
+    color: '#26C4E0',
     fontSize: 18,
   },
   buttonContainer: {
     justifyContent: 'center',
+    marginTop: 10,
     padding: 10,
-    height: 80,
+    height: 60,
     width: 310,
     overflow: 'hidden',
     borderRadius: 4,
-    backgroundColor: '#4682b4',
-    top: 212,
+    backgroundColor: '#233D4D',
     right: 0,
     left: 0,
     bottom: 0
