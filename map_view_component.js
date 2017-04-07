@@ -47,8 +47,8 @@ class MyMap extends Component {
   render() {
     let marker = {
       latlng: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 37.791557,
+        longitude: -122.393171,
       },
       title: 'Destination',
       description: 'testPin'
