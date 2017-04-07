@@ -140,8 +140,13 @@ class Form extends Component {
       </View>
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
         <Button
+<<<<<<< HEAD
           disabled={false}
           onPress={() => this.handleButtonPress()}
+=======
+
+          onPress={() => this.handleButtonPress(nextRoute)}
+>>>>>>> ef62a76eadde0c840fe8581f43787d4ad77db3af
           style={styles.button}
           containerStyle={styles.buttonContainer}>
           FIND A RIDE!
