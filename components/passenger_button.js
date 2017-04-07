@@ -1,36 +1,75 @@
 import React, { Component } from 'react';
-import SegmentedControlTab from 'react-native-segmented-control-tab';
+// import SegmentedControlTab from 'react-native-segmented-control-tab';
+import { SegmentedControls } from 'react-native-radio-buttons';
 import {
   StyleSheet,
   View,
   Text
 } from 'react-native';
 
+const options = [
+  '1 - 2',
+  '3 - 4',
+  '5+'
+];
 
 class PassengerButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: 0,
+      selectedOption: options[0]
     };
+      this.setSelectedOption = this.setSelectedOption.bind(this);
   }
 
-  handleIndexChange = (index) => {
+  // handleIndexChange = (index) => {
+  //   this.setState({
+  //     ...this.state,
+  //     selectedIndex: index,
+  //   });
+  // }
+
+  setSelectedOption(option) {
     this.setState({
-      ...this.state,
-      selectedIndex: index,
+      selectedOption: option
     });
+
   }
 
   render() {
+
     return (
-        <SegmentedControlTab
-          values={['1-2', '3-4', '5+']}
-          selectedIndex={this.state.selectedIndex}
-          onTabPress={this.handleIndexChange}
-          tabsContainerStyle={styles.passengerContainerStyle}
-          tint={'#D6FFE7'}
-          optionStyles={{fontFamily: 'AvenirNext-Medium'}}
+      <SegmentedControls
+          options={ options }
+          onSelection={ this.setSelectedOption }
+          selectedOption={this.state.selectedOption}
+          textAlign={'center'}
+
+          tint= {'#D6FFE7'}
+          backTint= {'#0B4F6C'}
+
+          selectedTint= {'#0B4F6C'}
+          selectedBackgroundColor= {'#D6FFE7'}
+
+          separatorTint= {'#FF5A5F'}
+          separatorWidth= {2}
+
+          containerBorderTint= {'#FF5A5F'}
+          containerBorderWidth= {2}
+          containerBorderRadius= {3}
+
+          optionStyle={{
+            fontSize: 20,
+            fontWeight: 'bold',
+            padding: 10,
+          }}
+
+          containerStyle= {{
+            marginLeft: 10,
+            marginRight: 10,
+            position: 'absolute',
+            top: 400,
+          }}
         />
     );
   }
