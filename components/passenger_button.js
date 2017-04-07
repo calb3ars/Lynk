@@ -29,11 +29,12 @@ class PassengerButton extends Component {
   //   });
   // }
 
+
   setSelectedOption(option) {
     this.setState({
       selectedOption: option
     });
-
+    this.props.updateRiders(this.state.selectedOption);
   }
 
   render() {

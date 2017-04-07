@@ -13,6 +13,7 @@ import UberList from './components/uber_list';
 import RideResults from './components/ride_results';
 import Navbar from './components/map_view_component';
 // import Results from './components/results';
+import Main from './components/main';
 
 
 import {
@@ -38,7 +39,7 @@ export default class lynk extends Component {
           tintColor='black'
           translucent={true}
           initialRoute={{
-            component: MyMap,
+            component: Main,
             title: 'Map',
             backButtonTitle: 'Back'
           }}
