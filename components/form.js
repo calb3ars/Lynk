@@ -3,6 +3,7 @@ import Results from './results';
 import MyMap from './map_view_component';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
+import Location from './components/geocoder.js';
 import {
   StyleSheet,
   View,
@@ -18,14 +19,16 @@ class Form extends Component {
   constructor(props){
     super(props);
     this.state = {
-      startLon: undefined,
+      startLng: undefined,
       startLat: undefined,
-      endLon: undefined,
+      endLng: undefined,
       endLat: undefined,
       riders: undefined,
+      lyftToken: undefined,
+      startAddress: undefined,
+      endAddress: undefined,
       error: ""
     };
-    this.update.bind(this);
     this.updateRiders.bind(this);
     this.updateDest.bind(this);
     this.unfilledForm = true;
@@ -46,6 +49,27 @@ class Form extends Component {
     );
   }
 
+  fetchLyftToken(){
+    let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
+    let url = 'https://api.lyft.com/oauth/token';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic '+ lyft_token
+      },
+      body: JSON.stringify({
+        "grant_type": "client_credentials",
+        "scope": "public"
+      })
+    }).then(response => {
+        response.json().then(data => {
+        this.setState({lyftToken:`${data.access_token}`});
+      });
+    });
+  }
+
+
   shouldComponentUpdate(){
     if(this.state.endLat !== undefined &&
         this.state.endLon !== undefined &&
@@ -60,13 +84,8 @@ class Form extends Component {
     }
   }
 
-  update(property) {
-    return e => this.setState({
-      [property]: e.target.value
-    });
-  }
-
   handleSubmit() {
+    this.fetchLyftToken();
 
   }
 
@@ -90,37 +109,39 @@ class Form extends Component {
     // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
   }
 
-  handleButtonPress(nextRoute){
+  handleButtonPress(){
+    this.fetchLyftToken();
+    let nextRoute = {
+      component: Results,
+      title: 'Results',
+      passProps: { form: this.state }
+    };
     // this.form.handleSubmit()
     //   .then
-      (this._handleNextPress(nextRoute));
+      this._handleNextPress(nextRoute);
   }
 
   // <DestButton updateDest={this.updateDest}/>
   render(){
 
-    const nextRoute = {
-      component: Results,
-      title: 'Results'
-    };
     return(
       <View style={styles.formContainer}>
       <View style={{borderBottomColor: 'black'}}>
         <TextInput
           style={styles.inputForm}
           placeholder="Current Location"
-          onChangeText={(currentLocation) => this.setState({currentLocation})}
+          onChangeText={(startAddress) => this.setState({startAddress})}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
-          onChangeText={(destination) => this.setState({destination})}
+          onChangeText={(endAddress) => this.setState({endAddress})}
           value={this.state.destination} />
       </View>
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
         <Button
-          disabled={this.unfilledForm}
-          onPress={() => this.handleButtonPress(nextRoute)}
+          disabled={false}
+          onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
           FIND A RIDE!

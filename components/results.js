@@ -36,12 +36,12 @@ export default class Results extends Component {
     }).then(response => {
         response.json().then(data => {
         this.setState({lyftToken:`${data.access_token}`});
-      })
-    })
+      });
+    });
   }
 
   fetchLyftList(){
-    let lyftToken = 'gAAAAABY5nUfGOyiWTrifS7QLS2wTR8KK5HPzyLPaMT62tiJ_D4gJZPl3kgewYFYgzHhT7XA2rMOixRIKtE2HJAeblN5Q2ShJUE20svpxHnp6pj0LprqQC0X-eUDEWyGu9f_yYf1JRJJmZw8XXAeFOI5LJu8F4BIuB3NxO7O9D8sv6vhe0rSanWH94ObJY8YbeL_o6NhsRItue0BN6PKY6979l1TcyzT4w==';
+    let lyftToken = "gAAAAABY58mK-kpTZIayKvea1btHRMI0VSmebCamPzAqVxEW5o4FuHctaXndrYzrkrCvbPTdCRGIOZi3hZC-gymr4KLBkeapK6omhmuNZDeMbNq2LaprdUVCpG4GRCBoS2Hg5SDD59wNAqeMlavVpTz86xO3QtlJJSyW0xJkAPG1fhCWk84-nuhUUOjzZDaJah1rPTupxtedgmqTAHuCY8oSg8WoeYhSSQ==";
     let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533';
     fetch(ride_url,{
       method: 'GET',

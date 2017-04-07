@@ -6,19 +6,17 @@ class Location extends Component {
   constructor() {
     super();
     this.state = {lat: "", lng: ""};
-
-    this.fetchCoords();
   }
 
-  fetchCoords() {
+  fetchCoords(address) {
     Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
-    Geocoder.getFromLocation("Palace of Fine Arts").then(
+    Geocoder.getFromLocation(address).then(
       json => {
         let location = json.results[0].geometry.location;
         this.setState({lat: location.lat, lng: location.lng});
-        console.log(location.lat + "," + location.lng);
       }
     );
+    return this.state;
   }
 
   render() {
