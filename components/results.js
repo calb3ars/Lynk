@@ -67,15 +67,9 @@ export default class Results extends Component {
         'Accept-Language': 'en_US'
       }
     }).then(response => {
-      // console.log(response);
-      // console.log(counter++);
-      // console.log(response.json());
       response.json().then(promise => {
-        // console.log(counter++);
-        // console.log(promise);
         this.setState({uberRides: Parsers.UberParser(promise)})
 
-        // console.log(`uberrides === ${this.state.uberRides}`);
       })
     })
   }
@@ -94,7 +88,7 @@ export default class Results extends Component {
     //   console.log(this.state.uberData._65.products);
     // }
 
-    if (this.state.lyftRides ){
+    if (this.state.lyftRides && this.state.uberRides){
       return (
         <View style={styles.container}>
           <Image source={pic} style={styles.logos}/>
