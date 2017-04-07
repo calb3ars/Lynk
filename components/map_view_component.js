@@ -71,7 +71,7 @@ class MyMap extends Component {
     const nextRoute = {
       component: Results,
       title: 'Results'
-    }
+    };
     let marker = {
       latlng: {
         latitude: 37.791557,
@@ -81,12 +81,11 @@ class MyMap extends Component {
       description: 'testPin'
     };
 
+    // <StatusBar
+    //   barStyle="dark-content"
+    //   />
     return (
-      <View style={styles.container}>
 
-        <StatusBar
-          barStyle="dark-content"
-          />
 
         <MapView.Animated
           style={styles.map}
@@ -106,27 +105,28 @@ class MyMap extends Component {
           />
 
       </MapView.Animated>
-      <View style={{borderBottomColor: 'black'}}>
-          <TextInput
-            style={styles.inputForm}
-            onChangeText={(currentLocation) => this.setState({currentLocation})}
-            value={this.state.currentLocation} />
-          <TextInput
-            style={styles.inputForm}
-            onChangeText={(destination) => this.setState({destination})}
-            value={this.state.destination} />
-          <PassengerButton />
-        </View>
-          <Button
-            onPress={() => this._handleNextPress(nextRoute)}
-            style={styles.button}
-            containerStyle={styles.buttonContainer}>
-            FIND A RIDE!
-          </Button>
-      </View>
     );
   }
 }
+// <View style={styles.container}>
+// </View>
+// <View style={{borderBottomColor: 'black'}}>
+//   <TextInput
+//     style={styles.inputForm}
+//     onChangeText={(currentLocation) => this.setState({currentLocation})}
+//     value={this.state.currentLocation} />
+//   <TextInput
+//     style={styles.inputForm}
+//     onChangeText={(destination) => this.setState({destination})}
+//     value={this.state.destination} />
+//   <PassengerButton />
+// </View>
+// <Button
+//   onPress={() => this._handleNextPress(nextRoute)}
+//   style={styles.button}
+//   containerStyle={styles.buttonContainer}>
+//   FIND A RIDE!
+// </Button>
 // styleDisabled={{color: 'red'}}>
 // <TouchableHighlight
 //   style={styles.touchable}
