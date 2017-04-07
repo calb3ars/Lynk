@@ -109,13 +109,13 @@ class Form extends Component {
         <TextInput
           style={styles.inputForm}
           placeholder="Pickup Location"
-          placeholderTextColor= '#387691'
+          placeholderTextColor= '#A7D1CC'
           onChangeText={(currentLocation) => this.setState({currentLocation})}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
-          placeholderTextColor= '#387691'
+          placeholderTextColor= '#A7D1CC'
           onChangeText={(destination) => this.setState({destination})}
           value={this.state.destination} />
       </View>
@@ -158,12 +158,12 @@ const styles = StyleSheet.create({
     height: 35,
     width: 310,
     fontSize: 14,
-    borderColor: '#233D4D',
-    color: '#387691',
+    borderColor: '#2F5268',
+    color: '#26646A',
     // fontWeight: 'bold',
     borderWidth: 0.5,
     borderRadius: 4,
-    // backgroundColor: '#083f56',
+    // backgroundColor: '#26646A',
     backgroundColor: '#EFFCFB',
     // justifyContent: 'center'
     textAlign: 'center',
@@ -173,8 +173,8 @@ const styles = StyleSheet.create({
     width: 310,
     borderWidth: 0.5,
     borderRadius: 4,
+    borderColor: '#26646A',
     backgroundColor: '#EFFCFB',
-    borderColor: '#233D4D',
     marginTop: 10
   },
   passengerText: {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     // fontWeight: 'bold',
     fontSize: 14,
     padding: 5,
-    color: '#387691',
+    color: '#26646A',
   },
   button: {
     color: '#EFFCFB',
@@ -196,9 +196,9 @@ const styles = StyleSheet.create({
     width: 310,
     overflow: 'hidden',
     borderRadius: 4,
-    borderColor: '#233D4D',
+    borderColor: '#26646A',
     borderWidth: 0.5,
-    backgroundColor: '#387691',
+    backgroundColor: '#26646A',
     right: 0,
     left: 0,
     bottom: 0

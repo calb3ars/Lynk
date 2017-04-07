@@ -47,16 +47,16 @@ class PassengerButton extends Component {
           selectedOption={this.state.selectedOption}
           textAlign={'center'}
 
-          tint= {'#387691'}
+          tint= {'#26646A'}
           backTint= {'#EFFCFB'}
 
           selectedTint= {'#EFFCFB'}
-          selectedBackgroundColor= {'#387691'}
+          selectedBackgroundColor= {'#26646A'}
 
-          separatorTint= {'#387691'}
-          separatorWidth= {0}
+          separatorTint= {'#26646A'}
+          separatorWidth= {0.5}
 
-          containerBorderTint= {'#387691'}
+          containerBorderTint= {'#26646A'}
           containerBorderWidth= {0}
           containerBorderRadius= {0}
 
