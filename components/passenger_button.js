@@ -35,7 +35,7 @@ class PassengerButton extends Component {
     this.setState({
       selectedOption: option
     });
-    this.props.updateRiders(this.state.selectedOption);
+    this.props.updateRiders(option);
   }
 
   render() {

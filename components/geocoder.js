@@ -6,6 +6,7 @@ class Location extends Component {
   constructor() {
     super();
     this.state = {lat: "", lng: ""};
+    this.setState.bind(this);
   }
 
   fetchCoords(address) {
@@ -16,7 +17,6 @@ class Location extends Component {
         this.setState({lat: location.lat, lng: location.lng});
       }
     );
-    return this.state;
   }
 
   render() {

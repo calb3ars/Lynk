@@ -16,8 +16,8 @@ export default class Results extends Component {
   }
 
   componentWillMount(){
-    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
-    this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
+    this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
+    // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
     console.log(this.state.lyftUrl);
   }
   componentDidMount(){

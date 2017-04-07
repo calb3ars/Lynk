@@ -3,7 +3,8 @@ import Results from './results';
 import MyMap from './map_view_component';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
-import Location from './components/geocoder.js';
+import Location from './geocoder.js';
+import Geocoder from 'react-native-geocoding';
 import {
   StyleSheet,
   View,
@@ -27,12 +28,14 @@ class Form extends Component {
       lyftToken: undefined,
       startAddress: undefined,
       endAddress: undefined,
+      unfilledForm: true,
       error: ""
     };
     this.updateRiders.bind(this);
     this.updateDest.bind(this);
-    this.unfilledForm = true;
     this.setState.bind(this);
+    this.getStartCoords.bind(this);
+    this.getEndCoords.bind(this);
   }
 
   componentDidMount(){
@@ -40,13 +43,14 @@ class Form extends Component {
       (position) => {
         this.setState({
           startLat: position.coords.latitude,
-          startLon: position.coords.longitude,
+          startLng: position.coords.longitude,
           error: null,
         });
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+    this.fetchLyftToken();
   }
 
   fetchLyftToken(){
@@ -71,22 +75,15 @@ class Form extends Component {
 
 
   shouldComponentUpdate(){
+    console.log(this.state);
     if(this.state.endLat !== undefined &&
-        this.state.endLon !== undefined &&
+        this.state.endLng !== undefined &&
         this.state.riders !== undefined) {
 
-          this.unfilledForm = false;
-          return this.unfilledForm;
+          this.setState({unfilledForm: false});
+          console.log(this.state);
       }
-    else{
-      this.unfilledForm = true;
-      return this.unfilledForm;
-    }
-  }
-
-  handleSubmit() {
-    this.fetchLyftToken();
-
+    return true;
   }
 
   updateRiders(passengers) {
@@ -109,16 +106,35 @@ class Form extends Component {
     // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
   }
 
+  getStartCoords(address) {
+    Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
+    Geocoder.getFromLocation(address).then(
+      json => {
+        let location = json.results[0].geometry.location;
+        this.setState({starttLat: location.lat, startLng: location.lng});
+      }
+    );
+  }
+
+  getEndCoords(address) {
+    Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
+    Geocoder.getFromLocation(address).then(
+      json => {
+        let location = json.results[0].geometry.location;
+        this.setState({endLat: location.lat, endLng: location.lng});
+      }
+    );
+  }
+
+
+
   handleButtonPress(){
-    this.fetchLyftToken();
     let nextRoute = {
       component: Results,
       title: 'Results',
       passProps: { form: this.state }
     };
-    // this.form.handleSubmit()
-    //   .then
-      this._handleNextPress(nextRoute);
+    this._handleNextPress(nextRoute);
   }
 
   // <DestButton updateDest={this.updateDest}/>
@@ -131,22 +147,19 @@ class Form extends Component {
           style={styles.inputForm}
           placeholder="Current Location"
           onChangeText={(startAddress) => this.setState({startAddress})}
+          onSubmitEditing={(startAddress) => this.getStartCoords(startAddress)}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
           onChangeText={(endAddress) => this.setState({endAddress})}
+          onSubmitEditing={(endAddress) => this.getEndCoords(endAddress)}
           value={this.state.destination} />
       </View>
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
         <Button
-<<<<<<< HEAD
-          disabled={false}
+          disabled={this.state.unfilledForm}
           onPress={() => this.handleButtonPress()}
-=======
-
-          onPress={() => this.handleButtonPress(nextRoute)}
->>>>>>> ef62a76eadde0c840fe8581f43787d4ad77db3af
           style={styles.button}
           containerStyle={styles.buttonContainer}>
           FIND A RIDE!
