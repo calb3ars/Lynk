@@ -26,26 +26,27 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 import MyMap from './components/map_view_component';
-
+import Location from './components/geocoder.js';
 
 // barTintColor='#4682b4'
 export default class lynk extends Component {
 
   render() {
     return (
-        <NavigatorIOS
-          titleTextColor='black'
-          tintColor='black'
-          translucent={true}
-          initialRoute={{
-            component: MyMap,
-            title: 'Map',
-            backButtonTitle: 'Back'
-          }}
-          style={styles.wrapper}/>
+      <Location />
     );
   }
 }
+// <NavigatorIOS
+//   titleTextColor='black'
+//   tintColor='black'
+//   translucent={true}
+//   initialRoute={{
+//     component: MyMap,
+//     title: 'Map',
+//     backButtonTitle: 'Back'
+//   }}
+//   style={styles.wrapper}/>
 
 const styles = StyleSheet.create({
   wrapper: {
