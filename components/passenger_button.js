@@ -20,6 +20,7 @@ class PassengerButton extends Component {
       selectedOption: options[0]
     };
       this.setSelectedOption = this.setSelectedOption.bind(this);
+    this.setState.bind(this);
   }
 
   // handleIndexChange = (index) => {
@@ -29,11 +30,12 @@ class PassengerButton extends Component {
   //   });
   // }
 
+
   setSelectedOption(option) {
     this.setState({
       selectedOption: option
     });
-
+    this.props.updateRiders(this.state.selectedOption);
   }
 
   render() {
