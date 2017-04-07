@@ -11,16 +11,14 @@ import {
 export default class Results extends Component {
   constructor(props){
     super(props)
-    this.state = { lyftToken: '', uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: undefined };
+    this.state = { lyftToken: '', uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined} };
   }
 
   componentDidMount(){
     this.fetchLyftToken();
     this.fetchLyftList();
-    this.getUberRides();
-    // debugger;
+    this.fetchUberRides();
   }
-
 
   fetchLyftToken(){
     let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
@@ -57,47 +55,29 @@ export default class Results extends Component {
       })
   }
 
-  // fetchUberRides(){
-  //   let url = 'https://api.uber.com/v1.2/products?latitude=37.7759792&longitude=-122.41823';
-  //   let server_token = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
-  //   fetch(url, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Token '+ server_token,
-  //       'Accept-Language': 'en_US'
-  //     }
-  //   }).then(response => {
-  //       response.json().then(data => {
-  //         this.setState({uberData: data})
-  //       })
-  //   })
-  //   // .catch(error => {
-  //   //   console.log(error)
-  //   // })
-  // }
+  fetchUberRides(){
+    let counter = 0;
+    let url = 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533';
+    let server_token = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+ server_token,
+        'Accept-Language': 'en_US'
+      }
+    }).then(response => {
+      // console.log(response);
+      // console.log(counter++);
+      // console.log(response.json());
+      response.json().then(promise => {
+        // console.log(counter++);
+        // console.log(promise);
+        this.setState({uberRides: Parsers.UberParser(promise)})
 
-  async getUberRides(){
-    try {
-      let url = 'https://api.uber.com/v1.2/products?latitude=37.7759792&longitude=-122.41823';
-      let server_token = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
-      let response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token '+ server_token,
-          'Accept-Language': 'en_US'
-        }
+        // console.log(`uberrides === ${this.state.uberRides}`);
       })
-      let responseJson = await response.json();
-      console.log(responseJson.products);
-      this.setState({uberData: reponseJson.products})
-      
-    } catch (e) {
-      console.error(error);
-    } finally {
-
-    }
+    })
   }
 
 
@@ -109,18 +89,18 @@ export default class Results extends Component {
     // console.log(this.state.lyftToken);
     // console.log(this.state.lyftRides);
     // console.log(this.state.uberRides);
-    console.log(`data ==== ${this.state.uberData}`);
+    // console.log(this.state.uberData);
+    // if (this.state.uberData._65){
+    //   console.log(this.state.uberData._65.products);
+    // }
 
-    if (this.state.lyftRides){
+    if (this.state.lyftRides ){
       return (
         <View style={styles.container}>
           <Image source={pic} style={styles.logos}/>
-          <RideResults lyftRides={this.state.lyftRides}/>
+          <RideResults lyftRides={this.state.lyftRides} uberRides={this.state.uberRides} />
         </View>
       )
-    // } else if (this.state.uberData) {
-      // debugger;
-        // this.setState({uberRides: Parsers.UberParser(this.state.uberData)})
     } else {
       return (
         <View style={styles.container}>
