@@ -28,6 +28,8 @@ class Form extends Component {
     this.update.bind(this);
     this.updateRiders.bind(this);
     this.updateDest.bind(this);
+    this.unfilledForm = true;
+    this.setState.bind(this);
   }
 
   componentDidMount(){
@@ -48,10 +50,13 @@ class Form extends Component {
     if(this.state.endLat !== undefined &&
         this.state.endLon !== undefined &&
         this.state.riders !== undefined) {
-          this.props.unfilledForm(false);
+
+          this.unfilledForm = false;
+          return this.unfilledForm;
       }
     else{
-      this.props.unfilledForm(true);
+      this.unfilledForm = true;
+      return this.unfilledForm;
     }
   }
 
@@ -76,8 +81,28 @@ class Form extends Component {
     });
   }
 
+  _handleBackPress() {
+    this.props.navigator.pop();
+  }
+
+  _handleNextPress(nextRoute) {
+    this.props.navigator.push(nextRoute);
+    // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
+  }
+
+  handleButtonPress(nextRoute){
+    // this.form.handleSubmit()
+    //   .then
+      (this._handleNextPress(nextRoute));
+  }
+
   // <DestButton updateDest={this.updateDest}/>
   render(){
+
+    const nextRoute = {
+      component: Results,
+      title: 'Results'
+    };
     return(
       <View style={styles.formContainer}>
       <View style={{borderBottomColor: 'black'}}>
@@ -92,7 +117,14 @@ class Form extends Component {
           onChangeText={(destination) => this.setState({destination})}
           value={this.state.destination} />
       </View>
-        <PassengerButton updateRiders={this.updateRiders} />
+        <PassengerButton updateRiders={this.updateRiders.bind(this)} />
+        <Button
+          disabled={this.unfilledForm}
+          onPress={() => this.handleButtonPress(nextRoute)}
+          style={styles.button}
+          containerStyle={styles.buttonContainer}>
+          FIND A RIDE!
+        </Button>
       </View>
     );
   }

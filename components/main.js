@@ -71,52 +71,50 @@ const styles = StyleSheet.create({
 class Main extends Component{
   constructor(props){
     super(props);
-    this.unfilledForm.bind(this);
-    this.form = new Form(this.unfilledForm.bind(this));
   }
-
-  _handleBackPress() {
-    this.props.navigator.pop();
-  }
-
-  _handleNextPress(nextRoute) {
-    this.props.navigator.push(nextRoute);
-    // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
-  }
-
-  handleButtonPress(nextRoute){
-    // this.form.handleSubmit()
-    //   .then
-      (this._handleNextPress(nextRoute));
-  }
-
-  unfilledForm(status = false){
-    return status;
-  }
+  //
+  // _handleBackPress() {
+  //   this.props.navigator.pop();
+  // }
+  //
+  // _handleNextPress(nextRoute) {
+  //   this.props.navigator.push(nextRoute);
+  //   // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
+  // }
+  //
+  // handleButtonPress(nextRoute){
+  //   // this.form.handleSubmit()
+  //   //   .then
+  //     (this._handleNextPress(nextRoute));
+  // }
+  //
+  // unfilledForm(status = true){
+  //   return status;
+  // }
+  //
+  // const nextRoute = {
+  //   component: Results,
+  //   title: 'Results'
+  // };
 
   render() {
-
-    const nextRoute = {
-      component: Results,
-      title: 'Results'
-    };
     return(
       <View style={styles.container}>
         <StatusBar
           barStyle="dark-content"
         />
         <MyMap/>
-        <Button
-        disabled={this.unfilledForm()}
-        onPress={() => this.handleButtonPress(nextRoute)}
-        style={styles.button}
-        containerStyle={styles.buttonContainer}>
-        FIND A RIDE!
-        </Button>
+        <Form navigator={this.props.navigator}/>
       </View>
     );
   }
 }
-// <Form unfilledForm={this.unfilledForm}/>
+// <Button
+//   disabled={this.unfilledForm()}
+//   onPress={() => this.handleButtonPress(nextRoute)}
+//   style={styles.button}
+//   containerStyle={styles.buttonContainer}>
+//   FIND A RIDE!
+// </Button>
 
 export default Main;
