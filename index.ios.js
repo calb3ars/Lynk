@@ -25,7 +25,6 @@ import {
   StatusBar
 } from 'react-native';
 import MapView from 'react-native-maps';
-
 import MyMap from './components/map_view_component';
 
 
