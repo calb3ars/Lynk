@@ -18,6 +18,7 @@ import MapView from 'react-native-maps';
 import MyMap from './map_view_component.js';
 
 export default class lynk extends Component {
+
   render() {
 
    return (
@@ -35,24 +36,29 @@ const styles = StyleSheet.create({
     left: 0,
   }
 });
-    
+
 //      let pic = {
 //       uri: 'https://2ecyvk3piszv4e6gv2yz9867-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/uber-and-lyft-side-by-side.png'
 //     };
-    
-    
+
+
 //     <View style={styles.container}>
 //         <Image source={pic} style={styles.logos}/>
 //         <RideResults />
 //     </View>
-   
+
+
+// logos: {
+//   width: 375,
+//   height: 180
+// },
 
 //   container: {
 //     flex: 1,
 //     backgroundColor: '#0B4F6C',
 //     marginTop: 20,
 //   },
-    
+
 //   logos: {
 //     width: 375,
 //     height: 140

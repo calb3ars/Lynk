@@ -22,11 +22,10 @@ export default class LyftRideItem extends Component {
 
 const styles = StyleSheet.create({
   listing: {
-    paddingTop: 10,
+    paddingTop: 15,
     paddingRight: 20,
-    paddingBottom: 10,
+    paddingBottom: 15,
     width: 190,
-    marginTop: 20,
     marginBottom: 20,
     // borderWidth: 2,
     // borderColor: '#0B4F6C',

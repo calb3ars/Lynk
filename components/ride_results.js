@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   rideResults: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: -20,
     justifyContent: 'center',
   },
 });
