@@ -65,8 +65,8 @@ class MyMap extends Component {
           <Button
             onPress={() => this._handleNextPress(nextRoute)}
             containerStyle={styles.buttonContainer}
-            style={{color: 'white', fontSize: 18}}>
-            Press Me!
+            style={styles.button}>
+            FIND A RIDE
           </Button>
       </View>
     );
@@ -101,23 +101,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'ghostwhite',
     // justifyContent: 'center'
     textAlign: 'center',
-    top: 230,
+    top: 200,
     right: 0,
     left: 0,
     bottom: 0,
     marginTop: 10
   },
   button: {
-
+    color: 'white',
+    fontSize: 18,
   },
   buttonContainer: {
+    justifyContent: 'center',
     padding: 10,
-    height: 35,
+    height: 80,
     width: 280,
     overflow: 'hidden',
     borderRadius: 4,
     backgroundColor: 'grey',
-    top: 240,
+    top: 210,
     right: 0,
     left: 0,
     bottom: 0
