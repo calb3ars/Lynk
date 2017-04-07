@@ -105,22 +105,22 @@ class Form extends Component {
     };
     return(
       <View style={styles.formContainer}>
-      <View style={{borderBottomColor: 'black'}}>
+      <View>
         <TextInput
           style={styles.inputForm}
-          placeholder="Current Location"
-          placeholderTextColor= '#26C4E0'
+          placeholder="Pickup Location"
+          placeholderTextColor= '#387691'
           onChangeText={(currentLocation) => this.setState({currentLocation})}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
-          placeholderTextColor= '#26C4E0'
+          placeholderTextColor= '#387691'
           onChangeText={(destination) => this.setState({destination})}
           value={this.state.destination} />
       </View>
       <View style={styles.passengerContainer}>
-        <Text style={styles.passengerText}># Passengers</Text>
+        <Text style={styles.passengerText}># Seats</Text>
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
       </View>
         <Button
@@ -128,7 +128,7 @@ class Form extends Component {
           onPress={() => this.handleButtonPress(nextRoute)}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
-          FIND A RIDE!
+          Find Your Ride
         </Button>
       </View>
     );
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 350
+    marginTop: 350,
   },
   map: {
     position: 'absolute',
@@ -157,42 +157,48 @@ const styles = StyleSheet.create({
   inputForm: {
     height: 35,
     width: 310,
-    borderColor: '#083f56',
-    color: '#26C4E0',
-    borderWidth: 1,
+    fontSize: 14,
+    borderColor: '#233D4D',
+    color: '#387691',
+    // fontWeight: 'bold',
+    borderWidth: 0.5,
     borderRadius: 4,
-    backgroundColor: '#083f56',
+    // backgroundColor: '#083f56',
+    backgroundColor: '#EFFCFB',
     // justifyContent: 'center'
     textAlign: 'center',
     marginTop: 10,
   },
   passengerContainer: {
-    backgroundColor: '#083f56',
     width: 310,
+    borderWidth: 0.5,
     borderRadius: 4,
+    backgroundColor: '#EFFCFB',
+    borderColor: '#233D4D',
     marginTop: 10
   },
   passengerText: {
     textAlign: 'center',
     // fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 14,
     padding: 5,
-    color: '#26C4E0',
-    borderRadius: 4,
+    color: '#387691',
   },
   button: {
-    color: '#26C4E0',
-    fontSize: 18,
+    color: '#EFFCFB',
+    fontSize: 16,
   },
   buttonContainer: {
     justifyContent: 'center',
     marginTop: 10,
     padding: 10,
-    height: 60,
+    height: 40,
     width: 310,
     overflow: 'hidden',
     borderRadius: 4,
-    backgroundColor: '#233D4D',
+    borderColor: '#233D4D',
+    borderWidth: 0.5,
+    backgroundColor: '#387691',
     right: 0,
     left: 0,
     bottom: 0
