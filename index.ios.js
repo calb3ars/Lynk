@@ -3,68 +3,38 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-import React, { Component, PropTypes } from 'react';
-// import MapView from 'react-native-maps';
-// import RideItem from './components/ride_item';
-import LyftRideItem from './components/lyft_ride_item';
-import UberRideItem from './components/uber_ride_item';
-import LyftList from './components/lyft_list';
-import UberList from './components/uber_list';
-import RideResults from './components/ride_results';
-import Navbar from './components/map_view_component';
+import React, { Component } from 'react';
 // import Results from './components/results';
-
 
 import {
   AppRegistry,
   StyleSheet,
   Image,
   Text,
-  View,
-  NavigatorIOS,
-  StatusBar
+  View
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-import MyMap from './components/map_view_component';
+import MyMap from './map_view_component.js';
 
-
-// barTintColor='#4682b4'
 export default class lynk extends Component {
 
   render() {
-    return (
-        <NavigatorIOS
-          titleTextColor='black'
-          tintColor='black'
-          translucent={true}
-          initialRoute={{
-            component: MyMap,
-            title: 'Map',
-            backButtonTitle: 'Back'
-          }}
-          style={styles.wrapper}/>
+
+   return (
+      <MyMap />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1
+   map: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
   }
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//    map: {
-//     position: 'absolute',
-//     top: 0,
-//     bottom: 0,
-//     right: 0,
-//     left: 0,
-//   }
 });
 
 //      let pic = {
@@ -76,7 +46,6 @@ const styles = StyleSheet.create({
 //         <Image source={pic} style={styles.logos}/>
 //         <RideResults />
 //     </View>
-
 
 
 // logos: {
