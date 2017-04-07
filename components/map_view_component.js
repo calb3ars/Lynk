@@ -151,10 +151,10 @@ const styles = StyleSheet.create({
   inputForm: {
     height: 35,
     width: 310,
-    borderColor: 'gray',
+    borderColor: '#083f56',
     borderWidth: 1,
     borderRadius: 4,
-    backgroundColor: 'ghostwhite',
+    backgroundColor: '#233D4D',
     // justifyContent: 'center'
     textAlign: 'center',
     top: 200,
@@ -164,17 +164,17 @@ const styles = StyleSheet.create({
     marginTop: 12
   },
   button: {
-    color: 'white',
+    color: '#ABF2EB',
     fontSize: 18,
   },
   buttonContainer: {
     justifyContent: 'center',
     padding: 10,
-    height: 80,
+    height: 76,
     width: 310,
     overflow: 'hidden',
     borderRadius: 4,
-    backgroundColor: '#4682b4',
+    backgroundColor: '#083f56',
     top: 212,
     right: 0,
     left: 0,
