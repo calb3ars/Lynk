@@ -56,12 +56,17 @@ class PassengerButton extends Component {
 
           containerBorderTint= {'#083f56'}
           containerBorderWidth= {2}
-          containerBorderRadius= {3}
+          containerBorderRadius= {4}
 
           optionStyle={{
             fontSize: 20,
             fontWeight: 'bold',
             padding: 10,
+            shadowColor: '#083f56',
+            shadowOffset: {
+              height: 2
+            },
+            shadowOpacity: 0.075,
           }}
 
           containerStyle= {{
