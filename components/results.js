@@ -13,13 +13,11 @@ export default class Results extends Component {
     super(props);
     this.state = { lyftToken: '', uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
                    lyftUrl: '', uberUrl: ''};
-
-
   }
 
   componentWillMount(){
-    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
-    this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
+    this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
+    // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
     console.log(this.state.lyftUrl);
   }
   componentDidMount(){
@@ -50,14 +48,16 @@ export default class Results extends Component {
         response.json().then(data => {
         console.log(data);
         this.setState({lyftToken:`${data.access_token}`});
-      })
-    })
+      });
+    });
   }
 
   fetchLyftList(){
+
     let lyftToken = 'gAAAAABY58mK-kpTZIayKvea1btHRMI0VSmebCamPzAqVxEW5o4FuHctaXndrYzrkrCvbPTdCRGIOZi3hZC-gymr4KLBkeapK6omhmuNZDeMbNq2LaprdUVCpG4GRCBoS2Hg5SDD59wNAqeMlavVpTz86xO3QtlJJSyW0xJkAPG1fhCWk84-nuhUUOjzZDaJah1rPTupxtedgmqTAHuCY8oSg8WoeYhSSQ==';
     // let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533';
     let ride_url = this.state.lyftUrl;
+
     fetch(ride_url,{
       method: 'GET',
       headers: {

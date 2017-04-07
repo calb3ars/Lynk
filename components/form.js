@@ -3,6 +3,8 @@ import Results from './results';
 import MyMap from './map_view_component';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
+import Location from './geocoder.js';
+import Geocoder from 'react-native-geocoding';
 import {
   StyleSheet,
   View,
@@ -18,18 +20,22 @@ class Form extends Component {
   constructor(props){
     super(props);
     this.state = {
-      startLon: undefined,
+      startLng: undefined,
       startLat: undefined,
-      endLon: undefined,
+      endLng: undefined,
       endLat: undefined,
       riders: undefined,
+      lyftToken: undefined,
+      startAddress: undefined,
+      endAddress: undefined,
+      unfilledForm: true,
       error: ""
     };
-    this.update.bind(this);
     this.updateRiders.bind(this);
     this.updateDest.bind(this);
-    this.unfilledForm = true;
     this.setState.bind(this);
+    this.getStartCoords.bind(this);
+    this.getEndCoords.bind(this);
   }
 
   componentDidMount(){
@@ -37,37 +43,47 @@ class Form extends Component {
       (position) => {
         this.setState({
           startLat: position.coords.latitude,
-          startLon: position.coords.longitude,
+          startLng: position.coords.longitude,
           error: null,
         });
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+    this.fetchLyftToken();
   }
 
-  shouldComponentUpdate(){
-    if(this.state.endLat !== undefined &&
-        this.state.endLon !== undefined &&
-        this.state.riders !== undefined) {
-
-          this.unfilledForm = false;
-          return this.unfilledForm;
-      }
-    else{
-      this.unfilledForm = true;
-      return this.unfilledForm;
-    }
-  }
-
-  update(property) {
-    return e => this.setState({
-      [property]: e.target.value
+  fetchLyftToken(){
+    let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
+    let url = 'https://api.lyft.com/oauth/token';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic '+ lyft_token
+      },
+      body: JSON.stringify({
+        "grant_type": "client_credentials",
+        "scope": "public"
+      })
+    }).then(response => {
+        response.json().then(data => {
+        this.setState({lyftToken:`${data.access_token}`});
+      });
     });
   }
 
-  handleSubmit() {
 
+  shouldComponentUpdate(){
+    console.log(this.state);
+    if(this.state.endLat !== undefined &&
+        this.state.endLng !== undefined &&
+        this.state.riders !== undefined) {
+
+          this.setState({unfilledForm: false});
+          console.log(this.state);
+      }
+    return true;
   }
 
   updateRiders(passengers) {
@@ -90,19 +106,40 @@ class Form extends Component {
     // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
   }
 
-  handleButtonPress(nextRoute){
-    // this.form.handleSubmit()
-    //   .then
-      (this._handleNextPress(nextRoute));
+  getStartCoords(address) {
+    Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
+    Geocoder.getFromLocation(address).then(
+      json => {
+        let location = json.results[0].geometry.location;
+        this.setState({starttLat: location.lat, startLng: location.lng});
+      }
+    );
+  }
+
+  getEndCoords(address) {
+    Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
+    Geocoder.getFromLocation(address).then(
+      json => {
+        let location = json.results[0].geometry.location;
+        this.setState({endLat: location.lat, endLng: location.lng});
+      }
+    );
+  }
+
+
+
+  handleButtonPress(){
+    let nextRoute = {
+      component: Results,
+      title: 'Results',
+      passProps: { form: this.state }
+    };
+    this._handleNextPress(nextRoute);
   }
 
   // <DestButton updateDest={this.updateDest}/>
   render(){
 
-    const nextRoute = {
-      component: Results,
-      title: 'Results'
-    };
     return(
       <View style={styles.formContainer}>
       <View>
@@ -110,13 +147,15 @@ class Form extends Component {
           style={styles.inputForm}
           placeholder="Pickup Location"
           placeholderTextColor= '#A7D1CC'
-          onChangeText={(currentLocation) => this.setState({currentLocation})}
+          onChangeText={(startAddress) => this.setState({startAddress})}
+          onSubmitEditing={(startAddress) => this.getStartCoords(startAddress)}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
+          onChangeText={(endAddress) => this.setState({endAddress})}
+          onSubmitEditing={(endAddress) => this.getEndCoords(endAddress)}
           placeholderTextColor= '#A7D1CC'
-          onChangeText={(destination) => this.setState({destination})}
           value={this.state.destination} />
       </View>
       <View style={styles.passengerContainer}>
@@ -124,8 +163,8 @@ class Form extends Component {
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
       </View>
         <Button
-
-          onPress={() => this.handleButtonPress(nextRoute)}
+          disabled={this.state.unfilledForm}
+          onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
           Find Your Ride

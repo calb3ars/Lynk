@@ -99,6 +99,13 @@ Vivian's primary responsibilities will be:
 - Location Services Alert
 - Sidebar for Account Settings
 
+## Notes
+- To pull and run
+  + npm install
+  + react-native upgrade
+  + react-native link react-native-maps
+  + react-native run-ios
+
 
 [results]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1491179096/flex/resultsDetail_tnzmjd.jpg
 [mapform]: http://res.cloudinary.com/dogzxn5h4/image/upload/c_scale,w_400/v1491179099/flex/mapForm_ynluyp.jpg
