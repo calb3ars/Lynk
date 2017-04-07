@@ -14,12 +14,25 @@ import NextPg from './next_pg.js';
 import  Button  from 'react-native-button';
 
 class MyMap extends Component {
-  constructor() {
-    super();
-    this.state = { currentLocation: 'Current Location', destination: 'Destination' };
-  }
 
-  _handleBackPress() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentLocation: 'Current Location', 
+      destination: 'Destination',
+      region:
+        new MapView.AnimatedRegion({
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 10,
+        longitudeDelta: 5
+      })
+    };
+
+    this.onRegionChange = this.onRegionChange.bind(this);
+  }
+  
+    _handleBackPress() {
     this.props.navigator.pop();
   }
 
@@ -28,30 +41,68 @@ class MyMap extends Component {
     // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
   }
 
+
+  // componentDidMount() {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       this.setState({
+  //
+  //         initialRegion: {
+  //           latitude: position.coords.latitude,
+  //           longitude: position.coords.longitude
+  //         }
+  //       });
+  //     },
+  //     (error) => alert(JSON.stringify(error)),
+  //     {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
+  //   );
+  // }
+
+  onRegionChange(region) {
+    this.state.region.setValue(region);
+
+  }
+
   render() {
     const nextRoute = {
       component: NextPg,
       title: 'Lynk'
+    }
+    let marker = {
+      latlng: {
+        latitude: 37.791557,
+        longitude: -122.393171,
+      },
+      title: 'Destination',
+      description: 'testPin'
     };
 
     return (
       <View style={styles.container}>
+
         <StatusBar
           barStyle="dark-content"
           />
-        <MapView
+
+        <MapView.Animated
           style={styles.map}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
+          region={this.state.region}
           mapType='standard'
+          onRegionChange={this.onRegionChange}
+
+          zoomEnabled={true}
           showsUserLocation={true}
-          zoomEnabled={true}>
-        </MapView>
-        <View style={{borderBottomColor: 'black'}}>
+          followsUserLocation={true}
+          showsMyLocationButton={true}
+          showScale={true}
+        >
+          <MapView.Marker coordinate={marker.latlng}
+            title={marker.title}
+            description={marker.description}
+          />
+      
+      </MapView.Animated>
+      <View style={{borderBottomColor: 'black'}}>
           <TextInput
             style={styles.inputForm}
             onChangeText={(currentLocation) => this.setState({currentLocation})}

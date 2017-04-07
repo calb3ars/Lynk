@@ -12,6 +12,9 @@ import LyftList from './components/lyft_list';
 import UberList from './components/uber_list';
 import RideResults from './components/ride_results';
 import Navbar from './map_view_component.js';
+// import Results from './components/results';
+
+
 import {
   AppRegistry,
   StyleSheet,
@@ -28,6 +31,7 @@ import MyMap from './map_view_component.js';
 
 // barTintColor='#4682b4'
 export default class lynk extends Component {
+
   render() {
     return (
         <NavigatorIOS
@@ -73,6 +77,12 @@ const styles = StyleSheet.create({
 //         <RideResults />
 //     </View>
 
+
+
+// logos: {
+//   width: 375,
+//   height: 180
+// },
 
 //   container: {
 //     flex: 1,
