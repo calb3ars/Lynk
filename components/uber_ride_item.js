@@ -3,21 +3,27 @@ import {
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
 
 // Uses Uber Ride Estimates - price - API endpoint
 // Endpoint Doesn't include Surge pricing
 //
 export default class UberRideItem extends Component {
+  buttonPress(){
+    console.log('Uber!');
+  }
   render() {
     return(
-      <View style={styles.uberListing, styles.listing}>
-        <Text style={[styles.uberRideType, styles.type]}>{this.props.ride.display_name}</Text>
-        <Text style={[styles.uberCost, styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.high_estimate}</Text>
-        <Text style={[styles.uberPrimeTime, styles.bonus]}>Surge: {this.props.ride.primetime_percentage}</Text>
-        <Text style={[styles.uberRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.duration / 60)} min</Text>
-      </View>
+      <TouchableHighlight onPress={this.buttonPress}>
+        <View style={styles.uberListing, styles.listing}>
+          <Text style={[styles.uberRideType, styles.type]}>{this.props.ride.display_name}</Text>
+          <Text style={[styles.uberCost, styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.high_estimate}</Text>
+          <Text style={[styles.uberPrimeTime, styles.bonus]}>Surge: {this.props.ride.primetime_percentage}</Text>
+          <Text style={[styles.uberRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.duration / 60)} min</Text>
+        </View>
+      </TouchableHighlight>
     );
   }
 }
@@ -31,11 +37,11 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 20,
     // shadowColor: '#0B4F6C',
-    shadowColor: '#083f56',
-    shadowOffset: {
-      height: 0
-    },
-    shadowOpacity: 0.4,
+    // shadowColor: '#083f56',
+    // shadowOffset: {
+    //   height: 0
+    // },
+    // shadowOpacity: 0.4,
   },
 
   type: {

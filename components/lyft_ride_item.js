@@ -3,18 +3,24 @@ import {
   StyleSheet,
   Image,
   Text,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
 
 export default class LyftRideItem extends Component {
+  buttonPress(){
+    console.log('Lyft!!');
+  }
   render() {
     return(
-      <View style={styles.lyftListing, styles.listing}>
-        <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
-        <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
-        <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>
-        <Text style={[styles.lyftRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.estimated_duration_seconds / 60)} min</Text>
-      </View>
+      <TouchableHighlight onPress={this.buttonPress}>
+        <View style={styles.lyftListing, styles.listing}>
+          <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
+          <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
+          <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>
+          <Text style={[styles.lyftRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.estimated_duration_seconds / 60)} min</Text>
+        </View>
+      </TouchableHighlight>
     );
   }
 }
@@ -31,11 +37,11 @@ const styles = StyleSheet.create({
     // borderColor: '#0B4F6C',
     // borderRightWidth: 0,
     // shadowColor: '#0B4F6C',
-    shadowColor: '#083f56',
-    shadowOffset: {
-      height: 0
-    },
-    shadowOpacity: 0.4,
+    // shadowColor: '#083f56',
+    // shadowOffset: {
+    //   height: 0
+    // },
+    // shadowOpacity: 0.4,
   },
 
   type: {
