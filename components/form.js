@@ -119,7 +119,7 @@ class Form extends Component {
       </View>
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
         <Button
-          disabled={this.unfilledForm}
+
           onPress={() => this.handleButtonPress(nextRoute)}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
