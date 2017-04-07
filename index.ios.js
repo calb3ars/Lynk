@@ -26,26 +26,24 @@ import MapView from 'react-native-maps';
 import MyMap from './map_view_component.js';
 
 
-// barTintColor='ghostwhite'
+// barTintColor='#4682b4'
 export default class lynk extends Component {
   render() {
     return (
         <NavigatorIOS
-          titleTextColor='gray'
-          tintColor='gray'
-
+          titleTextColor='black'
+          tintColor='black'
+          translucent={true}
           initialRoute={{
             component: MyMap,
-            title: 'Map'
+            title: 'Map',
+            backButtonTitle: 'Back'
           }}
           style={styles.wrapper}/>
     );
   }
 }
-// title: 'My Map'
-// <View style={styles.container}>
-// </View>
-// <MyMap />
+
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1

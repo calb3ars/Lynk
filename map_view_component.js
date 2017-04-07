@@ -8,15 +8,14 @@ import {
   TouchableHighlight,
   StatusBar,
   TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
-import InputForm from './input_form.js';
 import NextPg from './next_pg.js';
 import  Button  from 'react-native-button';
 
 class MyMap extends Component {
   constructor() {
     super();
-    // this.state = {currentLocation: "Current Location", destination: "Destination"};
     this.state = { currentLocation: 'Current Location', destination: 'Destination' };
   }
 
@@ -64,14 +63,15 @@ class MyMap extends Component {
         </View>
           <Button
             onPress={() => this._handleNextPress(nextRoute)}
-            containerStyle={styles.buttonContainer}
-            style={styles.button}>
-            FIND A RIDE
+            style={styles.button}
+            containerStyle={styles.buttonContainer}>
+            FIND A RIDE!
           </Button>
       </View>
     );
   }
 }
+// styleDisabled={{color: 'red'}}>
 // <TouchableHighlight
 //   style={styles.touchable}
 //   onPress={() => this._handleNextPress(nextRoute)}
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   inputForm: {
     height: 35,
-    width: 280,
+    width: 310,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 4,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0,
-    marginTop: 10
+    marginTop: 12
   },
   button: {
     color: 'white',
@@ -115,11 +115,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     height: 80,
-    width: 280,
+    width: 310,
     overflow: 'hidden',
     borderRadius: 4,
-    backgroundColor: 'grey',
-    top: 210,
+    backgroundColor: '#4682b4',
+    top: 212,
     right: 0,
     left: 0,
     bottom: 0
