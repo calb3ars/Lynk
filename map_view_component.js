@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MapView from 'react-native-maps';
-import PassengerButton from './components/passenger_button';
 import {
   StyleSheet,
   View,
@@ -73,7 +72,6 @@ class MyMap extends Component {
             title={marker.title}
             description={marker.description}
           />
-        <PassengerButton />
         </MapView.Animated>
 
       </View>

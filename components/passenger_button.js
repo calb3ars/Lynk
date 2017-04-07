@@ -72,8 +72,6 @@ class PassengerButton extends Component {
           containerStyle= {{
             marginLeft: 10,
             marginRight: 10,
-            position: 'absolute',
-            top: 400,
           }}
         />
     );
@@ -82,10 +80,10 @@ class PassengerButton extends Component {
 
 const styles = StyleSheet.create({
   passengerContainerStyle: {
-    position: 'absolute',
-    marginTop: 400,
+    // position: 'absolute',
+    marginTop: 40,
     height: 50,
-    width: 360,
+    width: 400,
     borderRadius: 0,
     marginLeft: 8,
   },
