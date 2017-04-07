@@ -10,7 +10,16 @@ class Location extends Component {
     this.fetchCoords();
   }
 
-
+  fetchCoords() {
+    Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
+    Geocoder.getFromLocation("Palace of Fine Arts").then(
+      json => {
+        let location = json.results[0].geometry.location;
+        this.setState({lat: location.lat, lng: location.lng});
+        console.log(location.lat + "," + location.lng);
+      }
+    );
+  }
 
   render() {
     return (

@@ -33,20 +33,20 @@ export default class lynk extends Component {
 
   render() {
     return (
-      <Location />
+      <NavigatorIOS
+        titleTextColor='black'
+        tintColor='black'
+        translucent={true}
+        initialRoute={{
+          component: MyMap,
+          title: 'Map',
+          backButtonTitle: 'Back'
+        }}
+        style={styles.wrapper}/>
     );
   }
 }
-// <NavigatorIOS
-//   titleTextColor='black'
-//   tintColor='black'
-//   translucent={true}
-//   initialRoute={{
-//     component: MyMap,
-//     title: 'Map',
-//     backButtonTitle: 'Back'
-//   }}
-//   style={styles.wrapper}/>
+// <Location />
 
 const styles = StyleSheet.create({
   wrapper: {
