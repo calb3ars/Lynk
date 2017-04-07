@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MapView from 'react-native-maps';
 // import NextPg from './next_pg.js';
-import PassengerButton from './passenger_button';
 import Results from './results';
 import Button  from 'react-native-button';
 import {
@@ -105,6 +104,7 @@ class MyMap extends Component {
           />
 
       </MapView.Animated>
+
     );
   }
 }
