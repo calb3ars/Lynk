@@ -11,25 +11,21 @@ import {
 export default class Results extends Component {
   constructor(props){
     super(props);
-    this.state = { lyftToken: this.props.lyftToken, uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
-                   lyftUrl: this.props.lyftUrl, uberUrl: this.props.uberUrl};
+    this.state = { lyftToken: this.props.form.lyftToken, uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
+                   lyftUrl: this.props.form.lyftUrl, uberUrl: this.props.form.uberUrl};
 
   }
 
   componentWillMount(){
-    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
     // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
     // console.log(this.state.lyftUrl);
   }
   componentDidMount(){
-    this.fetchLyftToken();
-    this.fetchLyftList();
+    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
+    // this.fetchLyftToken();
+    console.log(this.props.form);
     this.fetchUberRides();
-  }
-
-  createUrl(startLat, startLng, endLat, endLng){
-    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`})
+    this.fetchLyftList();
   }
 
   fetchLyftToken(){
@@ -59,11 +55,9 @@ export default class Results extends Component {
   }
 
   fetchLyftList(){
-
-    let lyftToken = 'gAAAAABY58mK-kpTZIayKvea1btHRMI0VSmebCamPzAqVxEW5o4FuHctaXndrYzrkrCvbPTdCRGIOZi3hZC-gymr4KLBkeapK6omhmuNZDeMbNq2LaprdUVCpG4GRCBoS2Hg5SDD59wNAqeMlavVpTz86xO3QtlJJSyW0xJkAPG1fhCWk84-nuhUUOjzZDaJah1rPTupxtedgmqTAHuCY8oSg8WoeYhSSQ==';
-    // let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533';
+    console.log(this.state);
+    let lyftToken = this.state.lyftToken;
     let ride_url = this.state.lyftUrl;
-
     fetch(ride_url,{
       method: 'GET',
       headers: {
@@ -75,8 +69,8 @@ export default class Results extends Component {
           return;
         }
         response.json().then(data => {
-          this.setState({lyftRides: Parsers.LyftParser(data)})
-        })
+          this.setState({lyftRides: Parsers.LyftParser(data)});
+        });
       }).catch(err => {
         console.log('Fetch Lyft Rides Error :-S', err);
       });
