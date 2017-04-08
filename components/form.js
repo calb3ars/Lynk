@@ -28,7 +28,8 @@ class Form extends Component {
       lyftToken: undefined,
       startAddress: undefined,
       endAddress: undefined,
-      unfilledForm: true,
+      lyftUrl: "",
+      uberUrl: "",
       error: ""
     };
     this.updateRiders.bind(this);
@@ -36,6 +37,7 @@ class Form extends Component {
     this.setState.bind(this);
     this.getStartCoords.bind(this);
     this.getEndCoords.bind(this);
+    this.createUrl.bind(this);
   }
 
   componentDidMount(){
@@ -75,13 +77,11 @@ class Form extends Component {
 
 
   shouldComponentUpdate(){
-    console.log(this.state);
     if(this.state.endLat !== undefined &&
         this.state.endLng !== undefined &&
         this.state.riders !== undefined) {
 
           this.setState({unfilledForm: false});
-          console.log(this.state);
       }
     return true;
   }
@@ -126,13 +126,22 @@ class Form extends Component {
     );
   }
 
+  createUrl(startLat, startLng, endLat, endLng){
+    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
+                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+  }
+
 
 
   handleButtonPress(){
+    this.createUrl(this.state.startLat, this.state.startLng, this.state.endLat, this.state.endLng);
     let nextRoute = {
       component: Results,
       title: 'Results',
-      passProps: { form: this.state }
+      passProps: { lyftUrl: this.state.lyftUrl,
+                   uberUrl: this.state.uberUrl,
+                   lyftToken: this.state.lyftToken
+                 }
     };
     this._handleNextPress(nextRoute);
   }
@@ -163,7 +172,9 @@ class Form extends Component {
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
       </View>
         <Button
-          disabled={this.state.unfilledForm}
+          disabled={this.state.endLat === undefined ||
+              this.state.endLng === undefined ||
+              this.state.riders === undefined}
           onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>

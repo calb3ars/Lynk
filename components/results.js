@@ -16,19 +16,21 @@ export default class Results extends Component {
   }
 
   componentWillMount(){
-    this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
     // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
-    console.log(this.state.lyftUrl);
+    // console.log(this.state.lyftUrl);
   }
   componentDidMount(){
-    this.fetchLyftToken();
+    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
+    // this.fetchLyftToken();
     this.fetchLyftList();
     this.fetchUberRides();
   }
 
   createUrl(startLat, startLng, endLat, endLng){
+    console.log(this.props.form);
     this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
                   uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`})
+    console.log(this.state);
   }
 
   fetchLyftToken(){
@@ -46,7 +48,7 @@ export default class Results extends Component {
       })
     }).then(response => {
         response.json().then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({lyftToken:`${data.access_token}`});
       });
     });
@@ -54,14 +56,14 @@ export default class Results extends Component {
 
   fetchLyftList(){
 
-    let lyftToken = 'gAAAAABY58mK-kpTZIayKvea1btHRMI0VSmebCamPzAqVxEW5o4FuHctaXndrYzrkrCvbPTdCRGIOZi3hZC-gymr4KLBkeapK6omhmuNZDeMbNq2LaprdUVCpG4GRCBoS2Hg5SDD59wNAqeMlavVpTz86xO3QtlJJSyW0xJkAPG1fhCWk84-nuhUUOjzZDaJah1rPTupxtedgmqTAHuCY8oSg8WoeYhSSQ==';
+    // let lyftToken = 'gAAAAABY58mK-kpTZIayKvea1btHRMI0VSmebCamPzAqVxEW5o4FuHctaXndrYzrkrCvbPTdCRGIOZi3hZC-gymr4KLBkeapK6omhmuNZDeMbNq2LaprdUVCpG4GRCBoS2Hg5SDD59wNAqeMlavVpTz86xO3QtlJJSyW0xJkAPG1fhCWk84-nuhUUOjzZDaJah1rPTupxtedgmqTAHuCY8oSg8WoeYhSSQ==';
     // let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533';
     let ride_url = this.state.lyftUrl;
 
     fetch(ride_url,{
       method: 'GET',
       headers: {
-        'Authorization': 'bearer '+ lyftToken
+        'Authorization': 'bearer '+ this.props.form.lyftToken
       }
     }).then(response => {
         response.json().then(data => {
