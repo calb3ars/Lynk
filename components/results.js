@@ -13,18 +13,26 @@ export default class Results extends Component {
     super(props);
     this.state = { lyftToken: this.props.form.lyftToken, uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
                    lyftUrl: this.props.form.lyftUrl, uberUrl: this.props.form.uberUrl};
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85210a8ec5095eaeb80a39ba68c0e737bedc568e
   }
 
   componentWillMount(){
-    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
     // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
     // console.log(this.state.lyftUrl);
   }
   
   componentDidMount(){
-    this.fetchLyftToken();
-    this.fetchLyftList();
+    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
+    // this.fetchLyftToken();
+    console.log(this.props.form);
     this.fetchUberRides();
+<<<<<<< HEAD
+=======
+    this.fetchLyftList();
+>>>>>>> 85210a8ec5095eaeb80a39ba68c0e737bedc568e
   }
 
   fetchLyftToken(){
@@ -54,11 +62,15 @@ export default class Results extends Component {
   }
 
   fetchLyftList(){
+<<<<<<< HEAD
 
     let lyftToken = this.state.lyftToken;
     // let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533';
+=======
+    console.log(this.state);
+    let lyftToken = this.state.lyftToken;
+>>>>>>> 85210a8ec5095eaeb80a39ba68c0e737bedc568e
     let ride_url = this.state.lyftUrl;
-
     fetch(ride_url,{
       method: 'GET',
       headers: {
@@ -70,8 +82,8 @@ export default class Results extends Component {
           return;
         }
         response.json().then(data => {
-          this.setState({lyftRides: Parsers.LyftParser(data)})
-        })
+          this.setState({lyftRides: Parsers.LyftParser(data)});
+        });
       }).catch(err => {
         console.log('Fetch Lyft Rides Error :-S', err);
       });
