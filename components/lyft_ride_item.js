@@ -38,6 +38,10 @@ export default class LyftRideItem extends Component {
 
 
 const styles = StyleSheet.create({
+  // highlighted: {
+  //   backgroundColor: '#0B4F6C'
+  // },
+
   listing: {
     paddingTop: 15,
     paddingRight: 20,
@@ -57,13 +61,13 @@ const styles = StyleSheet.create({
 
   type: {
     // color: '#087E8B',
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 18,
   },
 
   cost: {
     // color: '#0B4F6C',
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 48,
   },
 
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
   },
 
   time: {
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 16,
   },
 
