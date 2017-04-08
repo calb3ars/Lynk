@@ -28,14 +28,11 @@ class Form extends Component {
       lyftToken: undefined,
       startAddress: undefined,
       endAddress: undefined,
-
       unfilledForm: true,
-
-      // lyftUrl: 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533',
-      // uberUrl: 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533'
-
-      lyftUrl: "",
-      uberUrl: "",
+      lyftUrl: 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533',
+      uberUrl: 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533',
+      // lyftUrl: "",
+      // uberUrl: "",
       error: ""
 
     };
@@ -84,7 +81,7 @@ class Form extends Component {
     }).then(response => {
         response.json().then(data => {
           this.setState({lyftToken:`${data.access_token}`});
-          console.log(this.state.lyftToken);
+          // console.log(this.state.lyftToken);
       });
     });
   }
@@ -92,7 +89,7 @@ class Form extends Component {
   updateRiders(passengers) {
     this.setState({riders: passengers});
     this.createUrl(this.state.startLat, this.state.startLng, this.state.endLat, this.state.endLng);
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   updateDest(latitude, longitude) {
@@ -178,11 +175,6 @@ class Form extends Component {
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
       </View>
         <Button
-          disabled={this.state.endLat === undefined ||
-              this.state.endLng === undefined ||
-              this.state.uberUrl === "" ||
-              this.state.lyftUrl === "" ||
-              this.state.riders === undefined}
           onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
@@ -192,6 +184,12 @@ class Form extends Component {
     );
   }
 }
+
+// disabled={this.state.endLat === undefined ||
+//   this.state.endLng === undefined ||
+//   this.state.uberUrl === "" ||
+//   this.state.lyftUrl === "" ||
+//   this.state.riders === undefined}
 
 const styles = StyleSheet.create({
   container: {
