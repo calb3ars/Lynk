@@ -11,9 +11,8 @@ import {
 export default class Results extends Component {
   constructor(props){
     super(props);
-    this.state = { lyftToken: this.props.lyftToken, uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
-                   lyftUrl: this.props.lyftUrl, uberUrl: this.props.uberUrl};
-
+    this.state = { lyftToken: this.props.form.lyftToken, uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
+                   lyftUrl: this.props.form.lyftUrl, uberUrl: this.props.form.uberUrl};
   }
 
   componentWillMount(){
@@ -27,19 +26,14 @@ export default class Results extends Component {
     this.fetchUberRides();
   }
 
-  createUrl(startLat, startLng, endLat, endLng){
-    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`})
-  }
-
   fetchLyftToken(){
-    let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
+    let lyft_auth_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
     let url = 'https://api.lyft.com/oauth/token';
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Basic '+ lyft_token
+        'Authorization': 'Basic '+ lyft_auth_token
       },
       body: JSON.stringify({
         "grant_type": "client_credentials",
@@ -60,7 +54,7 @@ export default class Results extends Component {
 
   fetchLyftList(){
 
-    let lyftToken = 'gAAAAABY58mK-kpTZIayKvea1btHRMI0VSmebCamPzAqVxEW5o4FuHctaXndrYzrkrCvbPTdCRGIOZi3hZC-gymr4KLBkeapK6omhmuNZDeMbNq2LaprdUVCpG4GRCBoS2Hg5SDD59wNAqeMlavVpTz86xO3QtlJJSyW0xJkAPG1fhCWk84-nuhUUOjzZDaJah1rPTupxtedgmqTAHuCY8oSg8WoeYhSSQ==';
+    let lyftToken = this.state.lyftToken;
     // let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533';
     let ride_url = this.state.lyftUrl;
 
