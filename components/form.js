@@ -29,10 +29,10 @@ class Form extends Component {
       startAddress: undefined,
       endAddress: undefined,
       unfilledForm: true,
-      lyftUrl: 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533',
-      uberUrl: 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533',
-      // lyftUrl: "",
-      // uberUrl: "",
+      // lyftUrl: 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533',
+      // uberUrl: 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533',
+      lyftUrl: "",
+      uberUrl: "",
       error: ""
 
     };
@@ -62,7 +62,7 @@ class Form extends Component {
 
   createUrl(startLat, startLng, endLat, endLng){
     this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`})
+                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
   }
 
   fetchLyftToken(){
@@ -88,7 +88,7 @@ class Form extends Component {
 
   updateRiders(passengers) {
     this.setState({riders: passengers});
-    this.createUrl(this.state.startLat, this.state.startLng, this.state.endLat, this.state.endLng);
+    this.createUrl(this.state.startLat.toFixed(4), this.state.startLng.toFixed(4), this.state.endLat.toFixed(4), this.state.endLng.toFixed(4));
     // console.log(this.state);
   }
 
@@ -175,6 +175,11 @@ class Form extends Component {
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
       </View>
         <Button
+          disabled={this.state.endLat === undefined ||
+              this.state.endLng === undefined ||
+              this.state.uberUrl === "" ||
+              this.state.lyftUrl === "" ||
+              this.state.riders === undefined}
           onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
@@ -185,11 +190,6 @@ class Form extends Component {
   }
 }
 
-// disabled={this.state.endLat === undefined ||
-//   this.state.endLng === undefined ||
-//   this.state.uberUrl === "" ||
-//   this.state.lyftUrl === "" ||
-//   this.state.riders === undefined}
 
 const styles = StyleSheet.create({
   container: {
