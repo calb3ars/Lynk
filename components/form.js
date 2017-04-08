@@ -67,9 +67,15 @@ class Form extends Component {
         "scope": "public"
       })
     }).then(response => {
+        if (response.status !== 200){
+          console.log('Look like there was a problem. Status code: ' + response.status);
+          return;
+        }
         response.json().then(data => {
-        this.setState({lyftToken:`${data.access_token}`});
+          this.setState({lyftToken:`${data.access_token}`});
       });
+    }).catch(err => {
+      console.log('Fetch Token error :-S', err);
     });
   }
 
