@@ -20,6 +20,7 @@ export default class Results extends Component {
     // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
     // console.log(this.state.lyftUrl);
   }
+  
   componentDidMount(){
     this.fetchLyftToken();
     this.fetchLyftList();
