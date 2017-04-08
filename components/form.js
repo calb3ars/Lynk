@@ -29,13 +29,20 @@ class Form extends Component {
       startAddress: undefined,
       endAddress: undefined,
       unfilledForm: true,
+      // lyftUrl: 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533',
+      // uberUrl: 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533',
+      lyftUrl: "",
+      uberUrl: "",
       error: ""
+
     };
     this.updateRiders.bind(this);
     this.updateDest.bind(this);
     this.setState.bind(this);
     this.getStartCoords.bind(this);
     this.getEndCoords.bind(this);
+    this.createUrl.bind(this);
+    this.getCoords.bind(this);
   }
 
   componentDidMount(){
@@ -53,6 +60,11 @@ class Form extends Component {
     this.fetchLyftToken();
   }
 
+  createUrl(startLat, startLng, endLat, endLng){
+    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
+                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+  }
+
   fetchLyftToken(){
     let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
     let url = 'https://api.lyft.com/oauth/token';
@@ -67,33 +79,17 @@ class Form extends Component {
         "scope": "public"
       })
     }).then(response => {
-        if (response.status !== 200){
-          console.log('Look like there was a problem. Status code: ' + response.status);
-          return;
-        }
         response.json().then(data => {
           this.setState({lyftToken:`${data.access_token}`});
+          // console.log(this.state.lyftToken);
       });
-    }).catch(err => {
-      console.log('Fetch Token error :-S', err);
     });
-  }
-
-
-  shouldComponentUpdate(){
-    console.log(this.state);
-    if(this.state.endLat !== undefined &&
-        this.state.endLng !== undefined &&
-        this.state.riders !== undefined) {
-
-          this.setState({unfilledForm: false});
-          console.log(this.state);
-      }
-    return true;
   }
 
   updateRiders(passengers) {
     this.setState({riders: passengers});
+    this.createUrl(this.state.startLat.toFixed(4), this.state.startLng.toFixed(4), this.state.endLat.toFixed(4), this.state.endLng.toFixed(4));
+    // console.log(this.state);
   }
 
   updateDest(latitude, longitude) {
@@ -132,6 +128,16 @@ class Form extends Component {
     );
   }
 
+  getCoords() {
+    this.getStartCoords(this.state.startAddress);
+    this.getEndCoords(this.state.endAddress);
+  }
+
+  createUrl(startLat, startLng, endLat, endLng){
+    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
+                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+  }
+
 
 
   handleButtonPress(){
@@ -146,6 +152,7 @@ class Form extends Component {
   // <DestButton updateDest={this.updateDest}/>
   render(){
 
+    // onSubmitEditing={(startAddress) => this.getStartCoords(startAddress)}
     return(
       <View style={styles.formContainer}>
       <View>
@@ -154,13 +161,12 @@ class Form extends Component {
           placeholder="Pickup Location"
           placeholderTextColor= '#A7D1CC'
           onChangeText={(startAddress) => this.setState({startAddress})}
-          onSubmitEditing={(startAddress) => this.getStartCoords(startAddress)}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
           onChangeText={(endAddress) => this.setState({endAddress})}
-          onSubmitEditing={(endAddress) => this.getEndCoords(endAddress)}
+          onSubmitEditing={() => this.getCoords()}
           placeholderTextColor= '#A7D1CC'
           value={this.state.destination} />
       </View>
@@ -169,7 +175,11 @@ class Form extends Component {
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
       </View>
         <Button
-          disabled={this.state.unfilledForm}
+          disabled={this.state.endLat === undefined ||
+              this.state.endLng === undefined ||
+              this.state.uberUrl === "" ||
+              this.state.lyftUrl === "" ||
+              this.state.riders === undefined}
           onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
@@ -179,6 +189,7 @@ class Form extends Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
