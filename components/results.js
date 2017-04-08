@@ -11,14 +11,15 @@ import {
 export default class Results extends Component {
   constructor(props){
     super(props);
-    this.state = { lyftToken: '', uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
-                   lyftUrl: '', uberUrl: ''};
+    this.state = { lyftToken: this.props.lyftToken, uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
+                   lyftUrl: this.props.lyftUrl, uberUrl: this.props.uberUrl};
+
   }
 
   componentWillMount(){
-    this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
+    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
     // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
-    console.log(this.state.lyftUrl);
+    // console.log(this.state.lyftUrl);
   }
   componentDidMount(){
     this.fetchLyftToken();
@@ -45,10 +46,15 @@ export default class Results extends Component {
         "scope": "public"
       })
     }).then(response => {
+        if (response.status !== 200){
+          console.log('Looks like there was a problem. Status code: ' + response.status);
+          return;
+        }
         response.json().then(data => {
-        console.log(data);
         this.setState({lyftToken:`${data.access_token}`});
       });
+    }).catch(err => {
+      console.log('Fetch Error :-S', err);
     });
   }
 
@@ -64,10 +70,16 @@ export default class Results extends Component {
         'Authorization': 'bearer '+ lyftToken
       }
     }).then(response => {
+        if (response.status !== 200){
+          console.log('Looks like there was a problem. Status code: ' + response.status);
+          return;
+        }
         response.json().then(data => {
           this.setState({lyftRides: Parsers.LyftParser(data)})
         })
-      })
+      }).catch(err => {
+        console.log('Fetch Lyft Rides Error :-S', err);
+      });
   }
 
   fetchUberRides(){
@@ -83,9 +95,14 @@ export default class Results extends Component {
         'Accept-Language': 'en_US'
       }
     }).then(response => {
+      if (response.status !== 200){
+        console.log('Looks like there was a problem. Status code: ' + response.status);
+      }
       response.json().then(promise => {
         this.setState({uberRides: Parsers.UberParser(promise)})
       })
+    }).catch(err => {
+      console.log('Fetch Uber Rides Error :-S', err);
     })
   }
 
