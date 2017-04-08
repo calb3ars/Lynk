@@ -4,13 +4,24 @@ import {
   Image,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Linking
 } from 'react-native';
 
+
 export default class LyftRideItem extends Component {
+
+
   buttonPress(){
     console.log('Lyft!!');
+    Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
+      console.log('it worked!')})
+      .catch(err => {
+        console.log('An error occurred:', err);
+        Linking.openURL("https://www.lyft.com/signup/SDKSIGNUP?clientId=qCWwfqShiQOO&sdkName=iOS_direct");
+      });
   }
+
   render() {
     return(
       <TouchableHighlight onPress={this.buttonPress}>
