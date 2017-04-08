@@ -178,14 +178,11 @@ class Form extends Component {
         <PassengerButton updateRiders={this.updateRiders.bind(this)} />
       </View>
         <Button
-<<<<<<< HEAD
-=======
           disabled={this.state.endLat === undefined ||
               this.state.endLng === undefined ||
               this.state.uberUrl === "" ||
               this.state.lyftUrl === "" ||
               this.state.riders === undefined}
->>>>>>> 85210a8ec5095eaeb80a39ba68c0e737bedc568e
           onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
