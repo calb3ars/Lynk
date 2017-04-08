@@ -27,37 +27,37 @@ export default class Results extends Component {
     this.fetchUberRides();
     this.fetchLyftList();
   }
-
-  fetchLyftToken(){
-    let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
-    let url = 'https://api.lyft.com/oauth/token';
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic '+ lyft_token
-      },
-      body: JSON.stringify({
-        "grant_type": "client_credentials",
-        "scope": "public"
-      })
-    }).then(response => {
-        if (response.status !== 200){
-          console.log('Looks like there was a problem. Status code: ' + response.status);
-          return;
-        }
-        response.json().then(data => {
-        this.setState({lyftToken:`${data.access_token}`});
-      });
-    }).catch(err => {
-      console.log('Fetch Error :-S', err);
-    });
-  }
+  // 
+  // fetchLyftToken(){
+  //   let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
+  //   let url = 'https://api.lyft.com/oauth/token';
+  //   fetch(url, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Basic '+ lyft_token
+  //     },
+  //     body: JSON.stringify({
+  //       "grant_type": "client_credentials",
+  //       "scope": "public"
+  //     })
+  //   }).then(response => {
+  //       if (response.status !== 200){
+  //         console.log('Looks like there was a problem. Status code: ' + response.status);
+  //         return;
+  //       }
+  //       response.json().then(data => {
+  //       this.setState({lyftToken:`${data.access_token}`});
+  //     });
+  //   }).catch(err => {
+  //     console.log('Fetch Error :-S', err);
+  //   });
+  // }
 
   fetchLyftList(){
     console.log(this.state);
-    let lyftToken = this.state.lyftToken;
-    let ride_url = this.state.lyftUrl;
+    let lyftToken = "gAAAAABY6UykCzBEgfXC5GD0i7CQqee_UJRH7WCwibyaf4pKNcMR3Ii6utTss-ghSU-TZVbZ-VqBgL12UtJSnP5jUiqU1fRVPvl6CR1DwDLDxw0wxb-7M_ShOPehWs6fUykWF30FPkHhoA5Qz3oS0NWfD87b85YBhR7H1e0PT3teahA0e4corlfafLM-dSkQWSk6PHLdTTL0QGMhd3I-VGapvrcJnU3NLQ==";
+    let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.785834&start_lng=-74.01311910000001&end_lat=37.791305&end_lng=-122.3937352';
     fetch(ride_url,{
       method: 'GET',
       headers: {
@@ -78,8 +78,8 @@ export default class Results extends Component {
 
   fetchUberRides(){
     let counter = 0;
-    // let url = 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533';
-    let url = this.state.uberUrl;
+    let url = 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533';
+    // let url = this.state.uberUrl;
     let server_token = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
     fetch(url, {
       method: 'GET',
