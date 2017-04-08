@@ -15,15 +15,7 @@ export default class Results extends Component {
                    lyftUrl: this.props.form.lyftUrl, uberUrl: this.props.form.uberUrl};
   }
 
-  componentWillMount(){
-    // this.createUrl('37.7763', '-122.3918', '37.7972', '-122.4533');
-    // console.log(this.state.lyftUrl);
-  }
-
   componentDidMount(){
-    // this.createUrl(this.props.form.startLat, this.props.form.startLng, this.props.form.endLat, this.props.form.endLng);
-    // this.fetchLyftToken();
-    console.log(this.props.form);
     this.fetchUberRides();
     this.fetchLyftList();
 
@@ -96,11 +88,11 @@ export default class Results extends Component {
         console.log('Looks like there was a problem. Status code: ' + response.status);
       }
       response.json().then(promise => {
-        this.setState({uberRides: Parsers.UberParser(promise)})
-      })
+        this.setState({uberRides: Parsers.UberParser(promise)});
+      });
     }).catch(err => {
       console.log('Fetch Uber Rides Error :-S', err);
-    })
+    });
   }
 
 
@@ -109,27 +101,19 @@ export default class Results extends Component {
       uri: 'https://2ecyvk3piszv4e6gv2yz9867-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/uber-and-lyft-side-by-side.png'
     };
 
-    // console.log(this.state.lyftToken);
-    // console.log(this.state.lyftRides);
-    // console.log(this.state.uberRides);
-    // console.log(this.state.uberData);
-    // if (this.state.uberData._65){
-    //   console.log(this.state.uberData._65.products);
-    // }
-
     if (this.state.lyftRides && this.state.uberRides){
       return (
         <View style={styles.container}>
           <Image source={pic} style={styles.logos}/>
           <RideResults lyftRides={this.state.lyftRides} uberRides={this.state.uberRides} />
         </View>
-      )
+      );
     } else {
       return (
         <View style={styles.container}>
           <Image source={require('../assets/download.gif')} style={styles.loading}/>
         </View>
-      )
+      );
     }
   }
 }
