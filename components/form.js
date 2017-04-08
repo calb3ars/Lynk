@@ -24,20 +24,17 @@ class Form extends Component {
       startLat: undefined,
       endLng: undefined,
       endLat: undefined,
-      riders: undefined,
+      riders: '1 - 2',
       lyftToken: undefined,
       startAddress: undefined,
       endAddress: undefined,
       unfilledForm: true,
-      // lyftUrl: 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533',
-      // uberUrl: 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533',
       lyftUrl: "",
       uberUrl: "",
       error: ""
 
     };
     this.updateRiders.bind(this);
-    this.updateDest.bind(this);
     this.setState.bind(this);
     this.getStartCoords.bind(this);
     this.getEndCoords.bind(this);
@@ -79,24 +76,18 @@ class Form extends Component {
         "scope": "public"
       })
     }).then(response => {
+      if (response.status !== 200){
+        console.log('Looks like there was a problem. Status code: ' + response.status);
+        return;
+      }
         response.json().then(data => {
           this.setState({lyftToken:`${data.access_token}`});
-          // console.log(this.state.lyftToken);
       });
     });
   }
 
   updateRiders(passengers) {
     this.setState({riders: passengers});
-    this.createUrl(this.state.startLat.toFixed(4), this.state.startLng.toFixed(4), this.state.endLat.toFixed(4), this.state.endLng.toFixed(4));
-    // console.log(this.state);
-  }
-
-  updateDest(latitude, longitude) {
-    this.setState({
-      endLat: latitude,
-      endLon: longitude
-    });
   }
 
   _handleBackPress() {
@@ -105,7 +96,6 @@ class Form extends Component {
 
   _handleNextPress(nextRoute) {
     this.props.navigator.push(nextRoute);
-    // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
   }
 
   getStartCoords(address) {
@@ -113,7 +103,7 @@ class Form extends Component {
     Geocoder.getFromLocation(address).then(
       json => {
         let location = json.results[0].geometry.location;
-        this.setState({starttLat: location.lat, startLng: location.lng});
+        this.setState({starttLat: location.lat, startLng: location.lng}, this.createUrl);
       }
     );
   }
@@ -123,19 +113,32 @@ class Form extends Component {
     Geocoder.getFromLocation(address).then(
       json => {
         let location = json.results[0].geometry.location;
-        this.setState({endLat: location.lat, endLng: location.lng});
+        this.setState({endLat: location.lat, endLng: location.lng}, this.createUrl);
       }
     );
   }
 
   getCoords() {
-    this.getStartCoords(this.state.startAddress);
-    this.getEndCoords(this.state.endAddress);
+    if(this.state.startAddress !== undefined){
+      this.getStartCoords(this.state.startAddress);
+    }
+    if(this.state.endAddress !== undefined){
+      this.getEndCoords(this.state.endAddress);
+    }
   }
 
-  createUrl(startLat, startLng, endLat, endLng){
-    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+  createUrl(){
+    if(this.state.startLng &&
+      this.state.startLat &&
+      this.state.endLng &&
+      this.state.endLat) {
+        let startLat = this.state.startLat.toFixed(4);
+        let startLng = this.state.startLng.toFixed(4);
+        let endLat = this.state.endLat.toFixed(4);
+        let endLng = this.state.endLng.toFixed(4);
+        this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
+                        uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+      }
   }
 
 
@@ -149,10 +152,8 @@ class Form extends Component {
     this._handleNextPress(nextRoute);
   }
 
-  // <DestButton updateDest={this.updateDest}/>
   render(){
 
-    // onSubmitEditing={(startAddress) => this.getStartCoords(startAddress)}
     return(
       <View style={styles.formContainer}>
       <View>
@@ -161,6 +162,7 @@ class Form extends Component {
           placeholder="Pickup Location"
           placeholderTextColor= '#A7D1CC'
           onChangeText={(startAddress) => this.setState({startAddress})}
+          onSubmitEditing={() => this.getCoords()}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
@@ -178,8 +180,7 @@ class Form extends Component {
           disabled={this.state.endLat === undefined ||
               this.state.endLng === undefined ||
               this.state.uberUrl === "" ||
-              this.state.lyftUrl === "" ||
-              this.state.riders === undefined}
+              this.state.lyftUrl === "" }
           onPress={() => this.handleButtonPress()}
           style={styles.button}
           containerStyle={styles.buttonContainer}>
