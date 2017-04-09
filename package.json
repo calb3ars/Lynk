@@ -11,9 +11,6 @@
     "react-native": "^0.42.3",
     "react-native-button": "^1.8.2",
     "react-native-geocoding": "^0.1.0",
-    "react-native-hide-with-keyboard": "^0.1.1",
-    "react-native-keyboard-aware-scrollview": "^1.1.5",
-    "react-native-keyboardevents": "^0.4.5",
     "react-native-maps": "^0.13.1",
     "react-native-radio-buttons": "^0.14.0"
   },
