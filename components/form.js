@@ -113,7 +113,7 @@ class Form extends Component {
       }
     ).catch(error => {
       console.log(error.message);
-      this.setState( { error: error.message } );
+      this.setState( { error: "Invalid Pickup Location" } );
     });
   }
 
@@ -126,7 +126,7 @@ class Form extends Component {
       }
     ).catch(error => {
       console.log(error);
-      this.setState( { error: error.message } );
+      this.setState( { error: "Invalid Destination" } );
     });
   }
 
