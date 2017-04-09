@@ -43,6 +43,7 @@ class Form extends Component {
     this.getEndCoords.bind(this);
     this.createUrl.bind(this);
     this.getCoords.bind(this);
+
   }
 
   clearErrors(){
@@ -140,6 +141,22 @@ class Form extends Component {
   }
 
   createUrl(){
+    if(this.state.startLng &&
+      this.state.startLat){
+        let sMark =
+          {lat:this.state.startLat,
+           lng:this.state.startLng
+          };
+        this.props.markStartMap(sMark);
+      }
+    if(this.state.endLng &&
+      this.state.endLat) {
+        let eMark =
+          {lat:this.state.endLat,
+           lng:this.state.endLng
+          };
+        this.props.markEndMap(eMark);
+      }
     if(this.state.startLng &&
       this.state.startLat &&
       this.state.endLng &&
