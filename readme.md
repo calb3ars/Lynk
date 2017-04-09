@@ -1,111 +1,59 @@
 # Lynk
 
-## Background
-For the price conscious, comparing transportation costs between Lyft and Uber requires you to open both apps to check. This app will allow users to do a price comparison from within one single app. Users will then be able to select the ride they want and be redirected to the associated app.
+Lynk is a mobile app built using React Native for the Apple iOS platform. By inputting a valid starting point and a destination, it returns a side-by-side comparison of Uber and Lyft prices for different ride types at the time it is requested. Once the ride is selected, users will be redirected to the corresponding ride-sharing app or the App Store.
 
-## Functionality & MVP
-With this app, users will be able to:
-- [ ] Compare pricing between Lyft and Uber
-- [ ] Users will be able to view the map
-- [ ] Filter by price and eta
-- [ ] Select a ride and redirect to selected app
+For the price conscious, comparing transportation costs between Lyft and Uber requires you to open both apps to check. This app will allow users to do a price comparison from within one single app. Take a look at the demo link below:
 
-## Wireframes
-![mapform][mapform]
+[Live Here][live]
 
-![results][results]
+[live]: http://www.thymes-cookbook.com
 
+## Features
 
+* Compare pricing between Lyft and Uber
+* Address or place title input
+* Mark recipes as cooked
+* Comment on recipes
+* Find recipes by tag
+* Look at recipe boxes of other users
 
-## Technologies & Technical Challenges
-This app will be built for iOS using React-Native, JavaScript, jQuery, and CSS.
+## Code Guide
 
-The primary technical challenges will be:
-- Being able to use React-Native
-- Integrating APIs to retrieve data we specify
-- Redirecting to associated app and transferring pre-filled data
-- Implementing accordion views
+If you'd like to take a closer look at the code behind the Cookbook App, the best folders to look in are:
 
-## Group Members & Work Breakdown
-Our group consists of four members, Andrew Jiang, Tony Xie, Vinson Chen, and Vivian Lee.
+* [Cookbook.jsx](./frontend/Cookbook.jsx)
+* [React components](./frontend/components)
+  * [App](./frontend/components/app.jsx)
+* [Rails controllers](./app/controllers/api)
+* [Flux Stores](./frontend/stores)
+* [Api Util](./frontend/util/api_util.js)
+* [DB Schema](./db/schema.rb)
+* [Rails Routes](./config/routes.rb)
 
-Andrew's primary responsibilities will be:
-- Researching React-Native programming structure
-- Comparisons listings view component
-- Integrate Lyft API
-- Swipe animation implementation
-- Implement accordion views
-- CSS UI/UX Styling
+## Languages, Frameworks, Libraries, Etc.
 
-Tony's primary responsibilities will be:
-- Researching React-Native programming structure
-- Comparisons listings view component
-- Integrate Google Maps API
-- Swipe animation implementation
-- Implement accordion views
+* Ruby on Rails
+* PostgreSQL
+* React
+* Flux
+* jQuery
+* Gems
+  * Paperclip
+  * pg_search
+  * jwt
+  * Jbuilder
+  * BCrypt
 
-Vinson's primary responsibilities will be:
-- Researching API implementations: Google Maps Api, Lyft Api, Uber Api
-- Implement input forms
-- Integrate Lyft API
-- Implement accordion views
-- Filtering results
+## Screenshots
 
-Vivian's primary responsibilities will be:
-- Researching API implementations: Google Maps Api, Lyft Api, Uber Api
-- Implement map view component
-- Integrate Google Maps API
-- Filtering results
-- CSS UI/UX Styling
+Home page:
+![home page](./screenshots/homepage.jpg)
 
+Recipe detail page:
+![recipe detail](./screenshots/recipe-detail.jpg)
 
-## Implementation Timeline
-**Monday**
-- Research how to use and implement APIs and React native. Decide whether we need any other tools or libraries.
-  + APIs to use (Google Maps, Lyft/Uber) (Vivian and Vinson)
-  + React Native (Tony and Andrew)
-  + Brainstorm name of app and branding (Everyone)
+Recipe notes:
+![recipe detail](./screenshots/comments.jpg)
 
-**Tuesday**
-- Create the view and components and design for overall layout and buttons.
-  + View (List of components below)
-    * Map view component (Vivian)
-    * Input forms (Vinson)
-    * Comparison listings view component (Andrew & Tony)
-  + Accordion for buttons to select and drag (Andrew & Tony)
-
-
-**Wednesday & Thursday**
-- Integration (Everyone)
-  + Google Maps: get latitude & longitude for current location and destination
-  + Lyft/Uber APIs: use google map lat & long to perform GET requests for ride info.
-  + Link to chosen app (Lyft/Uber) and passing the location data
-  + Filtering and sorting of data
-
-**Friday**
-- CSS UI/UX refinement (Andrew)
-  + Color scheme, logo, and name
-- Quality Assurance (Vinson)
-- Demo Page (Tony & Vivian)
-  + GIFs for Demo
-  + Emulator
-  + Webpage
-
-## Future implementations
-- Google Place Search API
-- Loading Screen Animation
-- Pull reviews
-- Book through our app
-- Location Services Alert
-- Sidebar for Account Settings
-
-## Notes
-- To pull and run
-  + npm install
-  + react-native upgrade
-  + react-native link react-native-maps
-  + react-native run-ios
-
-
-[results]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1491179096/flex/resultsDetail_tnzmjd.jpg
-[mapform]: http://res.cloudinary.com/dogzxn5h4/image/upload/c_scale,w_400/v1491179099/flex/mapForm_ynluyp.jpg
+Search bar:
+![search bar](./screenshots/search.jpg)
