@@ -133,22 +133,6 @@ class Form extends Component {
   }
 
   createUrl(){
-    // if(this.state.startLng &&
-    //   this.state.startLat){
-    //     this.dispatchEvent('markStart');
-    //   }
-    // if(this.state.endLng &&
-    //   this.state.endLat) {
-    //     this.dispatchEvent('markEnd');
-    //   }
-    if(this.state.startLng &&
-      this.state.startLat){
-        this.dispatchEvent('markStart');
-      }
-    if(this.state.endLng &&
-      this.state.endLat) {
-        this.dispatchEvent('markEnd');
-      }
     if(this.state.startLng &&
       this.state.startLat &&
       this.state.endLng &&
