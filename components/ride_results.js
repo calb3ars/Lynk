@@ -162,10 +162,13 @@ export default class RideResults extends Component {
 
     // let lyftRides = Parsers.LyftParser(lyftData);
     // let uberRides = Parsers.UberParser(uberData);
+      // console.log('in ride results');
+      // console.log(this.props.lyftRedirectUrl);
+      // console.log(this.props.uberRedirectUrl);
       return (
         <View style={styles.rideResults}>
-          <LyftList style={[styles.rideResults, styles.lyftList]} rides={this.props.lyftRides} />
-          <UberList style={[styles.rideResults, styles.uberList]} rides={this.props.uberRides} />
+          <LyftList style={[styles.rideResults, styles.lyftList]} rides={this.props.lyftRides} lyftRedirectUrl={this.props.lyftRedirectUrl}/>
+          <UberList style={[styles.rideResults, styles.uberList]} rides={this.props.uberRides} uberRedirectUrl={this.props.uberRedirectUrl}/>
         </View>
       );
 

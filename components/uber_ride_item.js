@@ -14,41 +14,44 @@ import {
 export default class UberRideItem extends Component {
   constructor(props){
     super(props);
+
+    // this.buttonPress.bind(this);
+    // debugger;
+    // console.log('in UberRideItem');
+    // console.log(this.props.uberRedirectUrl);
+    // this.state = { uberRedirectUrl: this.props.uberRedirectUrl }
+
     this.state = {
       pressed: false,
     };
-    this.buttonPress.bind(this);
+    // this.buttonPress.bind(this);
   }
 
   buttonPress(){
-    console.log('Uber!');
-    Linking.openURL('uber://').then(() => {
-      console.log('This works!')
-    }).catch(err => {
-      console.log('An error occurred: ', err);
+    Linking.openURL(this.props.uberRedirectUrl)
+    .catch(err => {
       Linking.openURL('https://m.uber.com/sign-up?<client_id=NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>');
     })
   }
 
   _onShowUnderlay(){
-    console.log("Toggle Pressed");
     this.setState({ pressed: true });
   }
 
   _onHideUnderlay(){
-    console.log("Toggle Pressed");
     this.setState({ pressed: false });
   }
 
   render() {
     return(
       <TouchableHighlight
-        onPress={this.buttonPress}
         underlayColor={'#0B4F6C'}
+        onPress={this.buttonPress.bind(this)}
         onShowUnderlay={this._onShowUnderlay.bind(this)}
         onHideUnderlay={this._onHideUnderlay.bind(this)}
         style={ this.state.pressed ? styles.pressed : styles.unpressed }
         >
+
         <View style={styles.uberListing, styles.listing}>
           <Text style={[styles.uberRideType, this.state.pressed ? styles.pressedType : styles.type]}>{this.props.ride.display_name}</Text>
           <Text style={[styles.uberCost, this.state.pressed ? styles.pressedCost : styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.high_estimate}</Text>

@@ -10,20 +10,17 @@ import {
 
 
 export default class LyftRideItem extends Component {
+
   constructor(props){
     super(props);
     this.state = {
       pressed: false,
     };
-    this.buttonPress.bind(this);
   }
 
   buttonPress(){
-    console.log('Lyft!!');
-    Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
-      console.log('it worked!')})
+    Linking.openURL(this.props.lyftRedirectUrl)
       .catch(err => {
-        console.log('An error occurred:', err);
         Linking.openURL("https://www.lyft.com/signup/SDKSIGNUP?clientId=qCWwfqShiQOO&sdkName=iOS_direct");
       });
   }
@@ -41,12 +38,11 @@ export default class LyftRideItem extends Component {
   render() {
     return(
       <TouchableHighlight
-        onPress={this.buttonPress}
         underlayColor={'#0B4F6C'}
+        onPress={this.buttonPress.bind(this)}
         onShowUnderlay={this._onShowUnderlay.bind(this)}
         onHideUnderlay={this._onHideUnderlay.bind(this)}
         style={ this.state.pressed ? styles.pressed : styles.unpressed }
-
       >
           <View style={styles.lyftListing, styles.listing}>
             <Text style={[styles.lyftRideType, this.state.pressed ? styles.pressedType : styles.type]}>{this.props.ride.display_name}</Text>

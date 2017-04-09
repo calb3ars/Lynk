@@ -15,7 +15,10 @@ export default class Results extends Component {
                    lyftRides: undefined, uberRides: undefined,
                    uberData: {_65: undefined},
                    lyftUrl: this.props.form.lyftUrl,
-                   uberUrl: this.props.form.uberUrl};
+                   uberUrl: this.props.form.uberUrl,
+                   lyftRedirectUrl: this.props.form.lyftRedirectUrl,
+                   uberRedirectUrl: this.props.form.uberRedirectUrl
+                 };
   }
 
   componentDidMount(){
@@ -62,7 +65,7 @@ export default class Results extends Component {
       }
     }).then(response => {
         if (response.status !== 200){
-          console.log('Looks like there was a problem. Status code: ' + response.status);
+          console.log('fetchLystList. Status code: ' + response.status);
           return;
         }
         response.json().then(data => {
@@ -76,6 +79,7 @@ export default class Results extends Component {
   fetchUberRides(){
     let counter = 0;
     let url = this.state.uberUrl;
+    // console.log(url);
     let serverToken = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
     fetch(url, {
       method: 'GET',
@@ -86,7 +90,8 @@ export default class Results extends Component {
       }
     }).then(response => {
       if (response.status !== 200){
-        console.log('Looks like there was a problem. Status code: ' + response.status);
+        console.log('fetchUberRides. Status code: ' + response.status);
+        return;
       }
       response.json().then(promise => {
         this.setState({uberRides: Parsers.UberParser(promise)});
@@ -107,7 +112,9 @@ export default class Results extends Component {
         <View style={styles.resultsContainer}>
           <Image source={require('../assets/lyft_uber_2.png')} style={styles.logos}/>
           <RideResults lyftRides={this.state.lyftRides}
-            uberRides={this.state.uberRides} />
+            uberRides={this.state.uberRides}
+            lyftRedirectUrl={this.state.lyftRedirectUrl}
+            uberRedirectUrl={this.state.uberRedirectUrl} />
         </View>
       );
     } else {
