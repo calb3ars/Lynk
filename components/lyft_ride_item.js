@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
 
   pressed: {
     backgroundColor: '#0B4F6C',
-    opacity: 1,
   },
 
   listing: {
@@ -77,32 +76,17 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     width: 190,
     marginBottom:15,
-    // borderWidth: 2,
-    // borderColor: '#0B4F6C',
-    // borderRightWidth: 0,
-    // shadowColor: '#0B4F6C',
-    // shadowColor: '#083f56',
-    // shadowOffset: {
-    //   height: 0
-    // },
-    // shadowOpacity: 0.4,
-    opacity: 1,
   },
 
   type: {
-    // color: '#0B4F6C',
     color: '#E70B81',
     fontSize: 18,
     fontFamily: 'Avenir-Medium'
   },
 
   cost: {
-    // color: '#0B4F6C',
     color: '#0B4F6C',
     fontSize: 48,
-    // fontFamily: 'Heiti SC'
-    // fontFamily: 'IowanOldStyle-Bold'
-    // fontFamily: 'Bodoni 72'
     fontFamily: 'Avenir-Medium'
   },
 
@@ -110,6 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
 
   },
+
   // bonus: {
   //   color: '#FF5A5F',
   //   fontSize: 14,
@@ -139,8 +124,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Avenir-Medium'
   },
-
-
 
   lyftListing: {
     // marginRight: 20
