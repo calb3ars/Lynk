@@ -39,7 +39,7 @@ export default class UberRideItem extends Component {
     console.log("Toggle Pressed");
     this.setState({ pressed: false });
   }
- 
+
   render() {
     return(
       <TouchableHighlight
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     //   height: 0
     // },
     // shadowOpacity: 0.4,
-    opacity: 0.8
+    opacity: 1
   },
 
   type: {
