@@ -11,8 +11,11 @@ import {
 export default class Results extends Component {
   constructor(props){
     super(props);
-    this.state = { lyftToken: this.props.form.lyftToken, uberToken: '', lyftRides: undefined, uberRides: undefined, uberData: {_65: undefined},
-                   lyftUrl: this.props.form.lyftUrl, uberUrl: this.props.form.uberUrl};
+    this.state = { lyftToken: this.props.form.lyftToken, uberToken: '',
+                   lyftRides: undefined, uberRides: undefined,
+                   uberData: {_65: undefined},
+                   lyftUrl: this.props.form.lyftUrl,
+                   uberUrl: this.props.form.uberUrl};
   }
 
   componentDidMount(){
@@ -51,9 +54,8 @@ export default class Results extends Component {
   fetchLyftList(){
 
     let lyftToken = this.state.lyftToken;
-    // let ride_url = 'https://api.lyft.com/v1/cost?start_lat=37.7763&start_lng=-122.3918&end_lat=37.7972&end_lng=-122.4533';
-    let ride_url = this.state.lyftUrl;
-    fetch(ride_url,{
+    let rideUrl = this.state.lyftUrl;
+    fetch(rideUrl,{
       method: 'GET',
       headers: {
         'Authorization': 'bearer '+ lyftToken
@@ -73,14 +75,13 @@ export default class Results extends Component {
 
   fetchUberRides(){
     let counter = 0;
-    // let url = 'https://api.uber.com/v1.2/estimates/price?start_latitude=37.7763&start_longitude=-122.3918&end_latitude=37.7972&end_longitude=-122.4533';
     let url = this.state.uberUrl;
-    let server_token = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
+    let serverToken = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
     fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token '+ server_token,
+        'Authorization': 'Token '+ serverToken,
         'Accept-Language': 'en_US'
       }
     }).then(response => {
@@ -105,13 +106,15 @@ export default class Results extends Component {
       return (
         <View style={styles.container}>
           <Image source={pic} style={styles.logos}/>
-          <RideResults lyftRides={this.state.lyftRides} uberRides={this.state.uberRides} />
+          <RideResults lyftRides={this.state.lyftRides}
+            uberRides={this.state.uberRides} />
         </View>
       );
     } else {
       return (
         <View style={styles.container}>
-          <Image source={require('../assets/download.gif')} style={styles.loading}/>
+          <Image source={require('../assets/download.gif')}
+            style={styles.loading}/>
         </View>
       );
     }

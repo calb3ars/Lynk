@@ -5,6 +5,7 @@ import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
 import Location from './geocoder.js';
 import Geocoder from 'react-native-geocoding';
+
 import {
   StyleSheet,
   View,
@@ -13,7 +14,8 @@ import {
   TouchableHighlight,
   StatusBar,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Keyboard
 } from 'react-native';
 
 class Form extends Component {
@@ -31,6 +33,7 @@ class Form extends Component {
       unfilledForm: true,
       lyftUrl: "",
       uberUrl: "",
+      keyboard: false,
       error: ""
 
     };
@@ -55,6 +58,8 @@ class Form extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     this.fetchLyftToken();
+    Keyboard.addListener('keyboardDidShow', () => this.setState({keyboard: true}));
+    Keyboard.addListener('keyboardDidHide', () => this.setState({keyboard: false}));
   }
 
   createUrl(startLat, startLng, endLat, endLng){
@@ -63,13 +68,13 @@ class Form extends Component {
   }
 
   fetchLyftToken(){
-    let lyft_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
+    let lyftToken = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
     let url = 'https://api.lyft.com/oauth/token';
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Basic '+ lyft_token
+        'Authorization': 'Basic '+ lyftToken
       },
       body: JSON.stringify({
         "grant_type": "client_credentials",
@@ -103,7 +108,7 @@ class Form extends Component {
     Geocoder.getFromLocation(address).then(
       json => {
         let location = json.results[0].geometry.location;
-        this.setState({starttLat: location.lat, startLng: location.lng}, this.createUrl);
+        this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
       }
     );
   }
@@ -129,6 +134,14 @@ class Form extends Component {
 
   createUrl(){
     if(this.state.startLng &&
+      this.state.startLat){
+        this.dispatchEvent('markStart');
+      }
+    if(this.state.endLng &&
+      this.state.endLat) {
+        this.dispatchEvent('markEnd');
+      }
+    if(this.state.startLng &&
       this.state.startLat &&
       this.state.endLng &&
       this.state.endLat) {
@@ -140,8 +153,6 @@ class Form extends Component {
                         uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
       }
   }
-
-
 
   handleButtonPress(){
     let nextRoute = {
@@ -156,18 +167,23 @@ class Form extends Component {
 
     return(
       <View style={styles.formContainer}>
-      <View>
+      <View style={{height: this.state.keyboard ? 300 : 90 }}>
         <TextInput
           style={styles.inputForm}
+          autoFocus={true}
+          autoCapitalize={'words'}
           placeholder="Pickup Location"
           placeholderTextColor= '#A7D1CC'
           onChangeText={(startAddress) => this.setState({startAddress})}
+          onSelectionChange={() => this.getCoords()}
           onSubmitEditing={() => this.getCoords()}
           value={this.state.currentLocation} />
         <TextInput
           style={styles.inputForm}
           placeholder="Destination"
+          autoCapitalize={'words'}
           onChangeText={(endAddress) => this.setState({endAddress})}
+          onSelectionChange={() => this.getCoords()}
           onSubmitEditing={() => this.getCoords()}
           placeholderTextColor= '#A7D1CC'
           value={this.state.destination} />
@@ -186,6 +202,7 @@ class Form extends Component {
           containerStyle={styles.buttonContainer}>
           Find Your Ride
         </Button>
+
       </View>
     );
   }

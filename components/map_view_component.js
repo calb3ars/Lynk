@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MapView from 'react-native-maps';
-// import NextPg from './next_pg.js';
 import Results from './results';
 import Button  from 'react-native-button';
 import {
@@ -31,7 +30,8 @@ class MyMap extends Component {
         longitudeDelta: 5
       })
     };
-
+    this.addEventListener('markStart', () => this.markStart());
+    this.addEventListener('markEnd', () => this.markEnd());
     this.onRegionChange = this.onRegionChange.bind(this);
   }
 
@@ -41,25 +41,7 @@ class MyMap extends Component {
 
   _handleNextPress(nextRoute) {
     this.props.navigator.push(nextRoute);
-    // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
   }
-
-
-  // componentDidMount() {
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       this.setState({
-  //
-  //         initialRegion: {
-  //           latitude: position.coords.latitude,
-  //           longitude: position.coords.longitude
-  //         }
-  //       });
-  //     },
-  //     (error) => alert(JSON.stringify(error)),
-  //     {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000}
-  //   );
-  // }
 
   onRegionChange(region) {
     this.state.region.setValue(region);
@@ -80,9 +62,6 @@ class MyMap extends Component {
       description: 'testPin'
     };
 
-    // <StatusBar
-    //   barStyle="dark-content"
-    //   />
     return (
 
 
@@ -91,7 +70,6 @@ class MyMap extends Component {
           region={this.state.region}
           mapType='standard'
           onRegionChange={this.onRegionChange}
-
           zoomEnabled={true}
           showsUserLocation={true}
           followsUserLocation={true}
@@ -108,31 +86,6 @@ class MyMap extends Component {
     );
   }
 }
-// <View style={styles.container}>
-// </View>
-// <View style={{borderBottomColor: 'black'}}>
-//   <TextInput
-//     style={styles.inputForm}
-//     onChangeText={(currentLocation) => this.setState({currentLocation})}
-//     value={this.state.currentLocation} />
-//   <TextInput
-//     style={styles.inputForm}
-//     onChangeText={(destination) => this.setState({destination})}
-//     value={this.state.destination} />
-//   <PassengerButton />
-// </View>
-// <Button
-//   onPress={() => this._handleNextPress(nextRoute)}
-//   style={styles.button}
-//   containerStyle={styles.buttonContainer}>
-//   FIND A RIDE!
-// </Button>
-// styleDisabled={{color: 'red'}}>
-// <TouchableHighlight
-//   style={styles.touchable}
-//   onPress={() => this._handleNextPress(nextRoute)}
-//   >
-// </TouchableHighlight>
 
 const styles = StyleSheet.create({
   container: {
