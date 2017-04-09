@@ -10,7 +10,8 @@ import {
   TouchableHighlight,
   StatusBar,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  NativeEventEmitter
 } from 'react-native';
 
 
@@ -19,9 +20,12 @@ class MyMap extends Component {
 
   constructor(props) {
     super(props);
+    this.mapRef = null;
     this.state = {
       currentLocation: 'Current Location',
       destination: 'Destination',
+      startMark: undefined,
+      endMark: undefined,
       region:
         new MapView.AnimatedRegion({
         latitude: 37.78825,
@@ -30,10 +34,75 @@ class MyMap extends Component {
         longitudeDelta: 5
       })
     };
-    // this.addEventListener('markStart', () => this.markStart());
-    // this.addEventListener('markEnd', () => this.markEnd());
+    this.makeMarkStart = this.makeMarkStart.bind(this);
+    this.makeMarkEnd = this.makeMarkEnd.bind(this);
     this.onRegionChange = this.onRegionChange.bind(this);
+    this.animateToNewRegion = this.animateToNewRegion.bind(this);
   }
+
+  animateToNewRegion() {
+    if(this.state.startMark !== undefined && this.state.endMark !== undefined){
+      let newRegionData = this.getRegionForCoordinates([this.state.startMark, this.state.endMark]);
+      console.log(newRegionData);
+      let newRegion = new MapView.AnimatedRegion(newRegionData);
+      this.setState({region: newRegion});
+    }
+  }
+
+
+  componentWillReceiveProps(newProps) {
+    if(this.props !== newProps){
+      if(newProps.markStart !== this.state.startMark){
+        if(newProps.markStart !== undefined){
+          this.makeMarkStart(newProps.markStart);
+        }
+      }
+      if(newProps.markEnd !== this.state.endMark){
+        if(newProps.markEnd !== undefined){
+          this.makeMarkEnd(newProps.markEnd);
+        }
+      }
+    }
+  }
+
+  getRegionForCoordinates(points) {
+  // points should be an array of { latitude: X, longitude: Y }
+  let minX = 999;
+  let maxX = -999;
+  let minY = 999;
+  let maxY = -999;
+
+  // init first point
+  // ((point) => {
+  //   minX = point.latlng.latitude;
+  //   maxX = point.latlng.latitude;
+  //   minY = point.latlng.longitude;
+  //   maxY = point.latlng.longitude;
+  // })(points[0]);
+
+  // calculate rect
+  points.map((point) => {
+    minX = Math.min(minX, parseFloat(point.latlng.latitude));
+    maxX = Math.max(maxX, parseFloat(point.latlng.latitude));
+    minY = Math.min(minY, parseFloat(point.latlng.longitude));
+    maxY = Math.max(maxY, parseFloat(point.latlng.longitude));
+  });
+
+  const midX = (minX + maxX) / 2;
+  const midY = (minY + maxY) / 2 + 0.001;
+  const deltaX = 2*(maxX - minX);
+  const deltaY = 2*(maxY - minY);
+  console.log("minX" + minX);
+  console.log("minY" + minY);
+  console.log("maxX" + maxX);
+  console.log("max Y" + maxY);
+  return {
+    latitude: midX,
+    longitude: midY,
+    latitudeDelta: deltaX,
+    longitudeDelta: deltaY
+  };
+}
 
     _handleBackPress() {
     this.props.navigator.pop();
@@ -48,23 +117,51 @@ class MyMap extends Component {
 
   }
 
-  render() {
-    const nextRoute = {
-      component: Results,
-      title: 'Results'
-    };
-    let marker = {
+  makeMarkStart(obj) {
+    let startMark = {
       latlng: {
-        latitude: 37.791557,
-        longitude: -122.393171,
+        latitude: obj.lat,
+        longitude: obj.lng,
+      },
+      title: 'Pickup',
+      description: 'location'
+    };
+    this.setState({startMark: startMark}, this.animateToNewRegion);
+  }
+
+  makeMarkEnd(obj) {
+    let endMark = {
+      latlng: {
+        latitude: obj.lat,
+        longitude: obj.lng,
       },
       title: 'Destination',
-      description: 'testPin'
+      description: 'location'
     };
+    this.setState({endMark: endMark}, this.animateToNewRegion);
+  }
+
+  render() {
+    let renderStart;
+      if(this.state.startMark !== undefined){
+        renderStart = (
+          <MapView.Marker coordinate={this.state.startMark.latlng}
+            title={this.state.startMark.title}
+            description={this.state.startMark.description}
+          />
+        );
+      }
+    let renderEnd;
+      if(this.state.endMark !== undefined){
+        renderEnd = (
+          <MapView.Marker coordinate={this.state.endMark.latlng}
+            title={this.state.endMark.title}
+            description={this.state.endMark.description}
+          />
+        );
+      }
 
     return (
-
-
         <MapView.Animated
           style={styles.map}
           region={this.state.region}
@@ -76,10 +173,8 @@ class MyMap extends Component {
           showsMyLocationButton={true}
           showScale={true}
         >
-          <MapView.Marker coordinate={marker.latlng}
-            title={marker.title}
-            description={marker.description}
-          />
+          {renderStart}
+          {renderEnd}
 
       </MapView.Animated>
 

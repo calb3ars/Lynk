@@ -71,6 +71,17 @@ const styles = StyleSheet.create({
 class Main extends Component{
   constructor(props){
     super(props);
+    this.state = {
+      startPoint: undefined,
+      endPoint: undefined
+    };
+  }
+
+  markStartMap(start) {
+    this.setState({startPoint: start});
+  }
+  markEndMap(end) {
+    this.setState({endPoint: end});
   }
 
   render() {
@@ -79,8 +90,11 @@ class Main extends Component{
         <StatusBar
           barStyle="dark-content"
         />
-        <MyMap/>
-        <Form navigator={this.props.navigator}/>
+      <MyMap markStart={this.state.startPoint}
+             markEnd={this.state.endPoint}/>
+      <Form navigator={this.props.navigator}
+        markStartMap={this.markStartMap.bind(this)}
+        markEndMap={this.markEndMap.bind(this)}/>
       </View>
     );
   }

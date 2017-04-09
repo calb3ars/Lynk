@@ -43,6 +43,7 @@ class Form extends Component {
     this.getEndCoords.bind(this);
     this.createUrl.bind(this);
     this.getCoords.bind(this);
+
   }
 
   componentDidMount(){
@@ -135,11 +136,19 @@ class Form extends Component {
   createUrl(){
     if(this.state.startLng &&
       this.state.startLat){
-        this.dispatchEvent('markStart');
+        let sMark =
+          {lat:this.state.startLat,
+           lng:this.state.startLng
+          };
+        this.props.markStartMap(sMark);
       }
     if(this.state.endLng &&
       this.state.endLat) {
-        this.dispatchEvent('markEnd');
+        let eMark =
+          {lat:this.state.endLat,
+           lng:this.state.endLng
+          };
+        this.props.markEndMap(eMark);
       }
     if(this.state.startLng &&
       this.state.startLat &&
@@ -175,7 +184,6 @@ class Form extends Component {
           placeholder="Pickup Location"
           placeholderTextColor= '#A7D1CC'
           onChangeText={(startAddress) => this.setState({startAddress})}
-          onSelectionChange={() => this.getCoords()}
           onSubmitEditing={() => this.getCoords()}
           value={this.state.currentLocation} />
         <TextInput
@@ -183,7 +191,6 @@ class Form extends Component {
           placeholder="Destination"
           autoCapitalize={'words'}
           onChangeText={(endAddress) => this.setState({endAddress})}
-          onSelectionChange={() => this.getCoords()}
           onSubmitEditing={() => this.getCoords()}
           placeholderTextColor= '#A7D1CC'
           value={this.state.destination} />
