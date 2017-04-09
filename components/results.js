@@ -113,7 +113,7 @@ export default class Results extends Component {
     } else {
       return (
         <View style={styles.loadingContainer}>
-          <Image source={require('../assets/download.gif')} style={styles.loading}/>
+          <Image source={require('../assets/Lynk_iPhone7.png')} style={styles.loading}/>
         </View>
       );
     }
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
 
   loading: {
-    width: 375,
-    height: 375
+    width: 390,
+    height: 800,
   }
 });
