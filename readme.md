@@ -6,13 +6,13 @@ For the price conscious, comparing transportation costs between Lyft and Uber re
 
 [Live Here][live]
 
-[live]: http://www.thymes-cookbook.com
+<!-- [live]: demo link goes here-->
 
 ## Features
 
 * Compare ride costs between Lyft and Uber
 * Ability to input address or place name
-* Filter ride costs by price and ETA
+* Filter ride costs by price and ride time
 * Select a ride (Uber or Lyft)
   + Redirect to associated app
 * Centers map view on user's current location
@@ -20,38 +20,38 @@ For the price conscious, comparing transportation costs between Lyft and Uber re
 
 ## Code Guide
 
-If you'd like to take a closer look at the code behind the Cookbook App, the best folders to look in are:
+If you'd like to take a closer look at the code behind the Lynk App, the best folders to look in are:
+
+* [Form]
+* [Main]
+* [Map Component]
+* [Data Parsing]
+* [Results] (Folder: results and ride results)
+* [Uber List] (Folder: uber list and uber ride item)
+* [Lyft List] (Folder: lyft list and lyft ride item)
 
 
-* [Cookbook.jsx](./frontend/Cookbook.jsx)
-* [React components](./frontend/components)
-  * [App](./frontend/components/app.jsx)
-* [Rails controllers](./app/controllers/api)
-* [Flux Stores](./frontend/stores)
-* [Api Util](./frontend/util/api_util.js)
-* [DB Schema](./db/schema.rb)
-* [Rails Routes](./config/routes.rb)
 
-## Languages, Frameworks, Libraries, Etc.
+## Languages, Frameworks, Libraries, and APIs
 
 * React
-* React Native
-* React Native Maps
-* React Native Geocoding
+* React-Native
+* React-Native-Maps
+* React-Native-Geocoding
+* JavaScript
 * Lyft API
 * Uber API
 * Google Maps API
 
 ## Screenshots
 
-Home page:
-![home page](./screenshots/homepage.jpg)
+Map Page:
+<!-- ![map page](./screenshots/homepage.jpg) -->
 
-Recipe detail page:
-![recipe detail](./screenshots/recipe-detail.jpg)
+Ride Costs Comparison Page:
+<!-- ![map page](./screenshots/homepage.jpg) -->
 
-Recipe notes:
-![recipe detail](./screenshots/comments.jpg)
-
-Search bar:
-![search bar](./screenshots/search.jpg)
+## Future Implementations
+* User login and authorization to persist user account information
+* Sidebar for account settings
+* Book rides through Lynk App
