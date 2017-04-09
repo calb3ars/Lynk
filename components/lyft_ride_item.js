@@ -10,7 +10,13 @@ import {
 
 
 export default class LyftRideItem extends Component {
-
+  constructor(props){
+    super(props);
+    this.state = {
+      pressed: false,
+    };
+    this.buttonPress.bind(this);
+  }
 
   buttonPress(){
     console.log('Lyft!!');
@@ -22,9 +28,26 @@ export default class LyftRideItem extends Component {
       });
   }
 
+  _onShowUnderlay(){
+    console.log("Toggle Pressed");
+    this.setState({ pressed: true });
+  }
+
+  _onHideUnderlay(){
+    console.log("Toggle Pressed");
+    this.setState({ pressed: false });
+  }
+
   render() {
     return(
-      <TouchableHighlight onPress={this.buttonPress}>
+      <TouchableHighlight
+        onPress={this.buttonPress}
+        underlayColor={'#FBF5F8'}
+        onShowUnderlay={this._onShowUnderlay.bind(this)}
+        onHideUnderlay={this._onHideUnderlay.bind(this)}
+        style={ this.state.pressed ? styles.pressed : styles.unpressed }
+
+      >
           <View style={styles.lyftListing, styles.listing}>
             <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
             <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
@@ -38,9 +61,14 @@ export default class LyftRideItem extends Component {
 
 
 const styles = StyleSheet.create({
-  // highlighted: {
-  //   backgroundColor: '#0B4F6C'
-  // },
+  unpressed: {
+    backgroundColor: '#EFFCFB',
+  },
+
+  pressed: {
+    backgroundColor: '#FBF5F8',
+    opacity: 1,
+  },
 
   listing: {
     paddingTop: 15,
@@ -57,6 +85,7 @@ const styles = StyleSheet.create({
     //   height: 0
     // },
     // shadowOpacity: 0.4,
+    opacity: 0.8
   },
 
   type: {
