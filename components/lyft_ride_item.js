@@ -10,7 +10,9 @@ import {
 
 
 export default class LyftRideItem extends Component {
-
+  constructor(props) {
+    super(props)
+  }
 
   buttonPress(){
     console.log('Lyft!!');
@@ -24,7 +26,11 @@ export default class LyftRideItem extends Component {
 
   render() {
     return(
-      <TouchableHighlight onPress={this.buttonPress}>
+      <TouchableHighlight
+        onPress={this.buttonPress}
+        activeOpacity={1}
+        underlayColor='#FBF5F8'
+      >
           <View style={styles.lyftListing, styles.listing}>
             <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
             <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
@@ -57,6 +63,7 @@ const styles = StyleSheet.create({
     //   height: 0
     // },
     // shadowOpacity: 0.4,
+    opacity: 0.8
   },
 
   type: {

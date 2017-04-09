@@ -23,7 +23,11 @@ export default class UberRideItem extends Component {
   }
   render() {
     return(
-      <TouchableHighlight onPress={this.buttonPress}>
+      <TouchableHighlight
+        onPress={this.buttonPress}
+        activeOpacity={1}
+        underlayColor='#D6F2F7'
+        >
         <View style={styles.uberListing, styles.listing}>
           <Text style={[styles.uberRideType, styles.type]}>{this.props.ride.display_name}</Text>
           <Text style={[styles.uberCost, styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.high_estimate}</Text>
@@ -49,6 +53,7 @@ const styles = StyleSheet.create({
     //   height: 0
     // },
     // shadowOpacity: 0.4,
+    opacity: 0.8
   },
 
   type: {
