@@ -1,111 +1,59 @@
 # Lynk
 
-## Background
-For the price conscious, comparing transportation costs between Lyft and Uber requires you to open both apps to check. This app will allow users to do a price comparison from within one single app. Users will then be able to select the ride they want and be redirected to the associated app.
+Lynk is a mobile app built using React Native for the Apple iOS platform. By inputting a valid starting point and a destination, it returns a side-by-side comparison of Uber and Lyft prices for different ride types at the time it is requested. Once the ride is selected, users will be redirected to the corresponding ride-sharing app with pre-populated data or the App Store.
 
-## Functionality & MVP
-With this app, users will be able to:
-- [ ] Compare pricing between Lyft and Uber
-- [ ] Users will be able to view the map
-- [ ] Filter by price and eta
-- [ ] Select a ride and redirect to selected app
+For the price conscious, comparing transportation costs between Lyft and Uber requires you to open both apps to check. This app will allow users to do a price comparison from within one single app. Take a look at the demo link below:
 
-## Wireframes
-![mapform][mapform]
+[Live Here][live]
 
-![results][results]
+<!-- [live]: demo link goes here-->
 
+## Features
 
+* Compare ride costs between Lyft and Uber
+* Ability to input address or place name
+* Filter ride costs by price and ride time
+* Select a ride (Uber or Lyft)
+  + Redirect to associated app with pre-populated data
+* Centers map view on user's current location
+* Pick up location defaults to user's current location
 
-## Technologies & Technical Challenges
-This app will be built for iOS using React-Native, JavaScript, jQuery, and CSS.
+## Code Guide
 
-The primary technical challenges will be:
-- Being able to use React-Native
-- Integrating APIs to retrieve data we specify
-- Redirecting to associated app and transferring pre-filled data
-- Implementing accordion views
+If you'd like to take a closer look at the code behind the Lynk App, the files are listed below:
 
-## Group Members & Work Breakdown
-Our group consists of four members, Andrew Jiang, Tony Xie, Vinson Chen, and Vivian Lee.
-
-Andrew's primary responsibilities will be:
-- Researching React-Native programming structure
-- Comparisons listings view component
-- Integrate Lyft API
-- Swipe animation implementation
-- Implement accordion views
-- CSS UI/UX Styling
-
-Tony's primary responsibilities will be:
-- Researching React-Native programming structure
-- Comparisons listings view component
-- Integrate Google Maps API
-- Swipe animation implementation
-- Implement accordion views
-
-Vinson's primary responsibilities will be:
-- Researching API implementations: Google Maps Api, Lyft Api, Uber Api
-- Implement input forms
-- Integrate Lyft API
-- Implement accordion views
-- Filtering results
-
-Vivian's primary responsibilities will be:
-- Researching API implementations: Google Maps Api, Lyft Api, Uber Api
-- Implement map view component
-- Integrate Google Maps API
-- Filtering results
-- CSS UI/UX Styling
+* [Form](./components/form.js)
+* [Main](./components/main.js)
+* [Map Component](./components/map_view_component.js)
+* [Data Parsing](./components/data_parser.js)
+* [Results](./components/results.js)
+* [Ride Results](./components/ride_results.js)
+* [Uber List](./components/uber_list.js)
+* [Uber Ride Item](./components/uber_ride_item.js)
+* [Lyft List](./components/lyft_list.js)
+* [Lyft Ride Item](./components/lyft_ride_item.js)
 
 
-## Implementation Timeline
-**Monday**
-- Research how to use and implement APIs and React native. Decide whether we need any other tools or libraries.
-  + APIs to use (Google Maps, Lyft/Uber) (Vivian and Vinson)
-  + React Native (Tony and Andrew)
-  + Brainstorm name of app and branding (Everyone)
+## Languages, Frameworks, Libraries, and APIs
 
-**Tuesday**
-- Create the view and components and design for overall layout and buttons.
-  + View (List of components below)
-    * Map view component (Vivian)
-    * Input forms (Vinson)
-    * Comparison listings view component (Andrew & Tony)
-  + Accordion for buttons to select and drag (Andrew & Tony)
+* React
+* React-Native
+* React-Native-Maps
+* React-Native-Geocoding
+* JavaScript
+* Lyft API
+* Uber API
+* Google Maps API
 
+## Screenshots
 
-**Wednesday & Thursday**
-- Integration (Everyone)
-  + Google Maps: get latitude & longitude for current location and destination
-  + Lyft/Uber APIs: use google map lat & long to perform GET requests for ride info.
-  + Link to chosen app (Lyft/Uber) and passing the location data
-  + Filtering and sorting of data
+Map Page:
+<!-- ![map page](./screenshots/homepage.jpg) -->
 
-**Friday**
-- CSS UI/UX refinement (Andrew)
-  + Color scheme, logo, and name
-- Quality Assurance (Vinson)
-- Demo Page (Tony & Vivian)
-  + GIFs for Demo
-  + Emulator
-  + Webpage
+Ride Costs Comparison Page:
+<!-- ![map page](./screenshots/homepage.jpg) -->
 
-## Future implementations
-- Google Place Search API
-- Loading Screen Animation
-- Pull reviews
-- Book through our app
-- Location Services Alert
-- Sidebar for Account Settings
-
-## Notes
-- To pull and run
-  + npm install
-  + react-native upgrade
-  + react-native link react-native-maps
-  + react-native run-ios
-
-
-[results]: http://res.cloudinary.com/dogzxn5h4/image/upload/v1491179096/flex/resultsDetail_tnzmjd.jpg
-[mapform]: http://res.cloudinary.com/dogzxn5h4/image/upload/c_scale,w_400/v1491179099/flex/mapForm_ynluyp.jpg
+## Future Implementations
+* User login and authorization to persist user account information
+* Sidebar for account settings
+* Book rides directly through Lynk App

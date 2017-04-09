@@ -15,7 +15,10 @@ export default class Results extends Component {
                    lyftRides: undefined, uberRides: undefined,
                    uberData: {_65: undefined},
                    lyftUrl: this.props.form.lyftUrl,
-                   uberUrl: this.props.form.uberUrl};
+                   uberUrl: this.props.form.uberUrl,
+                   lyftRedirectUrl: this.props.form.lyftRedirectUrl,
+                   uberRedirectUrl: this.props.form.uberRedirectUrl
+                 };
   }
 
   componentDidMount(){
@@ -62,7 +65,7 @@ export default class Results extends Component {
       }
     }).then(response => {
         if (response.status !== 200){
-          console.log('Looks like there was a problem. Status code: ' + response.status);
+          console.log('fetchLystList. Status code: ' + response.status);
           return;
         }
         response.json().then(data => {
@@ -76,6 +79,7 @@ export default class Results extends Component {
   fetchUberRides(){
     let counter = 0;
     let url = this.state.uberUrl;
+    // console.log(url);
     let serverToken = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
     fetch(url, {
       method: 'GET',
@@ -86,7 +90,8 @@ export default class Results extends Component {
       }
     }).then(response => {
       if (response.status !== 200){
-        console.log('Looks like there was a problem. Status code: ' + response.status);
+        console.log('fetchUberRides. Status code: ' + response.status);
+        return;
       }
       response.json().then(promise => {
         this.setState({uberRides: Parsers.UberParser(promise)});
@@ -98,22 +103,24 @@ export default class Results extends Component {
 
 
   render(){
-    let pic = {
-      uri: 'https://2ecyvk3piszv4e6gv2yz9867-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/uber-and-lyft-side-by-side.png'
-    };
+    // let pic = {
+    //   uri: '../assets/lyft_uber.png'
+    // };
 
     if (this.state.lyftRides && this.state.uberRides){
       return (
         <View style={styles.resultsContainer}>
-          <Image source={pic} style={styles.logos}/>
+          <Image source={require('../assets/lyft_uber_2.png')} style={styles.logos}/>
           <RideResults lyftRides={this.state.lyftRides}
-            uberRides={this.state.uberRides} />
+            uberRides={this.state.uberRides}
+            lyftRedirectUrl={this.state.lyftRedirectUrl}
+            uberRedirectUrl={this.state.uberRedirectUrl} />
         </View>
       );
     } else {
       return (
         <View style={styles.loadingContainer}>
-          <Image source={require('../assets/download.gif')} style={styles.loading}/>
+          <Image source={require('../assets/Lynk_iPhone7.png')} style={styles.loading}/>
         </View>
       );
     }
@@ -133,12 +140,13 @@ const styles = StyleSheet.create({
   resultsContainer: {
     flex: 1,
     backgroundColor: '#EFFCFB',
-    marginTop: 50
+    marginTop: 65
   },
 
   logos: {
     width: 375,
-    height: 140
+    height: 120,
+    // marginRight: 25,
   },
 
   listingsList: {
@@ -147,7 +155,7 @@ const styles = StyleSheet.create({
   },
 
   loading: {
-    width: 375,
-    height: 375
+    width: 390,
+    height: 800,
   }
 });
