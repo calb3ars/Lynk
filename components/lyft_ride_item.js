@@ -10,10 +10,6 @@ import {
 
 
 export default class LyftRideItem extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   buttonPress(){
     console.log('Lyft!!');
     Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
