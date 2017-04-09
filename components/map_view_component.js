@@ -32,23 +32,33 @@ class MyMap extends Component {
         longitude: -122.4324,
         latitudeDelta: 10,
         longitudeDelta: 5
-      })
+      }),
+      line: undefined
     };
     this.makeMarkStart = this.makeMarkStart.bind(this);
     this.makeMarkEnd = this.makeMarkEnd.bind(this);
     this.onRegionChange = this.onRegionChange.bind(this);
     this.animateToNewRegion = this.animateToNewRegion.bind(this);
+    this.drawLine = this.drawLine.bind(this);
   }
 
   animateToNewRegion() {
     if(this.state.startMark !== undefined && this.state.endMark !== undefined){
       let newRegionData = this.getRegionForCoordinates([this.state.startMark, this.state.endMark]);
-      console.log(newRegionData);
       let newRegion = new MapView.AnimatedRegion(newRegionData);
-      this.setState({region: newRegion});
+      this.setState({region: newRegion}, this.drawLine);
     }
   }
 
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        let currentPos = { lat: position.coords.latitude,
+                            lng: position.coords.longitude};
+        this.makeMarkStart(currentPos);
+      }
+    );
+  }
 
   componentWillReceiveProps(newProps) {
     if(this.props !== newProps){
@@ -72,15 +82,6 @@ class MyMap extends Component {
   let minY = 999;
   let maxY = -999;
 
-  // init first point
-  // ((point) => {
-  //   minX = point.latlng.latitude;
-  //   maxX = point.latlng.latitude;
-  //   minY = point.latlng.longitude;
-  //   maxY = point.latlng.longitude;
-  // })(points[0]);
-
-  // calculate rect
   points.map((point) => {
     minX = Math.min(minX, parseFloat(point.latlng.latitude));
     maxX = Math.max(maxX, parseFloat(point.latlng.latitude));
@@ -92,10 +93,7 @@ class MyMap extends Component {
   const midY = (minY + maxY) / 2 + 0.001;
   const deltaX = 2*(maxX - minX);
   const deltaY = 2*(maxY - minY);
-  console.log("minX" + minX);
-  console.log("minY" + minY);
-  console.log("maxX" + maxX);
-  console.log("max Y" + maxY);
+
   return {
     latitude: midX,
     longitude: midY,
@@ -117,6 +115,15 @@ class MyMap extends Component {
 
   }
 
+  drawLine(){
+    let arr = [this.state.startMark.latlng,
+              this.state.endMark.latlng];
+    let line = {
+      coordinates: arr
+    };
+    this.setState({line: line});
+  }
+
   makeMarkStart(obj) {
     let startMark = {
       latlng: {
@@ -124,7 +131,8 @@ class MyMap extends Component {
         longitude: obj.lng,
       },
       title: 'Pickup',
-      description: 'location'
+      description: 'location',
+      pinColor: "#FF5A5F"
     };
     this.setState({startMark: startMark}, this.animateToNewRegion);
   }
@@ -136,7 +144,8 @@ class MyMap extends Component {
         longitude: obj.lng,
       },
       title: 'Destination',
-      description: 'location'
+      description: 'location',
+      pinColor: "#0B4F6C"
     };
     this.setState({endMark: endMark}, this.animateToNewRegion);
   }
@@ -148,6 +157,7 @@ class MyMap extends Component {
           <MapView.Marker coordinate={this.state.startMark.latlng}
             title={this.state.startMark.title}
             description={this.state.startMark.description}
+            pinColor={"#FF5A5F"}
           />
         );
       }
@@ -157,7 +167,21 @@ class MyMap extends Component {
           <MapView.Marker coordinate={this.state.endMark.latlng}
             title={this.state.endMark.title}
             description={this.state.endMark.description}
+            pinColor={"#0B4F6C"}
           />
+        );
+      }
+    let renderLine;
+      if(this.state.line !== undefined){
+        renderLine = (
+          <MapView.Polyline
+            coordinates={this.state.line.coordinates}
+            strokeColor={"#0B4F6C"}
+            fillColor={"#FF5A5F"}
+            geodesic={true}
+            lineDashPattern={[3,0,3]}
+            miterLimit={1}
+            strokeWidth={2}/>
         );
       }
 
@@ -174,6 +198,7 @@ class MyMap extends Component {
           showScale={true}
         >
           {renderStart}
+          {renderLine}
           {renderEnd}
 
       </MapView.Animated>
