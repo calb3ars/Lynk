@@ -24,9 +24,7 @@ export default class LyftRideItem extends Component {
 
   render() {
     return(
-      <TouchableHighlight
-        onPress={this.buttonPress}
-        >
+      <TouchableHighlight onPress={this.buttonPress}>
           <View style={styles.lyftListing, styles.listing}>
             <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
             <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
@@ -43,10 +41,6 @@ const styles = StyleSheet.create({
   // highlighted: {
   //   backgroundColor: '#0B4F6C'
   // },
-  pressed: {
-    color: '#FF5A5F',
-    backgroundColor: '#0B4F6C'
-  },
 
   listing: {
     paddingTop: 15,
