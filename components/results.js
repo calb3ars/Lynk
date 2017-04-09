@@ -104,7 +104,7 @@ export default class Results extends Component {
 
     if (this.state.lyftRides && this.state.uberRides){
       return (
-        <View style={styles.container}>
+        <View style={styles.resultsContainer}>
           <Image source={pic} style={styles.logos}/>
           <RideResults lyftRides={this.state.lyftRides}
             uberRides={this.state.uberRides} />
@@ -112,9 +112,8 @@ export default class Results extends Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          <Image source={require('../assets/download.gif')}
-            style={styles.loading}/>
+        <View style={styles.loadingContainer}>
+          <Image source={require('../assets/download.gif')} style={styles.loading}/>
         </View>
       );
     }
@@ -122,10 +121,19 @@ export default class Results extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  loadingContainer: {
     flex: 1,
-    backgroundColor: '#0B4F6C',
+    backgroundColor: '#EFFCFB',
     marginTop: 50,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  resultsContainer: {
+    flex: 1,
+    backgroundColor: '#EFFCFB',
+    marginTop: 50
   },
 
   logos: {
@@ -140,6 +148,6 @@ const styles = StyleSheet.create({
 
   loading: {
     width: 375,
-    height: 375,
+    height: 375
   }
 });

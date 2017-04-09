@@ -30,8 +30,8 @@ class MyMap extends Component {
         longitudeDelta: 5
       })
     };
-    this.addEventListener('markStart', () => this.markStart());
-    this.addEventListener('markEnd', () => this.markEnd());
+    // this.addEventListener('markStart', () => this.markStart());
+    // this.addEventListener('markEnd', () => this.markEnd());
     this.onRegionChange = this.onRegionChange.bind(this);
   }
 

@@ -4,13 +4,24 @@ import {
   Image,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Linking
 } from 'react-native';
 
+
 export default class LyftRideItem extends Component {
+
+
   buttonPress(){
     console.log('Lyft!!');
+    Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
+      console.log('it worked!')})
+      .catch(err => {
+        console.log('An error occurred:', err);
+        Linking.openURL("https://www.lyft.com/signup/SDKSIGNUP?clientId=qCWwfqShiQOO&sdkName=iOS_direct");
+      });
   }
+
   render() {
     return(
       <TouchableHighlight onPress={this.buttonPress}>
@@ -27,6 +38,10 @@ export default class LyftRideItem extends Component {
 
 
 const styles = StyleSheet.create({
+  // highlighted: {
+  //   backgroundColor: '#0B4F6C'
+  // },
+
   listing: {
     paddingTop: 15,
     paddingRight: 20,
@@ -46,13 +61,13 @@ const styles = StyleSheet.create({
 
   type: {
     // color: '#087E8B',
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 18,
   },
 
   cost: {
     // color: '#0B4F6C',
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 48,
   },
 
@@ -68,7 +83,7 @@ const styles = StyleSheet.create({
   },
 
   time: {
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 16,
   },
 

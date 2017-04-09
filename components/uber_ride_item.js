@@ -4,7 +4,8 @@ import {
   Image,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  Linking
 } from 'react-native';
 
 // Uses Uber Ride Estimates - price - API endpoint
@@ -13,6 +14,12 @@ import {
 export default class UberRideItem extends Component {
   buttonPress(){
     console.log('Uber!');
+    Linking.openURL('uber://').then(() => {
+      console.log('This works!')
+    }).catch(err => {
+      console.log('An error occurred: ', err);
+      Linking.openURL('https://m.uber.com/sign-up?<client_id=NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>');
+    })
   }
   render() {
     return(
@@ -46,13 +53,13 @@ const styles = StyleSheet.create({
 
   type: {
     // color: '#087E8B',
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 18,
   },
 
   cost: {
     // color: '#0B4F6C',
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 48,
   },
 
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
   },
 
   time: {
-    color: '#D6FFE7',
+    color: '#0B4F6C',
     fontSize: 16,
     textAlign: 'left',
   },
