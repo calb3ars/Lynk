@@ -10,9 +10,10 @@ import {
 export default class UberList extends Component {
   render(){
     let list = [];
-
+    // console.log('in uberlist');
+    // console.log(this.props.uberRedirectUrl);
     this.props.rides.forEach((ride, idx) => (
-      list.push(<UberRideItem key={idx} ride={ride} />)
+      list.push(<UberRideItem key={idx} ride={ride} uberRedirectUrl={this.props.uberRedirectUrl}/>) 
     ));
 
     return (
