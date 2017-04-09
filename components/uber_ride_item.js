@@ -39,7 +39,7 @@ export default class UberRideItem extends Component {
     console.log("Toggle Pressed");
     this.setState({ pressed: false });
   }
-
+ 
   render() {
     return(
       <TouchableHighlight
