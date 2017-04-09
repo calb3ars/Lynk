@@ -98,14 +98,14 @@ export default class Results extends Component {
 
 
   render(){
-    let pic = {
-      uri: 'https://2ecyvk3piszv4e6gv2yz9867-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/uber-and-lyft-side-by-side.png'
-    };
+    // let pic = {
+    //   uri: '../assets/lyft_uber.png'
+    // };
 
     if (this.state.lyftRides && this.state.uberRides){
       return (
         <View style={styles.resultsContainer}>
-          <Image source={pic} style={styles.logos}/>
+          <Image source={require('../assets/lyft_uber_2.png')} style={styles.logos}/>
           <RideResults lyftRides={this.state.lyftRides}
             uberRides={this.state.uberRides} />
         </View>
@@ -133,12 +133,13 @@ const styles = StyleSheet.create({
   resultsContainer: {
     flex: 1,
     backgroundColor: '#EFFCFB',
-    marginTop: 50
+    marginTop: 65
   },
 
   logos: {
     width: 375,
-    height: 140
+    height: 120,
+    // marginRight: 25,
   },
 
   listingsList: {
