@@ -10,21 +10,28 @@ import {
 
 
 export default class LyftRideItem extends Component {
-
+  constructor(){
+    super();
+    // debugger;
+    // this.buttonPress.bind(this);
+  }
 
   buttonPress(){
-    console.log('Lyft!!');
-    Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
-      console.log('it worked!')})
+    // console.log('Lyft!!');
+    // Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
+    // Linking.openURL('lyft://ridetype?id=lyft&pickup[latitude]=37.764728&pickup[longitude]=-122.422999&destination[latitude]=37.7763592&destination[longitude]=-122.4242038').then(() => {
+    Linking.openURL(this.props.lyftRedirectUrl)
+    // .then(() => {
+      // console.log('it worked!')})
       .catch(err => {
-        console.log('An error occurred:', err);
+        // console.log('An error occurred:', err);
         Linking.openURL("https://www.lyft.com/signup/SDKSIGNUP?clientId=qCWwfqShiQOO&sdkName=iOS_direct");
       });
   }
 
   render() {
     return(
-      <TouchableHighlight onPress={this.buttonPress}>
+      <TouchableHighlight onPress={this.buttonPress.bind(this)}>
           <View style={styles.lyftListing, styles.listing}>
             <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
             <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>

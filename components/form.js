@@ -62,10 +62,10 @@ class Form extends Component {
     Keyboard.addListener('keyboardDidHide', () => this.setState({keyboard: false}));
   }
 
-  createUrl(startLat, startLng, endLat, endLng){
-    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
-  }
+  // createUrl(startLat, startLng, endLat, endLng){
+  //   this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
+  //                 uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+  // }
 
   fetchLyftToken(){
     let lyftToken = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
@@ -142,7 +142,9 @@ class Form extends Component {
         let endLat = this.state.endLat.toFixed(4);
         let endLng = this.state.endLng.toFixed(4);
         this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                        uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+                       lyftRedirectUrl: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&destination[latitude]=${endLat}&destination[longitude]=${endLng}`,
+                       uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`,
+                       uberRedirectUrl: `uber://?client_id=<NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>&action=setPickup&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`})
       }
   }
 
@@ -167,7 +169,6 @@ class Form extends Component {
           placeholder="Pickup Location"
           placeholderTextColor= '#A7D1CC'
           onChangeText={(startAddress) => this.setState({startAddress})}
-          onSelectionChange={() => this.getCoords()}
           onSubmitEditing={() => this.getCoords()}
           value={this.state.currentLocation} />
         <TextInput
@@ -175,7 +176,6 @@ class Form extends Component {
           placeholder="Destination"
           autoCapitalize={'words'}
           onChangeText={(endAddress) => this.setState({endAddress})}
-          onSelectionChange={() => this.getCoords()}
           onSubmitEditing={() => this.getCoords()}
           placeholderTextColor= '#A7D1CC'
           value={this.state.destination} />
