@@ -16,18 +16,11 @@ export default class LyftRideItem extends Component {
     this.state = {
       pressed: false,
     };
-    // this.buttonPress.bind(this);
   }
 
   buttonPress(){
-    // console.log('Lyft!!');
-    // Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
-    // Linking.openURL('lyft://ridetype?id=lyft&pickup[latitude]=37.764728&pickup[longitude]=-122.422999&destination[latitude]=37.7763592&destination[longitude]=-122.4242038').then(() => {
     Linking.openURL(this.props.lyftRedirectUrl)
-    // .then(() => {
-      // console.log('it worked!')})
       .catch(err => {
-        // console.log('An error occurred:', err);
         Linking.openURL("https://www.lyft.com/signup/SDKSIGNUP?clientId=qCWwfqShiQOO&sdkName=iOS_direct");
       });
   }
@@ -45,17 +38,18 @@ export default class LyftRideItem extends Component {
   render() {
     return(
       <TouchableHighlight
+        underlayColor={'#0B4F6C'}
         onPress={this.buttonPress.bind(this)}
-        underlayColor={'#FBF5F8'}
         onShowUnderlay={this._onShowUnderlay.bind(this)}
         onHideUnderlay={this._onHideUnderlay.bind(this)}
         style={ this.state.pressed ? styles.pressed : styles.unpressed }
       >
-
           <View style={styles.lyftListing, styles.listing}>
-            <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
-            <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
-            <Text style={[styles.lyftRideTime, styles.time]}>Ride Time: {Math.floor(this.props.ride.estimated_duration_seconds / 60)} min</Text>
+            <Text style={[styles.lyftRideType, this.state.pressed ? styles.pressedType : styles.type]}>{this.props.ride.display_name}</Text>
+            <Text style={[styles.lyftCost, this.state.pressed ? styles.pressedCost : styles.cost]}><Text style={styles.dollar}>$ </Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
+
+            <Text style={[styles.lyftRideTime, this.state.pressed ? styles.pressedTime : styles.time]}>Ride Time: {Math.floor(this.props.ride.estimated_duration_seconds / 60)} min
+            </Text>
           </View>
       </TouchableHighlight>
     );
@@ -69,38 +63,27 @@ const styles = StyleSheet.create({
   },
 
   pressed: {
-    backgroundColor: '#FBF5F8',
-    opacity: 1,
+    backgroundColor: '#0B4F6C',
   },
 
   listing: {
-    paddingTop: 15,
-    paddingRight: 20,
+    paddingTop: 25,
+    paddingRight: 30,
     paddingBottom: 15,
     width: 190,
-    marginBottom: 20,
-    // borderWidth: 2,
-    // borderColor: '#0B4F6C',
-    // borderRightWidth: 0,
-    // shadowColor: '#0B4F6C',
-    // shadowColor: '#083f56',
-    // shadowOffset: {
-    //   height: 0
-    // },
-    // shadowOpacity: 0.4,
-    opacity: 0.8
+    marginBottom:15,
   },
 
   type: {
-    // color: '#087E8B',
-    color: '#0B4F6C',
+    color: '#E70B81',
     fontSize: 18,
+    fontFamily: 'Avenir-Medium'
   },
 
   cost: {
-    // color: '#0B4F6C',
     color: '#0B4F6C',
     fontSize: 48,
+    fontFamily: 'Avenir-Medium'
   },
 
   dollar: {
@@ -108,15 +91,34 @@ const styles = StyleSheet.create({
 
   },
 
-  bonus: {
-    color: '#FF5A5F',
-    fontSize: 14,
-    marginTop: -2
-  },
+  // bonus: {
+  //   color: '#FF5A5F',
+  //   fontSize: 14,
+  //   marginTop: -2
+  // },
 
   time: {
     color: '#0B4F6C',
     fontSize: 16,
+    fontFamily: 'Avenir-Medium'
+  },
+
+  pressedType: {
+    color: '#EFFCFB',
+    fontSize: 18,
+    fontFamily: 'Avenir-Medium'
+  },
+
+  pressedCost: {
+    color: '#FF5A5F',
+    fontSize: 48,
+    fontFamily: 'Avenir-Medium'
+  },
+
+  pressedTime: {
+    color: '#EFFCFB',
+    fontSize: 16,
+    fontFamily: 'Avenir-Medium'
   },
 
   lyftListing: {
@@ -139,3 +141,5 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
 });
+
+// <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>

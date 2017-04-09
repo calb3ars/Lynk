@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     color: '#26646A',
     // fontWeight: 'bold',
     borderWidth: 0.5,
-    borderRadius: 4,
+    borderRadius: 1,
     // backgroundColor: '#26646A',
     backgroundColor: '#EFFCFB',
     // justifyContent: 'center'
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   passengerContainer: {
     width: 310,
     borderWidth: 0.5,
-    borderRadius: 4,
+    borderRadius: 1,
     borderColor: '#26646A',
     backgroundColor: '#EFFCFB',
     marginTop: 10
