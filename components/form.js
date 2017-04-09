@@ -103,7 +103,7 @@ class Form extends Component {
     Geocoder.getFromLocation(address).then(
       json => {
         let location = json.results[0].geometry.location;
-        this.setState({starttLat: location.lat, startLng: location.lng}, this.createUrl);
+        this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
       }
     );
   }
