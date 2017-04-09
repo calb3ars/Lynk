@@ -10,6 +10,14 @@ import {
 
 
 export default class LyftRideItem extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      pressed: false,
+    };
+    this.buttonPress.bind(this);
+  }
+
   buttonPress(){
     console.log('Lyft!!');
     Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
@@ -20,12 +28,25 @@ export default class LyftRideItem extends Component {
       });
   }
 
+  _onShowUnderlay(){
+    console.log("Toggle Pressed");
+    this.setState({ pressed: true });
+  }
+
+  _onHideUnderlay(){
+    console.log("Toggle Pressed");
+    this.setState({ pressed: false });
+  }
+
   render() {
     return(
       <TouchableHighlight
         onPress={this.buttonPress}
-        activeOpacity={1}
-        underlayColor='#FBF5F8'
+        underlayColor={'#FBF5F8'}
+        onShowUnderlay={this._onShowUnderlay.bind(this)}
+        onHideUnderlay={this._onHideUnderlay.bind(this)}
+        style={ this.state.pressed ? styles.pressed : styles.unpressed }
+
       >
           <View style={styles.lyftListing, styles.listing}>
             <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
@@ -40,9 +61,14 @@ export default class LyftRideItem extends Component {
 
 
 const styles = StyleSheet.create({
-  // highlighted: {
-  //   backgroundColor: '#0B4F6C'
-  // },
+  unpressed: {
+    backgroundColor: '#EFFCFB',
+  },
+
+  pressed: {
+    backgroundColor: '#FBF5F8',
+    opacity: 1,
+  },
 
   listing: {
     paddingTop: 15,

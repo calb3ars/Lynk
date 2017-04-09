@@ -12,6 +12,14 @@ import {
 // Endpoint Doesn't include Surge pricing
 //
 export default class UberRideItem extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      pressed: false,
+    };
+    this.buttonPress.bind(this);
+  }
+
   buttonPress(){
     console.log('Uber!');
     Linking.openURL('uber://').then(() => {
@@ -21,12 +29,25 @@ export default class UberRideItem extends Component {
       Linking.openURL('https://m.uber.com/sign-up?<client_id=NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>');
     })
   }
+
+  _onShowUnderlay(){
+    console.log("Toggle Pressed");
+    this.setState({ pressed: true });
+  }
+
+  _onHideUnderlay(){
+    console.log("Toggle Pressed");
+    this.setState({ pressed: false });
+  }
+
   render() {
     return(
       <TouchableHighlight
         onPress={this.buttonPress}
-        activeOpacity={1}
-        underlayColor='#D6F2F7'
+        underlayColor={'#D6F2F7'}
+        onShowUnderlay={this._onShowUnderlay.bind(this)}
+        onHideUnderlay={this._onHideUnderlay.bind(this)}
+        style={ this.state.pressed ? styles.pressed : styles.unpressed }
         >
         <View style={styles.uberListing, styles.listing}>
           <Text style={[styles.uberRideType, styles.type]}>{this.props.ride.display_name}</Text>
@@ -40,6 +61,15 @@ export default class UberRideItem extends Component {
 }
 
 const styles = StyleSheet.create({
+  unpressed: {
+    backgroundColor: '#EFFCFB',
+  },
+
+  pressed: {
+    backgroundColor: '#D6F2F7',
+    opacity: 1,
+  },
+
   listing: {
     paddingTop: 15,
     paddingLeft: 20,
