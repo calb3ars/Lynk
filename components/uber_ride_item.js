@@ -14,12 +14,19 @@ import {
 export default class UberRideItem extends Component {
   constructor(props){
     super(props);
+
     // this.buttonPress.bind(this);
     // debugger;
     // console.log('in UberRideItem');
     // console.log(this.props.uberRedirectUrl);
     // this.state = { uberRedirectUrl: this.props.uberRedirectUrl }
+
+    this.state = {
+      pressed: false,
+    };
+    // this.buttonPress.bind(this);
   }
+
   buttonPress(){
     // console.log('Uber!');
     // console.log(this.props.uberRedirectUrl);
@@ -34,10 +41,26 @@ export default class UberRideItem extends Component {
       Linking.openURL('https://m.uber.com/sign-up?<client_id=NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>');
     })
   }
+
+  _onShowUnderlay(){
+    this.setState({ pressed: true });
+  }
+
+  _onHideUnderlay(){
+    this.setState({ pressed: false });
+  }
+
   render() {
     // console.log(this.props.uberRedirectUrl);
     return(
-      <TouchableHighlight onPress={this.buttonPress.bind(this)}>
+      <TouchableHighlight
+        onPress={this.buttonPress.bind(this)}
+        underlayColor={'#D6F2F7'}
+        onShowUnderlay={this._onShowUnderlay.bind(this)}
+        onHideUnderlay={this._onHideUnderlay.bind(this)}
+        style={ this.state.pressed ? styles.pressed : styles.unpressed }
+        >
+
         <View style={styles.uberListing, styles.listing}>
           <Text style={[styles.uberRideType, styles.type]}>{this.props.ride.display_name}</Text>
           <Text style={[styles.uberCost, styles.cost]}><Text style={styles.dollar}>$</Text>{this.props.ride.high_estimate}</Text>
@@ -50,6 +73,15 @@ export default class UberRideItem extends Component {
 }
 
 const styles = StyleSheet.create({
+  unpressed: {
+    backgroundColor: '#EFFCFB',
+  },
+
+  pressed: {
+    backgroundColor: '#D6F2F7',
+    opacity: 1,
+  },
+
   listing: {
     paddingTop: 15,
     paddingLeft: 20,
@@ -63,6 +95,7 @@ const styles = StyleSheet.create({
     //   height: 0
     // },
     // shadowOpacity: 0.4,
+    opacity: 0.8
   },
 
   type: {
