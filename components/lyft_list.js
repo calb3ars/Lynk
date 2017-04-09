@@ -10,9 +10,9 @@ import {
 export default class LyftList extends Component {
   render(){
     let list = [];
-
+    // console.log(this.props.lyftRedirectUrl);
     this.props.rides.forEach((ride, idx) => (
-      list.push(<LyftRideItem key={idx} ride={ride} />)
+      list.push(<LyftRideItem key={idx} ride={ride} lyftRedirectUrl={this.props.lyftRedirectUrl}/>)
     ));
 
     return (
