@@ -72,30 +72,6 @@ class Main extends Component{
   constructor(props){
     super(props);
   }
-  //
-  // _handleBackPress() {
-  //   this.props.navigator.pop();
-  // }
-  //
-  // _handleNextPress(nextRoute) {
-  //   this.props.navigator.push(nextRoute);
-  //   // const newState = this.setState({text: "123 Spear St. San Francisco, CA"});
-  // }
-  //
-  // handleButtonPress(nextRoute){
-  //   // this.form.handleSubmit()
-  //   //   .then
-  //     (this._handleNextPress(nextRoute));
-  // }
-  //
-  // unfilledForm(status = true){
-  //   return status;
-  // }
-  //
-  // const nextRoute = {
-  //   component: Results,
-  //   title: 'Results'
-  // };
 
   render() {
     return(
@@ -109,12 +85,6 @@ class Main extends Component{
     );
   }
 }
-// <Button
-//   disabled={this.unfilledForm()}
-//   onPress={() => this.handleButtonPress(nextRoute)}
-//   style={styles.button}
-//   containerStyle={styles.buttonContainer}>
-//   FIND A RIDE!
-// </Button>
+
 
 export default Main;
