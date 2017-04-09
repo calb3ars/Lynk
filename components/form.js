@@ -45,13 +45,19 @@ class Form extends Component {
     this.getCoords.bind(this);
   }
 
+  clearErrors(){
+    if (this.state.error !== ""){
+      this.setState({ error: "" });
+    }
+  }
+
   componentDidMount(){
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           startLat: position.coords.latitude,
           startLng: position.coords.longitude,
-          error: null,
+          error: "",
         });
       },
       (error) => this.setState({ error: error.message }),
@@ -61,11 +67,6 @@ class Form extends Component {
     Keyboard.addListener('keyboardDidShow', () => this.setState({keyboard: true}));
     Keyboard.addListener('keyboardDidHide', () => this.setState({keyboard: false}));
   }
-
-  // createUrl(startLat, startLng, endLat, endLng){
-  //   this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-  //                 uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
-  // }
 
   fetchLyftToken(){
     let lyftToken = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
@@ -110,7 +111,10 @@ class Form extends Component {
         let location = json.results[0].geometry.location;
         this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
       }
-    );
+    ).catch(error => {
+      console.log(error.message);
+      this.setState( { error: error.message } );
+    });
   }
 
   getEndCoords(address) {
@@ -120,7 +124,10 @@ class Form extends Component {
         let location = json.results[0].geometry.location;
         this.setState({endLat: location.lat, endLng: location.lng}, this.createUrl);
       }
-    );
+    ).catch(error => {
+      console.log(error);
+      this.setState( { error: error.message } );
+    });
   }
 
   getCoords() {
@@ -158,32 +165,40 @@ class Form extends Component {
   }
 
   render(){
-
+    if (this.state.error !== ""){
+      error_msg = <Text style={styles.errors}>{this.state.error}</Text>
+      console.log('there is an error');
+    } else {
+      console.log('there is no error');
+      error_msg = <Text style={{backgroundColor: 'transparent'}}></Text>
+      // debugger;
+    }
     return(
       <View style={styles.formContainer}>
-      <View style={{height: this.state.keyboard ? 300 : 90 }}>
-        <TextInput
-          style={styles.inputForm}
-          autoFocus={true}
-          autoCapitalize={'words'}
-          placeholder="Pickup Location"
-          placeholderTextColor= '#A7D1CC'
-          onChangeText={(startAddress) => this.setState({startAddress})}
-          onSubmitEditing={() => this.getCoords()}
-          value={this.state.currentLocation} />
-        <TextInput
-          style={styles.inputForm}
-          placeholder="Destination"
-          autoCapitalize={'words'}
-          onChangeText={(endAddress) => this.setState({endAddress})}
-          onSubmitEditing={() => this.getCoords()}
-          placeholderTextColor= '#A7D1CC'
-          value={this.state.destination} />
-      </View>
-      <View style={styles.passengerContainer}>
-        <Text style={styles.passengerText}># Seats</Text>
-        <PassengerButton updateRiders={this.updateRiders.bind(this)} />
-      </View>
+        {error_msg}
+        <View style={{height: this.state.keyboard ? 300 : 90 }}>
+          <TextInput
+            style={styles.inputForm}
+            autoFocus={true}
+            autoCapitalize={'words'}
+            placeholder="Pickup Location"
+            placeholderTextColor= '#A7D1CC'
+            onChangeText={(startAddress) => this.setState({startAddress}, this.clearErrors.bind(this))}
+            onSubmitEditing={() => this.getCoords()}
+            value={this.state.currentLocation} />
+          <TextInput
+            style={styles.inputForm}
+            placeholder="Destination"
+            autoCapitalize={'words'}
+            onChangeText={(endAddress) => this.setState({endAddress}, this.clearErrors.bind(this))}
+            onSubmitEditing={() => this.getCoords()}
+            placeholderTextColor= '#A7D1CC'
+            value={this.state.destination} />
+        </View>
+        <View style={styles.passengerContainer}>
+          <Text style={styles.passengerText}># Seats</Text>
+          <PassengerButton updateRiders={this.updateRiders.bind(this)} />
+        </View>
         <Button
           disabled={this.state.endLat === undefined ||
               this.state.endLng === undefined ||
@@ -194,7 +209,6 @@ class Form extends Component {
           containerStyle={styles.buttonContainer}>
           Find Your Ride
         </Button>
-
       </View>
     );
   }
@@ -268,6 +282,26 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0
+  },
+  errors: {
+    // height: 35,
+    width: 310,
+    fontSize: 14,
+    borderColor: '#2F5268',
+    color: '#26646A',
+    // fontWeight: 'bold',
+    borderWidth: 0.5,
+    borderRadius: 4,
+    // backgroundColor: '#26646A',
+    backgroundColor: '#EFFCFB',
+    // justifyContent: 'center',
+    // verticalAlign: 'center',
+    // alignItems: 'center',
+    textAlign: 'center',
+    alignSelf: 'center',
+    // marginTop: 10,
+    color: 'red',
+    padding: 5
   }
 });
 
