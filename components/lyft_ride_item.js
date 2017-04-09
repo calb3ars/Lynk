@@ -13,7 +13,6 @@ export default class LyftRideItem extends Component {
 
 
   buttonPress(){
-    this.style = styles.pressed;
     console.log('Lyft!!');
     Linking.openURL('lyft://partner=qCWwfqShiQOO').then(() => {
       console.log('it worked!')})
@@ -27,9 +26,8 @@ export default class LyftRideItem extends Component {
     return(
       <TouchableHighlight
         onPress={this.buttonPress}
-        style={styles.lyftListing, styles.listing}
         >
-          <View >
+          <View style={styles.lyftListing, styles.listing}>
             <Text style={[styles.lyftRideType, styles.type]}>{this.props.ride.display_name}</Text>
             <Text style={[styles.lyftCost, styles.cost]}><Text style={styles.dollar}>$</Text>{Math.round(this.props.ride.estimated_cost_cents_max / 100)}</Text>
             <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>
