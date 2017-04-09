@@ -7,7 +7,7 @@ For the price conscious, comparing transportation costs between Lyft and Uber re
 With this app, users will be able to:
 - [ ] Compare pricing between Lyft and Uber
 - [ ] Users will be able to view the map
-- [ ] Filter by price and eta
+- [ ] Filter by price and ETA
 - [ ] Select a ride and redirect to selected app
 
 ## Wireframes

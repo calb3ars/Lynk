@@ -10,16 +10,18 @@ For the price conscious, comparing transportation costs between Lyft and Uber re
 
 ## Features
 
-* Compare pricing between Lyft and Uber
-* Address or place title input
-* Mark recipes as cooked
-* Comment on recipes
-* Find recipes by tag
-* Look at recipe boxes of other users
+* Compare ride costs between Lyft and Uber
+* Ability to input address or place name
+* Filter ride costs by price and ETA
+* Select a ride (Uber or Lyft)
+  + Redirect to associated app
+* Centers map view on user's current location
+* Pick up location defaults to user's current location
 
 ## Code Guide
 
 If you'd like to take a closer look at the code behind the Cookbook App, the best folders to look in are:
+
 
 * [Cookbook.jsx](./frontend/Cookbook.jsx)
 * [React components](./frontend/components)
@@ -32,17 +34,13 @@ If you'd like to take a closer look at the code behind the Cookbook App, the bes
 
 ## Languages, Frameworks, Libraries, Etc.
 
-* Ruby on Rails
-* PostgreSQL
 * React
-* Flux
-* jQuery
-* Gems
-  * Paperclip
-  * pg_search
-  * jwt
-  * Jbuilder
-  * BCrypt
+* React Native
+* React Native Maps
+* React Native Geocoding
+* Lyft API
+* Uber API
+* Google Maps API
 
 ## Screenshots
 
