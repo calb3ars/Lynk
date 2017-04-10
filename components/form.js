@@ -3,7 +3,7 @@ import Results from './results';
 import MyMap from './map_view_component';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
-import Location from './geocoder.js';
+// import Location from './geocoder.js';
 import Geocoder from 'react-native-geocoding';
 
 import {

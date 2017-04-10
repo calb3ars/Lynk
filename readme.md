@@ -49,23 +49,23 @@ If you'd like to take a closer look at the code behind the Lynk App, the files a
 
 Lyft Redirect:
 
-![lyft](./assets/Lynk_Lyft_Final.gif)
+![lyft](http://res.cloudinary.com/beebeean09/image/upload/v1491790837/Lynk_Lyft_Final_fwkhxc.gif)
 
 Uber Redirect:
 
-![uber](./assets/Lynk_Uber_Final.gif)
+![uber](http://res.cloudinary.com/beebeean09/image/upload/v1491790626/Lynk_Uber_Final_emmhob.gif)
 
 Map Page (Keyboard Avoiding View):
 
-![map page keyboard](./assets/photo3.png)
+![map page keyboard](http://res.cloudinary.com/beebeean09/image/upload/v1491790249/Simulator_Screen_Shot_Apr_9_2017_6.19.08_PM_wywmme.png)
 
 Map Page (Connecting Two Destinations):
 
-![map page destination](./assets/photo1.png)
+![map page destination](http://res.cloudinary.com/beebeean09/image/upload/v1491790247/Simulator_Screen_Shot_Apr_9_2017_6.18.09_PM_xub8do.png)
 
 Ride Costs Comparison Page:
 
-![results page](./assets/photo2.png)
+![results page](http://res.cloudinary.com/beebeean09/image/upload/v1491790204/Simulator_Screen_Shot_Apr_9_2017_6.18.15_PM_okcrsh.png)
 
 ## Future Implementations
 * User login and authorization to persist user account information
