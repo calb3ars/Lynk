@@ -91,12 +91,6 @@ const styles = StyleSheet.create({
 
   },
 
-  // bonus: {
-  //   color: '#FF5A5F',
-  //   fontSize: 14,
-  //   marginTop: -2
-  // },
-
   time: {
     color: '#0B4F6C',
     fontSize: 16,
@@ -122,7 +116,6 @@ const styles = StyleSheet.create({
   },
 
   lyftListing: {
-    // marginRight: 20
   },
 
   lyftRideType: {
@@ -141,5 +134,3 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
 });
-
-// <Text style={[styles.lyftPrimeTime, styles.bonus]}>PrimeTime: {this.props.ride.primetime_percentage}</Text>

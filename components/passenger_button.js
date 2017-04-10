@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import {
   StyleSheet,
@@ -22,14 +21,6 @@ class PassengerButton extends Component {
       this.setSelectedOption = this.setSelectedOption.bind(this);
     this.setState.bind(this);
   }
-
-  // handleIndexChange = (index) => {
-  //   this.setState({
-  //     ...this.state,
-  //     selectedIndex: index,
-  //   });
-  // }
-
 
   setSelectedOption(option) {
     this.setState({
@@ -62,14 +53,7 @@ class PassengerButton extends Component {
 
           optionStyle={{
             fontSize: 14,
-            // fontWeight: 'bold',
             padding: 5,
-            // shadowColor: '#083f56',
-            // shadowOffset: {
-            //   height: 2
-            // },
-            // shadowOpacity: 0.1,
-            // fontFamily: 'Avenir-Medium'
           }}
 
 

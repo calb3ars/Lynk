@@ -79,7 +79,6 @@ export default class Results extends Component {
   fetchUberRides(){
     let counter = 0;
     let url = this.state.uberUrl;
-    // console.log(url);
     let serverToken = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
     fetch(url, {
       method: 'GET',
@@ -103,9 +102,6 @@ export default class Results extends Component {
 
 
   render(){
-    // let pic = {
-    //   uri: '../assets/lyft_uber.png'
-    // };
 
     if (this.state.lyftRides && this.state.uberRides){
       return (
@@ -146,7 +142,6 @@ const styles = StyleSheet.create({
   logos: {
     width: 375,
     height: 120,
-    // marginRight: 25,
   },
 
   listingsList: {

@@ -33,7 +33,8 @@ class MyMap extends Component {
         latitudeDelta: 10,
         longitudeDelta: 5
       }),
-      line: undefined
+      line: undefined,
+      follow: true
     };
     this.makeMarkStart = this.makeMarkStart.bind(this);
     this.makeMarkEnd = this.makeMarkEnd.bind(this);
@@ -76,7 +77,6 @@ class MyMap extends Component {
   }
 
   getRegionForCoordinates(points) {
-  // points should be an array of { latitude: X, longitude: Y }
   let minX = 999;
   let maxX = -999;
   let minY = 999;
@@ -121,7 +121,7 @@ class MyMap extends Component {
     let line = {
       coordinates: arr
     };
-    this.setState({line: line});
+    this.setState({line: line, follow: false});
   }
 
   makeMarkStart(obj) {
@@ -193,7 +193,7 @@ class MyMap extends Component {
           onRegionChange={this.onRegionChange}
           zoomEnabled={true}
           showsUserLocation={true}
-          followsUserLocation={true}
+          followsUserLocation={this.state.follow}
           showsMyLocationButton={true}
           showScale={true}
         >

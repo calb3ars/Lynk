@@ -10,10 +10,10 @@ export const LyftParser = (data) => {
         estimated_duration_seconds: ride.estimated_duration_seconds,
         primetime_percentage: ride.primetime_percentage
     })
-  )
+  );
   selectedData = [parsedData['lyft_line'], parsedData['lyft'], parsedData['lyft_plus']];
   return selectedData;
-}
+};
 
 export const UberParser = (data) => {
   let parsedData = {};
@@ -27,7 +27,7 @@ export const UberParser = (data) => {
         duration: ride.duration,
         primetime_percentage: ride.primetime_percentage
     })
-  )
+  );
   selectedData = [parsedData['POOL'], parsedData['uberX'], parsedData['uberXL']];
   return selectedData;
-}
+};
