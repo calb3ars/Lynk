@@ -6,7 +6,7 @@ For the price conscious, comparing transportation costs between Lyft and Uber re
 
 [Live Here][live]
 
-<!-- [live]: demo link goes here-->
+[live]: https://calb3ars.github.io/LynkDemo/
 
 ## Features
 
