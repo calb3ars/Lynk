@@ -45,13 +45,27 @@ If you'd like to take a closer look at the code behind the Lynk App, the files a
 * Uber API
 * Google Maps API
 
-## Screenshots
+## GIFs and Screenshots
 
-Map Page:
-<!-- ![map page](./screenshots/homepage.jpg) -->
+Lyft Redirect:
+
+![lyft](./assets/Lynk_Lyft_Final.gif)
+
+Uber Redirect:
+
+![uber](./assets/Lynk_Uber_Final.gif)
+
+Map Page (Keyboard Avoiding View):
+
+![map page keyboard](./assets/photo3.png)
+
+Map Page (Connecting Two Destinations):
+
+![map page destination](./assets/photo1.png)
 
 Ride Costs Comparison Page:
-<!-- ![map page](./screenshots/homepage.jpg) -->
+
+![results page](./assets/photo2.png)
 
 ## Future Implementations
 * User login and authorization to persist user account information
