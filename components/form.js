@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Results from './results';
-import MyMap from './map_view_component';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
-// import Location from './geocoder.js';
 import Geocoder from 'react-native-geocoding';
 
 import {
@@ -43,6 +41,13 @@ class Form extends Component {
     this.getEndCoords.bind(this);
     this.createUrl.bind(this);
     this.getCoords.bind(this);
+
+  }
+
+  clearErrors(){
+    if (this.state.error !== ""){
+      this.setState({ error: "" });
+    }
   }
 
   componentDidMount(){
@@ -51,7 +56,7 @@ class Form extends Component {
         this.setState({
           startLat: position.coords.latitude,
           startLng: position.coords.longitude,
-          error: null,
+          error: "",
         });
       },
       (error) => this.setState({ error: error.message }),
@@ -60,11 +65,6 @@ class Form extends Component {
     this.fetchLyftToken();
     Keyboard.addListener('keyboardDidShow', () => this.setState({keyboard: true}));
     Keyboard.addListener('keyboardDidHide', () => this.setState({keyboard: false}));
-  }
-
-  createUrl(startLat, startLng, endLat, endLng){
-    this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                  uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
   }
 
   fetchLyftToken(){
@@ -82,7 +82,6 @@ class Form extends Component {
       })
     }).then(response => {
       if (response.status !== 200){
-        console.log('Looks like there was a problem. Status code: ' + response.status);
         return;
       }
         response.json().then(data => {
@@ -110,7 +109,9 @@ class Form extends Component {
         let location = json.results[0].geometry.location;
         this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
       }
-    );
+    ).catch(error => {
+      this.setState( { error: "Invalid Pickup Location" } );
+    });
   }
 
   getEndCoords(address) {
@@ -120,7 +121,9 @@ class Form extends Component {
         let location = json.results[0].geometry.location;
         this.setState({endLat: location.lat, endLng: location.lng}, this.createUrl);
       }
-    );
+    ).catch(error => {
+      this.setState( { error: "Invalid Destination" } );
+    });
   }
 
   getCoords() {
@@ -134,6 +137,22 @@ class Form extends Component {
 
   createUrl(){
     if(this.state.startLng &&
+      this.state.startLat){
+        let sMark =
+          {lat:this.state.startLat,
+           lng:this.state.startLng
+          };
+        this.props.markStartMap(sMark);
+      }
+    if(this.state.endLng &&
+      this.state.endLat) {
+        let eMark =
+          {lat:this.state.endLat,
+           lng:this.state.endLng
+          };
+        this.props.markEndMap(eMark);
+      }
+    if(this.state.startLng &&
       this.state.startLat &&
       this.state.endLng &&
       this.state.endLat) {
@@ -142,7 +161,9 @@ class Form extends Component {
         let endLat = this.state.endLat.toFixed(4);
         let endLng = this.state.endLng.toFixed(4);
         this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                        uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`});
+                       lyftRedirectUrl: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&destination[latitude]=${endLat}&destination[longitude]=${endLng}`,
+                       uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`,
+                       uberRedirectUrl: `uber://?client_id=<NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>&action=setPickup&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`})
       }
   }
 
@@ -156,34 +177,38 @@ class Form extends Component {
   }
 
   render(){
-
+    if (this.state.error !== ""){
+      error_msg = <Text style={styles.errors}>{this.state.error}</Text>
+    } else {
+      console.log('there is no error');
+      error_msg = <Text style={{backgroundColor: 'transparent'}}></Text>
+    }
     return(
       <View style={styles.formContainer}>
-      <View style={{height: this.state.keyboard ? 300 : 90 }}>
-        <TextInput
-          style={styles.inputForm}
-          autoFocus={true}
-          autoCapitalize={'words'}
-          placeholder="Pickup Location"
-          placeholderTextColor= '#A7D1CC'
-          onChangeText={(startAddress) => this.setState({startAddress})}
-          onSelectionChange={() => this.getCoords()}
-          onSubmitEditing={() => this.getCoords()}
-          value={this.state.currentLocation} />
-        <TextInput
-          style={styles.inputForm}
-          placeholder="Destination"
-          autoCapitalize={'words'}
-          onChangeText={(endAddress) => this.setState({endAddress})}
-          onSelectionChange={() => this.getCoords()}
-          onSubmitEditing={() => this.getCoords()}
-          placeholderTextColor= '#A7D1CC'
-          value={this.state.destination} />
-      </View>
-      <View style={styles.passengerContainer}>
-        <Text style={styles.passengerText}># Seats</Text>
-        <PassengerButton updateRiders={this.updateRiders.bind(this)} />
-      </View>
+        {error_msg}
+        <View style={{height: this.state.keyboard ? 300 : 90 }}>
+          <TextInput
+            style={styles.inputForm}
+            autoFocus={true}
+            autoCapitalize={'words'}
+            placeholder="Pickup Location"
+            placeholderTextColor= '#A7D1CC'
+            onChangeText={(startAddress) => this.setState({startAddress}, this.clearErrors.bind(this))}
+            onSubmitEditing={() => this.getCoords()}
+            value={this.state.currentLocation} />
+          <TextInput
+            style={styles.inputForm}
+            placeholder="Destination"
+            autoCapitalize={'words'}
+            onChangeText={(endAddress) => this.setState({endAddress}, this.clearErrors.bind(this))}
+            onSubmitEditing={() => this.getCoords()}
+            placeholderTextColor= '#A7D1CC'
+            value={this.state.destination} />
+        </View>
+        <View style={styles.passengerContainer}>
+          <Text style={styles.passengerText}># Seats</Text>
+          <PassengerButton updateRiders={this.updateRiders.bind(this)} />
+        </View>
         <Button
           disabled={this.state.endLat === undefined ||
               this.state.endLng === undefined ||
@@ -194,7 +219,6 @@ class Form extends Component {
           containerStyle={styles.buttonContainer}>
           Find Your Ride
         </Button>
-
       </View>
     );
   }
@@ -224,35 +248,35 @@ const styles = StyleSheet.create({
     height: 35,
     width: 310,
     fontSize: 14,
-    borderColor: '#2F5268',
-    color: '#26646A',
-    // fontWeight: 'bold',
+    fontFamily: 'Avenir-Medium',
+    borderColor: '#0B4F6C',
+    color: '#0B4F6C',
     borderWidth: 0.5,
-    borderRadius: 4,
-    // backgroundColor: '#26646A',
+    borderRadius: 1,
     backgroundColor: '#EFFCFB',
-    // justifyContent: 'center'
     textAlign: 'center',
     marginTop: 10,
   },
   passengerContainer: {
     width: 310,
     borderWidth: 0.5,
-    borderRadius: 4,
-    borderColor: '#26646A',
+    borderRadius: 1,
+    borderColor: '#0B4F6C',
     backgroundColor: '#EFFCFB',
     marginTop: 10
   },
   passengerText: {
     textAlign: 'center',
     // fontWeight: 'bold',
+    fontFamily: 'Avenir-Medium',
     fontSize: 14,
     padding: 5,
-    color: '#26646A',
+    color: '#0B4F6C',
   },
   button: {
     color: '#EFFCFB',
     fontSize: 16,
+    fontFamily: 'Avenir-Medium',
   },
   buttonContainer: {
     justifyContent: 'center',
@@ -262,12 +286,25 @@ const styles = StyleSheet.create({
     width: 310,
     overflow: 'hidden',
     borderRadius: 4,
-    borderColor: '#26646A',
+    borderColor: '#0B4F6C',
     borderWidth: 0.5,
-    backgroundColor: '#26646A',
+    backgroundColor: '#0B4F6C',
     right: 0,
     left: 0,
     bottom: 0
+  },
+  errors: {
+    width: 310,
+    fontSize: 14,
+    borderColor: '#0B4F6C',
+    borderWidth: 0.5,
+    borderRadius: 4,
+    backgroundColor: '#EFFCFB',
+    fontFamily: 'Avenir-Medium',
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: 'red',
+    padding: 5
   }
 });
 
