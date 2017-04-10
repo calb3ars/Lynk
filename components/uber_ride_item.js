@@ -15,16 +15,9 @@ export default class UberRideItem extends Component {
   constructor(props){
     super(props);
 
-    // this.buttonPress.bind(this);
-    // debugger;
-    // console.log('in UberRideItem');
-    // console.log(this.props.uberRedirectUrl);
-    // this.state = { uberRedirectUrl: this.props.uberRedirectUrl }
-
     this.state = {
       pressed: false,
     };
-    // this.buttonPress.bind(this);
   }
 
   buttonPress(){
@@ -96,13 +89,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
-  // bonus: {
-  //   color: '#FF5A5F',
-  //   fontSize: 14,
-  //   marginTop: -2,
-  //
-  // },
-
   time: {
     color: '#0B4F6C',
     fontSize: 16,
@@ -148,5 +134,3 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
 });
-
-// <Text style={[styles.uberPrimeTime, styles.bonus]}>Surge: {this.props.ride.primetime_percentage}</Text>

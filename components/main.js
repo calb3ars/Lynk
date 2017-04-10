@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Results from './results';
 import MyMap from './map_view_component';
-import PassengerButton from './passenger_button';
-import Button from 'react-native-button';
 import Form from './form';
 import {
   StyleSheet,
@@ -41,7 +39,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     backgroundColor: 'ghostwhite',
-    // justifyContent: 'center'
     textAlign: 'center',
     top: 200,
     right: 0,

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Results from './results';
-import MyMap from './map_view_component';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
-import Location from './geocoder.js';
 import Geocoder from 'react-native-geocoding';
 
 import {
@@ -84,7 +82,6 @@ class Form extends Component {
       })
     }).then(response => {
       if (response.status !== 200){
-        console.log('Looks like there was a problem. Status code: ' + response.status);
         return;
       }
         response.json().then(data => {
@@ -113,7 +110,6 @@ class Form extends Component {
         this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
       }
     ).catch(error => {
-      console.log(error.message);
       this.setState( { error: "Invalid Pickup Location" } );
     });
   }
@@ -126,7 +122,6 @@ class Form extends Component {
         this.setState({endLat: location.lat, endLng: location.lng}, this.createUrl);
       }
     ).catch(error => {
-      console.log(error);
       this.setState( { error: "Invalid Destination" } );
     });
   }
@@ -184,11 +179,9 @@ class Form extends Component {
   render(){
     if (this.state.error !== ""){
       error_msg = <Text style={styles.errors}>{this.state.error}</Text>
-      console.log('there is an error');
     } else {
       console.log('there is no error');
       error_msg = <Text style={{backgroundColor: 'transparent'}}></Text>
-      // debugger;
     }
     return(
       <View style={styles.formContainer}>
@@ -258,12 +251,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir-Medium',
     borderColor: '#0B4F6C',
     color: '#0B4F6C',
-    // fontWeight: 'bold',
     borderWidth: 0.5,
     borderRadius: 1,
-    // backgroundColor: '#0B4F6C',
     backgroundColor: '#EFFCFB',
-    // justifyContent: 'center'
     textAlign: 'center',
     marginTop: 10,
   },
@@ -304,21 +294,15 @@ const styles = StyleSheet.create({
     bottom: 0
   },
   errors: {
-    // height: 35,
     width: 310,
     fontSize: 14,
     borderColor: '#0B4F6C',
     borderWidth: 0.5,
     borderRadius: 4,
-    // backgroundColor: '#0B4F6C',
     backgroundColor: '#EFFCFB',
-    // justifyContent: 'center',
-    // verticalAlign: 'center',
-    // alignItems: 'center',
     fontFamily: 'Avenir-Medium',
     textAlign: 'center',
     alignSelf: 'center',
-    // marginTop: 10,
     color: 'red',
     padding: 5
   }

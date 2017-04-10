@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import RideItem from './components/ride_item';
 import LyftRideItem from './lyft_ride_item';
 import {
   StyleSheet,
@@ -10,7 +9,6 @@ import {
 export default class LyftList extends Component {
   render(){
     let list = [];
-    // console.log(this.props.lyftRedirectUrl);
     this.props.rides.forEach((ride, idx) => (
       list.push(<LyftRideItem key={idx} ride={ride} lyftRedirectUrl={this.props.lyftRedirectUrl}/>)
     ));
