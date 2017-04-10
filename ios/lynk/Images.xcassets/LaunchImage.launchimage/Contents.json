@@ -1,14 +1,14 @@
 {
   "images" : [
     {
-      "orientation" : "portrait",
+      "orientation" : "full-screen",
       "idiom" : "iphone",
       "filename" : "Lynk_iPhone7.png",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
     },
     {
-      "orientation" : "portrait",
+      "orientation" : "full-screen",
       "idiom" : "iphone",
       "filename" : "Lynk_iPhone7-1.png",
       "minimum-system-version" : "7.0",
