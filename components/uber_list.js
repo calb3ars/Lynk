@@ -9,9 +9,11 @@ import {
 export default class UberList extends Component {
   render(){
     let list = [];
-    this.props.rides.forEach((ride, idx) => (
-      list.push(<UberRideItem key={idx} ride={ride} uberRedirectUrl={this.props.uberRedirectUrl}/>)
-    ));
+    this.props.rides.forEach((ride, idx) => {
+      if (ride.display_name !== 'Not Available') {
+        return list.push(<UberRideItem key={idx} ride={ride} uberRedirectUrl={this.props.uberRedirectUrl}/>);
+      }
+    });
 
     return (
       <View style={styles.UberList}>

@@ -13,23 +13,33 @@ export const LyftParser = (data) => {
     console.log('ride');
     console.log(ride);
 
-
-      // return parsedData;
-    // } else {
-
-      parsedData[ride.ride_type] = {
-        estimated_cost_cents_min: ride.estimated_cost_cents_min,
-        estimated_cost_cents_max: ride.estimated_cost_cents_max,
-        display_name: ride.display_name,
-        estimated_duration_seconds: ride.estimated_duration_seconds,
-        primetime_percentage: ride.primetime_percentage
-      };
-      return parsedData;
+    parsedData[ride.ride_type] = {
+      estimated_cost_cents_min: ride.estimated_cost_cents_min,
+      estimated_cost_cents_max: ride.estimated_cost_cents_max,
+      display_name: ride.display_name,
+      estimated_duration_seconds: ride.estimated_duration_seconds,
+      primetime_percentage: ride.primetime_percentage
+    };
+    // // }
+    // for(ride in parsedData) {
+    //   if (ride) {
+    //     selectedData.push(ride.ride_type);
+    //   }
     // }
   });
-  console.log(parsedData['lyft_line']);
+  console.log('parsedData');
+  console.log(parsedData);
   console.log(notFound);
-  selectedData = [parsedData['lyft_line'] ? parsedData['lyft_line'] : notFound, parsedData['lyft'], parsedData['lyft_plus']];
+
+  // selectedData = [parsedData['lyft_line'], parsedData['lyft'], parsedData['lyft_plus']];
+  // return selectedData;
+
+// };
+  selectedData =
+  [parsedData['lyft_line'] ? parsedData['lyft_line'] : notFound,
+  parsedData['lyft'] ? parsedData['lyft'] : notFound,
+  parsedData['lyft_plus'] ? parsedData['lyft_plus'] : notFound];
+
   return selectedData;
 };
 
@@ -53,6 +63,10 @@ export const UberParser = (data) => {
         primetime_percentage: ride.primetime_percentage
     })
   );
-  selectedData = [parsedData['POOL'] ? parsedData['POOL'] : notFound, parsedData['uberX'], parsedData['uberXL']];
+
+  selectedData =
+  [parsedData['POOL'] ? parsedData['POOL'] : notFound,
+  parsedData['uberX'] ? parsedData['uberX'] : notFound,
+  parsedData['uberXL'] ? parsedData['uberXL'] : notFound];
   return selectedData;
 };
