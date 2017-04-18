@@ -36,7 +36,6 @@ export default class LyftRideItem extends Component {
   }
 
   render() {
-    // debugger;
     return(
       <TouchableHighlight
         underlayColor={'#0B4F6C'}

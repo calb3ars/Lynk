@@ -8,10 +8,8 @@ import {
 
 export default class LyftList extends Component {
   render(){
-    console.log(this.props.rides);
     let list = [];
     this.props.rides.forEach((ride, idx) => {
-      console.log(ride);
       if (ride.display_name !== 'Not Available') {
         return list.push(<LyftRideItem key={idx} ride={ride} lyftRedirectUrl={this.props.lyftRedirectUrl}/>);
       }

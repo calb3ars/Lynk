@@ -10,9 +10,6 @@ export const LyftParser = (data) => {
   };
 
   data["cost_estimates"].forEach(ride => {
-    console.log('ride');
-    console.log(ride);
-
     parsedData[ride.ride_type] = {
       estimated_cost_cents_min: ride.estimated_cost_cents_min,
       estimated_cost_cents_max: ride.estimated_cost_cents_max,
@@ -20,26 +17,12 @@ export const LyftParser = (data) => {
       estimated_duration_seconds: ride.estimated_duration_seconds,
       primetime_percentage: ride.primetime_percentage
     };
-    // // }
-    // for(ride in parsedData) {
-    //   if (ride) {
-    //     selectedData.push(ride.ride_type);
-    //   }
-    // }
   });
-  console.log('parsedData');
-  console.log(parsedData);
-  console.log(notFound);
 
-  // selectedData = [parsedData['lyft_line'], parsedData['lyft'], parsedData['lyft_plus']];
-  // return selectedData;
-
-// };
   selectedData =
   [parsedData['lyft_line'] ? parsedData['lyft_line'] : notFound,
   parsedData['lyft'] ? parsedData['lyft'] : notFound,
   parsedData['lyft_plus'] ? parsedData['lyft_plus'] : notFound];
-
   return selectedData;
 };
 
