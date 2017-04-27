@@ -13,7 +13,6 @@ import {
   StatusBar,
   TextInput,
   KeyboardAvoidingView,
-  Keyboard
 } from 'react-native';
 
 class Form extends Component {
@@ -31,7 +30,6 @@ class Form extends Component {
       unfilledForm: true,
       lyftUrl: "",
       uberUrl: "",
-      keyboard: false,
       error: ""
 
     };
@@ -41,6 +39,7 @@ class Form extends Component {
     this.getEndCoords.bind(this);
     this.createUrl.bind(this);
     this.getCoords.bind(this);
+    this.drawMarks.bind(this);
 
   }
 
@@ -51,6 +50,7 @@ class Form extends Component {
   }
 
   componentDidMount(){
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -63,8 +63,6 @@ class Form extends Component {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     this.fetchLyftToken();
-    Keyboard.addListener('keyboardDidShow', () => this.setState({keyboard: true}));
-    Keyboard.addListener('keyboardDidHide', () => this.setState({keyboard: false}));
   }
 
   fetchLyftToken(){
@@ -81,9 +79,9 @@ class Form extends Component {
         "scope": "public"
       })
     }).then(response => {
-      if (response.status !== 200){
-        return;
-      }
+        if (response.status !== 200){
+          return;
+        }
         response.json().then(data => {
           this.setState({lyftToken:`${data.access_token}`});
       });
@@ -135,7 +133,7 @@ class Form extends Component {
     }
   }
 
-  createUrl(){
+  drawMarks(){
     if(this.state.startLng &&
       this.state.startLat){
         let sMark =
@@ -152,14 +150,17 @@ class Form extends Component {
           };
         this.props.markEndMap(eMark);
       }
+  }
+  createUrl(){
+    this.drawMarks()
     if(this.state.startLng &&
       this.state.startLat &&
       this.state.endLng &&
       this.state.endLat) {
-        let startLat = this.state.startLat.toFixed(4);
-        let startLng = this.state.startLng.toFixed(4);
-        let endLat = this.state.endLat.toFixed(4);
-        let endLng = this.state.endLng.toFixed(4);
+        let startLat = this.state.startLat.toFixed(6);
+        let startLng = this.state.startLng.toFixed(6);
+        let endLat = this.state.endLat.toFixed(6);
+        let endLng = this.state.endLng.toFixed(6);
         this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
                        lyftRedirectUrl: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&destination[latitude]=${endLat}&destination[longitude]=${endLng}`,
                        uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`,
@@ -186,7 +187,7 @@ class Form extends Component {
     return(
       <View style={styles.formContainer}>
         {error_msg}
-        <View style={{height: this.state.keyboard ? 300 : 90 }}>
+        <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <TextInput
             style={styles.inputForm}
             autoFocus={true}
@@ -204,11 +205,13 @@ class Form extends Component {
             onSubmitEditing={() => this.getCoords()}
             placeholderTextColor= '#A7D1CC'
             value={this.state.destination} />
-        </View>
-        <View style={styles.passengerContainer}>
-          <Text style={styles.passengerText}># Seats</Text>
-          <PassengerButton updateRiders={this.updateRiders.bind(this)} />
-        </View>
+            <View style={styles.passengerContainer}>
+              <Text style={styles.passengerText}># Seats</Text>
+              <PassengerButton updateRiders={this.updateRiders.bind(this)} />
+            </View>
+
+        </KeyboardAvoidingView>
+
         <Button
           disabled={this.state.endLat === undefined ||
               this.state.endLng === undefined ||
@@ -224,25 +227,17 @@ class Form extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   formContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 350,
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
   },
   inputForm: {
     height: 35,
@@ -255,7 +250,7 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     backgroundColor: '#EFFCFB',
     textAlign: 'center',
-    marginTop: 10,
+    marginBottom: 10,
   },
   passengerContainer: {
     width: 310,
@@ -263,11 +258,10 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     borderColor: '#0B4F6C',
     backgroundColor: '#EFFCFB',
-    marginTop: 10
+    marginBottom: 10
   },
   passengerText: {
     textAlign: 'center',
-    // fontWeight: 'bold',
     fontFamily: 'Avenir-Medium',
     fontSize: 14,
     padding: 5,
@@ -280,8 +274,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     justifyContent: 'center',
-    marginTop: 10,
-    padding: 10,
+    marginBottom: 10,
     height: 40,
     width: 310,
     overflow: 'hidden',
@@ -289,9 +282,6 @@ const styles = StyleSheet.create({
     borderColor: '#0B4F6C',
     borderWidth: 0.5,
     backgroundColor: '#0B4F6C',
-    right: 0,
-    left: 0,
-    bottom: 0
   },
   errors: {
     width: 310,
