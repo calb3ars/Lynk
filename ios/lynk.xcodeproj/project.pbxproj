@@ -36,10 +36,14 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 		19A793E20BA94CF49D0D9FA0 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C3849A4B37479EAFCCD592 /* libAirMaps.a */; };
 =======
 		C59CE794B1DD4121A18B6668 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 627E3639E88F4510BE7552AD /* libAirMaps.a */; };
 >>>>>>> fixed text box placement when keyboard is active
+=======
+		22C620D5469541CF8D985114 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA396DC8C194CE0B4C64655 /* libAirMaps.a */; };
+>>>>>>> init project
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,12 +264,17 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 		D5924AAC107B410A872478CA /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		E9C3849A4B37479EAFCCD592 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 =======
 		97688E853DC34AC7B3B004AC /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		627E3639E88F4510BE7552AD /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 >>>>>>> fixed text box placement when keyboard is active
+=======
+		2FE1E680F5D144A29CD256CC /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		6CA396DC8C194CE0B4C64655 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+>>>>>>> init project
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,10 +302,14 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				19A793E20BA94CF49D0D9FA0 /* libAirMaps.a in Frameworks */,
 =======
 				C59CE794B1DD4121A18B6668 /* libAirMaps.a in Frameworks */,
 >>>>>>> fixed text box placement when keyboard is active
+=======
+				22C620D5469541CF8D985114 /* libAirMaps.a in Frameworks */,
+>>>>>>> init project
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,10 +477,14 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				D5924AAC107B410A872478CA /* AirMaps.xcodeproj */,
 =======
 				97688E853DC34AC7B3B004AC /* AirMaps.xcodeproj */,
 >>>>>>> fixed text box placement when keyboard is active
+=======
+				2FE1E680F5D144A29CD256CC /* AirMaps.xcodeproj */,
+>>>>>>> init project
 			);
 			name = Libraries;
 			sourceTree = "<group>";
