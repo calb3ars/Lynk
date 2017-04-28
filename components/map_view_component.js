@@ -28,7 +28,7 @@ class MyMap extends Component {
       endMark: undefined,
       region:
         new MapView.AnimatedRegion({
-        latitude: 37.78825,
+        latitude: 37.78825 - 0.001,
         longitude: -122.4324,
         latitudeDelta: 10,
         longitudeDelta: 5
@@ -77,20 +77,20 @@ class MyMap extends Component {
   }
 
   getRegionForCoordinates(points) {
-  let minX = 999;
-  let maxX = -999;
-  let minY = 999;
-  let maxY = -999;
+    let minX = 1.0/0.0;
+    let maxX = -1.0/0.0;
+    let minY = 1.0/0.0;
+    let maxY = -1.0/0.0;
 
-  points.map((point) => {
-    minX = Math.min(minX, parseFloat(point.latlng.latitude));
-    maxX = Math.max(maxX, parseFloat(point.latlng.latitude));
-    minY = Math.min(minY, parseFloat(point.latlng.longitude));
-    maxY = Math.max(maxY, parseFloat(point.latlng.longitude));
+    points.map((point) => {
+      minX = Math.min(minX, parseFloat(point.latlng.latitude));
+      maxX = Math.max(maxX, parseFloat(point.latlng.latitude));
+      minY = Math.min(minY, parseFloat(point.latlng.longitude));
+      maxY = Math.max(maxY, parseFloat(point.latlng.longitude));
   });
 
   const midX = (minX + maxX) / 2;
-  const midY = (minY + maxY) / 2 + 0.001;
+  const midY = (minY + maxY) / 2;
   const deltaX = 2*(maxX - minX);
   const deltaY = 2*(maxY - minY);
 

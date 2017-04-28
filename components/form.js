@@ -181,7 +181,6 @@ class Form extends Component {
     if (this.state.error !== ""){
       error_msg = <Text style={styles.errors}>{this.state.error}</Text>
     } else {
-      console.log('there is no error');
       error_msg = <Text style={{backgroundColor: 'transparent'}}></Text>
     }
     return(
@@ -190,14 +189,18 @@ class Form extends Component {
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <TextInput
             style={styles.inputForm}
-            autoFocus={true}
+            autoFocus={false}
             autoCapitalize={'words'}
             placeholder="Pickup Location"
             placeholderTextColor= '#A7D1CC'
             onChangeText={(startAddress) => this.setState({startAddress}, this.clearErrors.bind(this))}
-            onSubmitEditing={() => this.getCoords()}
+            onSubmitEditing={() => {
+              this.getCoords();
+              this.refs.SecondInput.focus();
+            }}
             value={this.state.currentLocation} />
           <TextInput
+            ref='SecondInput'
             style={styles.inputForm}
             placeholder="Destination"
             autoCapitalize={'words'}
