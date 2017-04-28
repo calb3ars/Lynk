@@ -205,13 +205,13 @@ class Form extends Component {
             onSubmitEditing={() => this.getCoords()}
             placeholderTextColor= '#A7D1CC'
             value={this.state.destination} />
-            <View style={styles.passengerContainer}>
-              <Text style={styles.passengerText}># Seats</Text>
-              <PassengerButton updateRiders={this.updateRiders.bind(this)} />
-            </View>
+
 
         </KeyboardAvoidingView>
-
+        <View style={styles.passengerContainer}>
+          <Text style={styles.passengerText}># Seats</Text>
+          <PassengerButton updateRiders={this.updateRiders.bind(this)} />
+        </View>
         <Button
           disabled={this.state.endLat === undefined ||
               this.state.endLng === undefined ||
