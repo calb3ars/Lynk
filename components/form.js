@@ -40,6 +40,7 @@ class Form extends Component {
     this.createUrl.bind(this);
     this.getCoords.bind(this);
     this.drawMarks.bind(this);
+
   }
 
   clearErrors(){
@@ -207,13 +208,12 @@ class Form extends Component {
             onSubmitEditing={() => this.getCoords()}
             placeholderTextColor= '#A7D1CC'
             value={this.state.destination} />
-
-
         </KeyboardAvoidingView>
         <View style={styles.passengerContainer}>
           <Text style={styles.passengerText}># Seats</Text>
           <PassengerButton updateRiders={this.updateRiders.bind(this)} />
         </View>
+
         <Button
           disabled={this.state.endLat === undefined ||
               this.state.endLng === undefined ||
