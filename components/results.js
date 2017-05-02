@@ -17,7 +17,8 @@ export default class Results extends Component {
                    lyftUrl: this.props.form.lyftUrl,
                    uberUrl: this.props.form.uberUrl,
                    lyftRedirectUrl: this.props.form.lyftRedirectUrl,
-                   uberRedirectUrl: this.props.form.uberRedirectUrl
+                   uberRedirectUrl: this.props.form.uberRedirectUrl,
+                   riders: this.props.form.riders
                  };
   }
 
@@ -69,7 +70,7 @@ export default class Results extends Component {
           return;
         }
         response.json().then(data => {
-          this.setState({lyftRides: Parsers.LyftParser(data)});
+          this.setState({lyftRides: Parsers.LyftParser(data, this.state.riders)});
         });
       }).catch(err => {
         console.log('Fetch Lyft Rides Error :-S', err);
@@ -93,7 +94,7 @@ export default class Results extends Component {
         return;
       }
       response.json().then(promise => {
-        this.setState({uberRides: Parsers.UberParser(promise)});
+        this.setState({uberRides: Parsers.UberParser(promise, this.state.riders)});
       });
     }).catch(err => {
       console.log('Fetch Uber Rides Error :-S', err);

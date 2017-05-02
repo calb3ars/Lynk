@@ -1,4 +1,4 @@
-export const LyftParser = (data) => {
+export const LyftParser = (data, passengers = '1 - 2') => {
   let parsedData = {};
   let selectedData = [];
   let notFound = {
@@ -19,14 +19,26 @@ export const LyftParser = (data) => {
     };
   });
 
-  selectedData =
-  [parsedData['lyft_line'] ? parsedData['lyft_line'] : notFound,
-  parsedData['lyft'] ? parsedData['lyft'] : notFound,
-  parsedData['lyft_plus'] ? parsedData['lyft_plus'] : notFound];
+  parsedLyftData =
+    [parsedData['lyft_line'] ? parsedData['lyft_line'] : notFound,
+    parsedData['lyft'] ? parsedData['lyft'] : notFound,
+    parsedData['lyft_plus'] ? parsedData['lyft_plus'] : notFound];
+
+  switch (passengers){
+    case '1 - 2':
+      selectedData = parsedLyftData;
+      break;
+    case '3 - 4':
+      selectedData = [parsedLyftData[1], parsedLyftData[2]];
+      break;
+    case '5+':
+      selectedData = [parsedLyftData[2]];
+      break;
+  }
   return selectedData;
 };
 
-export const UberParser = (data) => {
+export const UberParser = (data, passengers = '1 - 2') => {
   let parsedData = {};
   let selectedData =[];
   let notFound = {
@@ -46,10 +58,40 @@ export const UberParser = (data) => {
         primetime_percentage: ride.primetime_percentage
     })
   );
+  parsedUberData =
+    [parsedData['POOL'] ? parsedData['POOL'] : notFound,
+    parsedData['uberX'] ? parsedData['uberX'] : notFound,
+    parsedData['uberXL'] ? parsedData['uberXL'] : notFound];
 
-  selectedData =
-  [parsedData['POOL'] ? parsedData['POOL'] : notFound,
-  parsedData['uberX'] ? parsedData['uberX'] : notFound,
-  parsedData['uberXL'] ? parsedData['uberXL'] : notFound];
+  switch (passengers){
+    case '1 - 2':
+      selectedData = parsedUberData;
+      break;
+    case '3 - 4':
+      selectedData = [parsedUberData[1], parsedUberData[2]];
+      break;
+    case '5+':
+      selectedData = [parsedUberData[2]];
+      break;
+  }
+
   return selectedData;
 };
+
+
+// 1-2
+//  POOL, uberX, uberXL
+//  lyft_line, lyft, lyft_plus
+// 3-4
+//  uberX, uberXL
+//  lyft, lyft_plus
+// 5
+//  uberXL
+//  lyft_plus
+
+
+// const options = [
+//   '1 - 2',
+//   '3 - 4',
+//   '5+'
+// ];
