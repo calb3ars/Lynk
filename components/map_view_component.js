@@ -219,9 +219,7 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     right: 0,
-    left: 0,
-    // width: 375,
-    // height: 440
+    left: 0
   },
   inputForm: {
     height: 35,
