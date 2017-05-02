@@ -40,6 +40,7 @@ class Form extends Component {
     this.createUrl.bind(this);
     this.getCoords.bind(this);
     this.drawMarks.bind(this);
+
   }
 
   clearErrors(){

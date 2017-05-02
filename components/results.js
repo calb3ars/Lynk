@@ -117,7 +117,7 @@ export default class Results extends Component {
     } else {
       return (
         <View style={styles.loadingContainer}>
-          <Image source={require('../assets/Lynk_iPhone7.png')} style={styles.loading}/>
+          <Image source={require('../assets/loading.gif')} style={styles.loading}/>
         </View>
       );
     }

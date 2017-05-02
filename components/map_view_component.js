@@ -220,6 +220,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
+    // width: 375,
+    height: 440
   },
   inputForm: {
     height: 35,
