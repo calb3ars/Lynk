@@ -39,7 +39,11 @@
 		C59CE794B1DD4121A18B6668 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 627E3639E88F4510BE7552AD /* libAirMaps.a */; };
 =======
 		19A793E20BA94CF49D0D9FA0 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C3849A4B37479EAFCCD592 /* libAirMaps.a */; };
+<<<<<<< HEAD
 >>>>>>> 33e8784d5721c2849704edc824837c15c9da3dda
+=======
+>>>>>>> c084dd9c9727fca6998fe6a0b8cbfb29ce8b4ffa
+>>>>>>> loadingGif
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,7 +271,11 @@
 		D5924AAC107B410A872478CA /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		E9C3849A4B37479EAFCCD592 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 
+<<<<<<< HEAD
 >>>>>>> 33e8784d5721c2849704edc824837c15c9da3dda
+=======
+>>>>>>> c084dd9c9727fca6998fe6a0b8cbfb29ce8b4ffa
+>>>>>>> loadingGif
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +306,11 @@
 				C59CE794B1DD4121A18B6668 /* libAirMaps.a in Frameworks */,
 =======
 				19A793E20BA94CF49D0D9FA0 /* libAirMaps.a in Frameworks */,
+<<<<<<< HEAD
 >>>>>>> 33e8784d5721c2849704edc824837c15c9da3dda
+=======
+>>>>>>> c084dd9c9727fca6998fe6a0b8cbfb29ce8b4ffa
+>>>>>>> loadingGif
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,7 +481,11 @@
 				97688E853DC34AC7B3B004AC /* AirMaps.xcodeproj */,
 =======
 				D5924AAC107B410A872478CA /* AirMaps.xcodeproj */,
+<<<<<<< HEAD
 >>>>>>> 33e8784d5721c2849704edc824837c15c9da3dda
+=======
+>>>>>>> c084dd9c9727fca6998fe6a0b8cbfb29ce8b4ffa
+>>>>>>> loadingGif
 			);
 			name = Libraries;
 			sourceTree = "<group>";
