@@ -29,7 +29,7 @@ export default class lynk extends Component {
           translucent={true}
           initialRoute={{
             component: Main,
-            title: 'Map',
+            title: 'Lynk',
             backButtonTitle: 'Back'
           }}
           style={styles.wrapper}/>
