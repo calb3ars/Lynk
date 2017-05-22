@@ -40,7 +40,7 @@ class Form extends Component {
     this.createUrl.bind(this);
     this.getCoords.bind(this);
     this.drawMarks.bind(this);
-
+    this.swapCoords.bind(this);
   }
 
   clearErrors(){
@@ -177,6 +177,20 @@ class Form extends Component {
     this._handleNextPress(nextRoute);
   }
 
+  swapCoords(){
+    let tempStartLng = this.state.startLng;
+    let tempStartLat = this.state.startLat;
+    let tempStartAddress = this.state.startAddress;
+    this.setState({
+      startLng : this.state.endLng,
+      startLat : this.state.endLat,
+      endLng : tempStartLng,
+      endLat : tempStartLat,
+      startAddress: this.state.endAddress,
+      endAddress: tempStartAddress,
+    }, this.drawMarks);
+  }
+
   render(){
     if (this.state.error !== ""){
       error_msg = <Text style={styles.errors}>{this.state.error}</Text>
@@ -187,18 +201,21 @@ class Form extends Component {
       <View style={styles.formContainer}>
         {error_msg}
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
-          <TextInput
-            style={styles.inputForm}
-            autoFocus={false}
-            autoCapitalize={'words'}
-            placeholder="Pickup Location"
-            placeholderTextColor= '#A7D1CC'
-            onChangeText={(startAddress) => this.setState({startAddress}, this.clearErrors.bind(this))}
-            onSubmitEditing={() => {
-              this.getCoords();
-              this.refs.SecondInput.focus();
-            }}
-            value={this.state.currentLocation} />
+          <View class="inputContainer" style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputForm}
+              autoFocus={false}
+              autoCapitalize={'words'}
+              placeholder="Pickup Location"
+              placeholderTextColor= '#A7D1CC'
+              onChangeText={(startAddress) => this.setState({startAddress}, this.clearErrors.bind(this))}
+              onSubmitEditing={() => {
+                this.getCoords();
+                this.refs.SecondInput.focus();
+              }}
+              value={this.state.startAddress} />
+            <Button class="addressSwap" style={styles.swap} onPress={() => this.swapCoords()}>&#x21F3;</Button>
+          </View>
           <TextInput
             ref='SecondInput'
             style={styles.inputForm}
@@ -207,7 +224,7 @@ class Form extends Component {
             onChangeText={(endAddress) => this.setState({endAddress}, this.clearErrors.bind(this))}
             onSubmitEditing={() => this.getCoords()}
             placeholderTextColor= '#A7D1CC'
-            value={this.state.destination} />
+            value={this.state.endAddress} />
         </KeyboardAvoidingView>
         <View style={styles.passengerContainer}>
           <Text style={styles.passengerText}># Seats</Text>
@@ -241,9 +258,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  inputContainer: {
+    width: 310,
+    flexDirection: 'row',
+  },
   inputForm: {
     height: 35,
-    width: 310,
+    width: 280,
     fontSize: 14,
     fontFamily: 'Avenir-Medium',
     borderColor: '#0B4F6C',
@@ -254,6 +275,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
   },
+  swap: {
+    height: 40,
+    width: 25,
+    color: '#0B4F6C',
+    // borderWidth: 0.5,
+    // borderRadius: 1,
+    backgroundColor: 'rgba(52, 52, 52, 0)',
+    fontSize: 40,
+    textAlign: 'center',
+    fontFamily: 'Avenir-Medium',
+    marginLeft: 5,
+    bottom: 10,
+  },
+
   passengerContainer: {
     width: 310,
     borderWidth: 0.5,
