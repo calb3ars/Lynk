@@ -3,6 +3,7 @@ import Results from './results';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
 import Geocoder from 'react-native-geocoding';
+import * as API from './api_util';
 
 import {
   StyleSheet,
@@ -50,16 +51,20 @@ class Form extends Component {
   }
 
   componentDidMount(){
-
+    console.log("in did mount");
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           startLat: position.coords.latitude,
           startLng: position.coords.longitude,
           error: "",
-        });
+        }, API.getAddress(position.coords.latitude, position.coords.longitude));
       },
-      (error) => this.setState({ error: error.message }),
+      (error) => {
+        // console.log("start position error")
+        this.setState({ error: error.message })
+        // alert(JSON.stringify(error))
+      },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     this.fetchLyftToken();
