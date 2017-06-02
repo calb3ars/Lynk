@@ -12,7 +12,8 @@
     "react-native-button": "^1.8.2",
     "react-native-geocoding": "^0.1.0",
     "react-native-maps": "^0.13.1",
-    "react-native-radio-buttons": "^0.14.0"
+    "react-native-radio-buttons": "^0.14.0",
+    "react-native-vector-icons": "^4.2.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

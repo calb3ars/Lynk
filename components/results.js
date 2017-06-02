@@ -59,6 +59,7 @@ export default class Results extends Component {
 
     let lyftToken = this.state.lyftToken;
     let rideUrl = this.state.lyftUrl;
+
     fetch(rideUrl,{
       method: 'GET',
       headers: {
@@ -67,6 +68,9 @@ export default class Results extends Component {
     }).then(response => {
         if (response.status !== 200){
           console.log('fetchLystList. Status code: ' + response.status);
+          response.json().then(data =>{
+            console.log(data)
+          })
           return;
         }
         response.json().then(data => {

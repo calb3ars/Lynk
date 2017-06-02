@@ -3,6 +3,7 @@ import Results from './results';
 import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
 import Geocoder from 'react-native-geocoding';
+import * as API from './api_util';
 
 import {
   StyleSheet,
@@ -50,16 +51,20 @@ class Form extends Component {
   }
 
   componentDidMount(){
-
+    // console.log("in did mount");
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           startLat: position.coords.latitude,
           startLng: position.coords.longitude,
           error: "",
-        });
+        }, this.getAddress(position.coords.latitude, position.coords.longitude));
       },
-      (error) => this.setState({ error: error.message }),
+      (error) => {
+        // console.log("start position error")
+        this.setState({ error: error.message })
+        // alert(JSON.stringify(error))
+      },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     this.fetchLyftToken();
@@ -102,8 +107,7 @@ class Form extends Component {
 
   getStartCoords(address) {
     Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
-    Geocoder.getFromLocation(address).then(
-      json => {
+    Geocoder.getFromLocation(address).then(json => {
         let location = json.results[0].geometry.location;
         this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
       }
@@ -114,8 +118,7 @@ class Form extends Component {
 
   getEndCoords(address) {
     Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
-    Geocoder.getFromLocation(address).then(
-      json => {
+    Geocoder.getFromLocation(address).then(json => {
         let location = json.results[0].geometry.location;
         this.setState({endLat: location.lat, endLng: location.lng}, this.createUrl);
       }
@@ -133,6 +136,24 @@ class Form extends Component {
     }
   }
 
+  getAddress(lat,lng) {
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY`;
+
+    fetch(url).then(response => {
+      if (response.status !== 200){
+        console.log('getAddress. Status code: ' + response.status);
+        console.log(response);
+        return;
+      }
+      response.json().then(data => {
+        // console.log(data["results"][0]["formatted_address"]);
+        this.setState({ currentLocation: data["results"][0]["formatted_address"] });
+        // console.log(this.state.startAddress);
+      })
+    }).catch(err => {
+      console.log('Get Address Error: ', err);
+    })
+  }
   drawMarks(){
     if(this.state.startLng &&
       this.state.startLat){

@@ -22,7 +22,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		19A793E20BA94CF49D0D9FA0 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C3849A4B37479EAFCCD592 /* libAirMaps.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -37,9 +36,17 @@
 		2DCD954D1E0B4F2C00145EB5 /* lynkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* lynkTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-
-		8A687D531EC3CCDA0095DD52 /* Lynk_iPhone7.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A687D521EC3CCDA0095DD52 /* Lynk_iPhone7.png */; };
-
+		8ADAE4F71EE0D42900A26BC2 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4ED1EE0D42900A26BC2 /* Entypo.ttf */; };
+		8ADAE4F81EE0D42900A26BC2 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4EE1EE0D42900A26BC2 /* EvilIcons.ttf */; };
+		8ADAE4F91EE0D42900A26BC2 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4EF1EE0D42900A26BC2 /* FontAwesome.ttf */; };
+		8ADAE4FA1EE0D42900A26BC2 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4F01EE0D42900A26BC2 /* Foundation.ttf */; };
+		8ADAE4FB1EE0D42900A26BC2 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4F11EE0D42900A26BC2 /* Ionicons.ttf */; };
+		8ADAE4FC1EE0D42900A26BC2 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4F21EE0D42900A26BC2 /* MaterialCommunityIcons.ttf */; };
+		8ADAE4FD1EE0D42900A26BC2 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4F31EE0D42900A26BC2 /* MaterialIcons.ttf */; };
+		8ADAE4FE1EE0D42900A26BC2 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4F41EE0D42900A26BC2 /* Octicons.ttf */; };
+		8ADAE4FF1EE0D42900A26BC2 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4F51EE0D42900A26BC2 /* SimpleLineIcons.ttf */; };
+		8ADAE5001EE0D42900A26BC2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8ADAE4F61EE0D42900A26BC2 /* Zocial.ttf */; };
+		D74B4B900AA64ABBA8D3ADAA /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE5F4BF4B0D4BD19A046A1A /* libAirMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -232,9 +239,9 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		8AD799621EC2429900CF92A2 /* PBXContainerItemProxy */ = {
+		8ADAE4D11EE0D2B300A26BC2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D5924AAC107B410A872478CA /* AirMaps.xcodeproj */;
+			containerPortal = 64EA3DEC5CBE4E53BBC9BD91 /* AirMaps.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
@@ -264,12 +271,20 @@
 		2D02E47B1E0B4A5D006451C7 /* lynk-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lynk-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* lynk-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "lynk-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		64EA3DEC5CBE4E53BBC9BD91 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		8A687D521EC3CCDA0095DD52 /* Lynk_iPhone7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Lynk_iPhone7.png; path = ../assets/Lynk_iPhone7.png; sourceTree = "<group>"; };
-		D5924AAC107B410A872478CA /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
-		E9C3849A4B37479EAFCCD592 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
-
+		8ADAE4ED1EE0D42900A26BC2 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		8ADAE4EE1EE0D42900A26BC2 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		8ADAE4EF1EE0D42900A26BC2 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		8ADAE4F01EE0D42900A26BC2 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		8ADAE4F11EE0D42900A26BC2 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		8ADAE4F21EE0D42900A26BC2 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		8ADAE4F31EE0D42900A26BC2 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		8ADAE4F41EE0D42900A26BC2 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		8ADAE4F51EE0D42900A26BC2 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		8ADAE4F61EE0D42900A26BC2 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		EFE5F4BF4B0D4BD19A046A1A /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,8 +311,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				C59CE794B1DD4121A18B6668 /* libAirMaps.a in Frameworks */,
-
+				D74B4B900AA64ABBA8D3ADAA /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,12 +420,12 @@
 		13B07FAE1A68108700A75B9A /* lynk */ = {
 			isa = PBXGroup;
 			children = (
+				8ADAE4EC1EE0D42900A26BC2 /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				8A687D521EC3CCDA0095DD52 /* Lynk_iPhone7.png */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -465,8 +479,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				97688E853DC34AC7B3B004AC /* AirMaps.xcodeproj */,
-
+				64EA3DEC5CBE4E53BBC9BD91 /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -503,12 +516,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8AD7995F1EC2429700CF92A2 /* Products */ = {
+		8ADAE4CE1EE0D2B200A26BC2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8AD799631EC2429900CF92A2 /* libAirMaps.a */,
+				8ADAE4D21EE0D2B300A26BC2 /* libAirMaps.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8ADAE4EC1EE0D42900A26BC2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8ADAE4ED1EE0D42900A26BC2 /* Entypo.ttf */,
+				8ADAE4EE1EE0D42900A26BC2 /* EvilIcons.ttf */,
+				8ADAE4EF1EE0D42900A26BC2 /* FontAwesome.ttf */,
+				8ADAE4F01EE0D42900A26BC2 /* Foundation.ttf */,
+				8ADAE4F11EE0D42900A26BC2 /* Ionicons.ttf */,
+				8ADAE4F21EE0D42900A26BC2 /* MaterialCommunityIcons.ttf */,
+				8ADAE4F31EE0D42900A26BC2 /* MaterialIcons.ttf */,
+				8ADAE4F41EE0D42900A26BC2 /* Octicons.ttf */,
+				8ADAE4F51EE0D42900A26BC2 /* SimpleLineIcons.ttf */,
+				8ADAE4F61EE0D42900A26BC2 /* Zocial.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -600,7 +631,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 9EBUFSGV6P;
+						DevelopmentTeam = S92UGQ79WV;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -626,8 +657,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 8AD7995F1EC2429700CF92A2 /* Products */;
-					ProjectRef = D5924AAC107B410A872478CA /* AirMaps.xcodeproj */;
+					ProductGroup = 8ADAE4CE1EE0D2B200A26BC2 /* Products */;
+					ProjectRef = 64EA3DEC5CBE4E53BBC9BD91 /* AirMaps.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -860,11 +891,11 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8AD799631EC2429900CF92A2 /* libAirMaps.a */ = {
+		8ADAE4D21EE0D2B300A26BC2 /* libAirMaps.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libAirMaps.a;
-			remoteRef = 8AD799621EC2429900CF92A2 /* PBXContainerItemProxy */;
+			remoteRef = 8ADAE4D11EE0D2B300A26BC2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -881,9 +912,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ADAE4FE1EE0D42900A26BC2 /* Octicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				8ADAE4F91EE0D42900A26BC2 /* FontAwesome.ttf in Resources */,
+				8ADAE4F81EE0D42900A26BC2 /* EvilIcons.ttf in Resources */,
+				8ADAE5001EE0D42900A26BC2 /* Zocial.ttf in Resources */,
+				8ADAE4FF1EE0D42900A26BC2 /* SimpleLineIcons.ttf in Resources */,
+				8ADAE4FB1EE0D42900A26BC2 /* Ionicons.ttf in Resources */,
+				8ADAE4FA1EE0D42900A26BC2 /* Foundation.ttf in Resources */,
+				8ADAE4FD1EE0D42900A26BC2 /* MaterialIcons.ttf in Resources */,
+				8ADAE4F71EE0D42900A26BC2 /* Entypo.ttf in Resources */,
+				8ADAE4FC1EE0D42900A26BC2 /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				8A687D531EC3CCDA0095DD52 /* Lynk_iPhone7.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1055,10 +1095,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 9EBUFSGV6P;
+				DEVELOPMENT_TEAM = S92UGQ79WV;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/**",
@@ -1072,6 +1111,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = lynk;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1080,9 +1120,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9EBUFSGV6P;
+				DEVELOPMENT_TEAM = S92UGQ79WV;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-maps/ios/**",
@@ -1096,6 +1135,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = lynk;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

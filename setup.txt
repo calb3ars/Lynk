@@ -3,3 +3,16 @@ brew install --HEAD watchman
 brew install flow
 npm install -g react-native-cli
 react-native init myProject
+
+
+rm -rf ios android node_modules
+npm install
+react-native upgrade
+react-native link
+
+for AIRMap not found warning:
+react-native unlink react-native-maps
+react-native link react-native-maps
+
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>This application uses your location to determine available rides nearest you.</string>
