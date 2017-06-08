@@ -4,6 +4,7 @@ import PassengerButton from './passenger_button';
 import Button  from 'react-native-button';
 import Geocoder from 'react-native-geocoding';
 import * as API from './api_util';
+import * as KEYS from './key';
 
 import {
   StyleSheet,
@@ -70,7 +71,7 @@ class Form extends Component {
   }
 
   fetchLyftToken(){
-    let lyftToken = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
+    let lyftToken = KEYS.lyftToken;
     let url = 'https://api.lyft.com/oauth/token';
     fetch(url, {
       method: 'POST',
@@ -105,7 +106,7 @@ class Form extends Component {
   }
 
   getStartCoords(address) {
-    Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
+    Geocoder.setApiKey(KEYS.googleApiKey);
     Geocoder.getFromLocation(address).then(json => {
         let location = json.results[0].geometry.location;
         this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
@@ -116,7 +117,7 @@ class Form extends Component {
   }
 
   getEndCoords(address) {
-    Geocoder.setApiKey('AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY');
+    Geocoder.setApiKey(KEYS.googleApiKey);
     Geocoder.getFromLocation(address).then(json => {
         let location = json.results[0].geometry.location;
         this.setState({endLat: location.lat, endLng: location.lng}, this.createUrl);
@@ -136,7 +137,7 @@ class Form extends Component {
   }
 
   getAddress(lat,lng) {
-    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY`;
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${KEYS.googleApiKey}`;
 
     fetch(url).then(response => {
       if (response.status !== 200){
@@ -183,7 +184,7 @@ class Form extends Component {
         this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
                        lyftRedirectUrl: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&destination[latitude]=${endLat}&destination[longitude]=${endLng}`,
                        uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`,
-                       uberRedirectUrl: `uber://?client_id=<NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>&action=setPickup&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`})
+                       uberRedirectUrl: `uber://?client_id=<${KEYS.uberClientId}>&action=setPickup&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`})
       }
   }
 

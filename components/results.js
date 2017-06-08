@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RideResults from './ride_results';
 import * as Parsers from './data_parser';
+import * as KEYS from './key';
 import {
   StyleSheet,
   Image,
@@ -30,7 +31,7 @@ export default class Results extends Component {
 
 
   fetchLyftToken(){
-    let lyft_auth_token = 'cUNXd2ZxU2hpUU9POkhHUE5xcUtoQ1RONU5zSkRyS21sMjgzcG44TkFOUG56';
+    let lyft_auth_token = KEYS.lyftAuthToken;
     let url = 'https://api.lyft.com/oauth/token';
     fetch(url, {
       method: 'POST',
@@ -84,7 +85,7 @@ export default class Results extends Component {
   fetchUberRides(){
     let counter = 0;
     let url = this.state.uberUrl;
-    let serverToken = 'Cwy6MC7KQ1jFGY_8cTA8UW6Ry145Y2eMlsypiXxG';
+    let serverToken = KEYS.uberServerToken;
     fetch(url, {
       method: 'GET',
       headers: {
