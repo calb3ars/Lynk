@@ -41,7 +41,6 @@ class Form extends Component {
     this.createUrl.bind(this);
     this.getCoords.bind(this);
     this.drawMarks.bind(this);
-
   }
 
   clearErrors(){
@@ -146,9 +145,7 @@ class Form extends Component {
         return;
       }
       response.json().then(data => {
-        // console.log(data["results"][0]["formatted_address"]);
-        this.setState({ currentLocation: data["results"][0]["formatted_address"] });
-        // console.log(this.state.startAddress);
+        this.setState({ startAddress: data["results"][0]["formatted_address"] });
       })
     }).catch(err => {
       console.log('Get Address Error: ', err);
@@ -221,7 +218,7 @@ class Form extends Component {
               this.getCoords();
               this.refs.SecondInput.focus();
             }}
-            value={this.state.currentLocation} />
+            value={this.state.startAddress} />
 
           <TextInput
             ref='SecondInput'
@@ -232,7 +229,7 @@ class Form extends Component {
             onSubmitEditing={() => this.getCoords()}
             placeholderTextColor= '#A7D1CC'
             clearButtonMode="always"
-            value={this.state.destination} />
+            value={this.state.endAddress} />
         </KeyboardAvoidingView>
         <View style={styles.passengerContainer}>
           <Text style={styles.passengerText}># Seats</Text>
