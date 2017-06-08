@@ -41,7 +41,6 @@ class Form extends Component {
     this.createUrl.bind(this);
     this.getCoords.bind(this);
     this.drawMarks.bind(this);
-
   }
 
   clearErrors(){
@@ -146,14 +145,13 @@ class Form extends Component {
         return;
       }
       response.json().then(data => {
-        // console.log(data["results"][0]["formatted_address"]);
-        this.setState({ currentLocation: data["results"][0]["formatted_address"] });
-        // console.log(this.state.startAddress);
+        this.setState({ startAddress: data["results"][0]["formatted_address"] });
       })
     }).catch(err => {
       console.log('Get Address Error: ', err);
     })
   }
+
   drawMarks(){
     if(this.state.startLng &&
       this.state.startLat){
@@ -214,12 +212,14 @@ class Form extends Component {
             autoCapitalize={'words'}
             placeholder="Pickup Location"
             placeholderTextColor= '#A7D1CC'
+            clearButtonMode="always"
             onChangeText={(startAddress) => this.setState({startAddress}, this.clearErrors.bind(this))}
             onSubmitEditing={() => {
               this.getCoords();
               this.refs.SecondInput.focus();
             }}
-            value={this.state.currentLocation} />
+            value={this.state.startAddress} />
+
           <TextInput
             ref='SecondInput'
             style={styles.inputForm}
@@ -228,7 +228,8 @@ class Form extends Component {
             onChangeText={(endAddress) => this.setState({endAddress}, this.clearErrors.bind(this))}
             onSubmitEditing={() => this.getCoords()}
             placeholderTextColor= '#A7D1CC'
-            value={this.state.destination} />
+            clearButtonMode="always"
+            value={this.state.endAddress} />
         </KeyboardAvoidingView>
         <View style={styles.passengerContainer}>
           <Text style={styles.passengerText}># Seats</Text>
