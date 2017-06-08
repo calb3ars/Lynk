@@ -154,6 +154,7 @@ class Form extends Component {
       console.log('Get Address Error: ', err);
     })
   }
+
   drawMarks(){
     if(this.state.startLng &&
       this.state.startLat){
@@ -214,12 +215,14 @@ class Form extends Component {
             autoCapitalize={'words'}
             placeholder="Pickup Location"
             placeholderTextColor= '#A7D1CC'
+            clearButtonMode="always"
             onChangeText={(startAddress) => this.setState({startAddress}, this.clearErrors.bind(this))}
             onSubmitEditing={() => {
               this.getCoords();
               this.refs.SecondInput.focus();
             }}
             value={this.state.currentLocation} />
+
           <TextInput
             ref='SecondInput'
             style={styles.inputForm}
@@ -228,6 +231,7 @@ class Form extends Component {
             onChangeText={(endAddress) => this.setState({endAddress}, this.clearErrors.bind(this))}
             onSubmitEditing={() => this.getCoords()}
             placeholderTextColor= '#A7D1CC'
+            clearButtonMode="always"
             value={this.state.destination} />
         </KeyboardAvoidingView>
         <View style={styles.passengerContainer}>
