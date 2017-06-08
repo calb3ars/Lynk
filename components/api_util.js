@@ -1,7 +1,7 @@
 // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
 
 export const getAddress = (lat,lng) => {
-  let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBU2mqWr39IFNszvttIscbHpZQpDfDe_dY`;
+  let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${KEYS.googleApiKey}`;
 
   fetch(url).then(response => {
     if (response.status !== 200){

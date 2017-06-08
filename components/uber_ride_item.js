@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as KEYS from './key';
 import {
   StyleSheet,
   Image,
@@ -23,7 +24,7 @@ export default class UberRideItem extends Component {
   buttonPress(){
     Linking.openURL(this.props.uberRedirectUrl)
     .catch(err => {
-      Linking.openURL('https://m.uber.com/sign-up?<client_id=NQ5t_E_CebtAze6Ci44XFTdiJtM2GH8x>');
+      Linking.openURL(`https://m.uber.com/sign-up?<client_id=${KEYS.uberClientId}>`);
     })
   }
 

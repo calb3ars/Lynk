@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as KEYS from './key.js';
 import {
   StyleSheet,
   Image,
@@ -21,7 +22,7 @@ export default class LyftRideItem extends Component {
   buttonPress(){
     Linking.openURL(this.props.lyftRedirectUrl)
       .catch(err => {
-        Linking.openURL("https://www.lyft.com/signup/SDKSIGNUP?clientId=qCWwfqShiQOO&sdkName=iOS_direct");
+        Linking.openURL(`https://www.lyft.com/signup/SDKSIGNUP?clientId=${KEYS.lyftClientId}&sdkName=iOS_direct`);
       });
   }
 
