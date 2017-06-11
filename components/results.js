@@ -52,7 +52,7 @@ export default class Results extends Component {
       if (response.status !== 200){
         console.log('fetchUberRides. Status code: ' + response.status);
         response.json().then(data => {
-          alert('Uber Error: ' + data.message);
+          alert(data.message);
         })
         return;
       }
