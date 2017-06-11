@@ -228,7 +228,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     backgroundColor: '#233D4D',
-    // justifyContent: 'center'
     textAlign: 'center',
     top: 200,
     right: 0,

@@ -9,9 +9,6 @@ import {
   Linking
 } from 'react-native';
 
-// Uses Uber Ride Estimates - price - API endpoint
-// Endpoint Doesn't include Surge pricing
-//
 export default class UberRideItem extends Component {
   constructor(props){
     super(props);

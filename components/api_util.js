@@ -1,35 +1,64 @@
-// https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=YOUR_API_KEY
+import * as KEYS from './key';
 
-export const getAddress = (lat,lng) => {
-  let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${KEYS.googleApiKey}`;
+export const fetchAddress = (lat,lng) => {
+  let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=
+             ${lat},${lng}&key=${KEYS.googleApiKey}`;
 
-  fetch(url).then(response => {
-    if (response.status !== 200){
-      console.log('getAddress. Status code: ' + response.status)
-      return;
-    }
-    response.json().then(data => {
-      console.log(data["results"][0]["formatted_address"]);
-      this.setState({ startAddress: data["results"][0]["formatted_address"] });
-    })
-  }).catch(err => {
-    console.log('Get Address Error: ', err);
-  })
+  return fetch(url);
 }
-//
-// fetch(rideUrl,{
-//   method: 'GET',
-//   headers: {
-//     'Authorization': 'bearer '+ lyftToken
-//   }
-// }).then(response => {
-//     if (response.status !== 200){
-//       console.log('fetchLystList. Status code: ' + response.status);
-//       return;
-//     }
-//     response.json().then(data => {
-//       this.setState({lyftRides: Parsers.LyftParser(data, this.state.riders)});
-//     });
-//   }).catch(err => {
-//     console.log('Fetch Lyft Rides Error :-S', err);
-//   });
+
+export const fetchLyftToken = () => {
+  let token = KEYS.lyftAuthToken;
+  let url = 'https://api.lyft.com/oauth/token';
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic '+ token
+    },
+    body: JSON.stringify({
+      "grant_type": "client_credentials",
+      "scope": "public"
+    })
+  });
+}
+
+
+export const fetchLyftRides = (token, url) => {
+  return fetch(url,{
+    method: 'GET',
+    headers: {
+      'Authorization': 'bearer '+ token
+    }
+  });
+}
+
+export const fetchUberRides = (url) => {
+  let serverToken = KEYS.uberServerToken;
+  
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Token '+ serverToken,
+      'Accept-Language': 'en_US'
+    }
+  });
+}
+
+export const generateUrls = (startLat, startLng, endLat, endLng) => {
+  return {
+    lyft: `https://api.lyft.com/v1/cost?start_lat=${startLat}
+      &start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
+    lyftRedirect: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}
+      &pickup[longitude]=${startLng}&destination[latitude]=${endLat}
+      &destination[longitude]=${endLng}`,
+    uber: `https://api.uber.com/v1.2/estimates/price?start_latitude=
+      ${startLat}&start_longitude=${startLng}&end_latitude=${endLat}
+      &end_longitude=${endLng}`,
+    uberRedirect: `uber://?client_id=<${KEYS.uberClientId}>&action=
+      setPickup&pickup[latitude]=${startLat}&pickup[longitude]=
+      ${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`
+  }
+}
