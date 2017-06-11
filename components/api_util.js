@@ -4,19 +4,14 @@ export const fetchAddress = (lat,lng) => {
   let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=
              ${lat},${lng}&key=${KEYS.googleApiKey}`;
 
-  fetch(url).then(response => {
-    if (response.status !== 200){
-      console.log('getAddress. Status code: ' + response.status)
-      return;
-    }
-    return response.json();
-  });
+  return fetch(url);
 }
 
 export const fetchLyftToken = () => {
   let token = KEYS.lyftAuthToken;
   let url = 'https://api.lyft.com/oauth/token';
-  fetch(url, {
+
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -26,46 +21,29 @@ export const fetchLyftToken = () => {
       "grant_type": "client_credentials",
       "scope": "public"
     })
-  }).then(response => {
-    if (response.status !== 200){
-      console.log('Looks like there was a problem. Status code: '
-                  + response.status);
-      return;
-    }
-    return response.json();
-  })
+  });
 }
 
+
 export const fetchLyftRides = (token, url) => {
-  fetch(url,{
+  return fetch(url,{
     method: 'GET',
     headers: {
       'Authorization': 'bearer '+ token
     }
-  }).then(response => {
-    if (response.status !== 200){
-      console.log('fetchLystList. Status code: ' + response.status);
-      return;
-    }
-    return response.json();
-  })
+  });
 }
 
 export const fetchUberRides = (url) => {
   let serverToken = KEYS.uberServerToken;
-  fetch(url, {
+  
+  return fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Token '+ serverToken,
       'Accept-Language': 'en_US'
     }
-  }).then(response => {
-    if (response.status !== 200){
-      console.log('fetchUberRides. Status code: ' + response.status);
-      return;
-    }
-    return response.json();
   });
 }
 

@@ -51,7 +51,6 @@ class Form extends Component {
   }
 
   componentDidMount(){
-    // console.log("in did mount");
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -61,36 +60,22 @@ class Form extends Component {
         }, this.getAddress(position.coords.latitude, position.coords.longitude));
       },
       (error) => {
-        // console.log("start position error")
         this.setState({ error: error.message })
-        // alert(JSON.stringify(error))
       },
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-    this.fetchLyftToken();
+    this.getLyftToken();
   }
 
-  fetchLyftToken(){
-    let lyftToken = KEYS.lyftAuthToken;
-    let url = 'https://api.lyft.com/oauth/token';
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic '+ lyftToken
-      },
-      body: JSON.stringify({
-        "grant_type": "client_credentials",
-        "scope": "public"
+  getLyftToken(){
+    API.fetchLyftToken().then(response => {
+      if (response.status !== 200){
+        return;
+      }
+      response.json().then(json => {
+        this.setState({ lyftToken: `${json.access_token}` });
       })
-    }).then(response => {
-        if (response.status !== 200){
-          return;
-        }
-        response.json().then(data => {
-          this.setState({lyftToken:`${data.access_token}`});
-      });
-    });
+    })
   }
 
   updateRiders(passengers) {
@@ -137,12 +122,9 @@ class Form extends Component {
   }
 
   getAddress(lat,lng) {
-    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${KEYS.googleApiKey}`;
-
-    fetch(url).then(response => {
+    API.fetchAddress(lat, lng).then(response => {
       if (response.status !== 200){
         console.log('getAddress. Status code: ' + response.status);
-        console.log(response);
         return;
       }
       response.json().then(data => {
@@ -173,19 +155,22 @@ class Form extends Component {
   }
   createUrl(){
     this.drawMarks()
-    if(this.state.startLng &&
-      this.state.startLat &&
-      this.state.endLng &&
-      this.state.endLat) {
-        let startLat = this.state.startLat.toFixed(6);
-        let startLng = this.state.startLng.toFixed(6);
-        let endLat = this.state.endLat.toFixed(6);
-        let endLng = this.state.endLng.toFixed(6);
-        this.setState({lyftUrl: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-                       lyftRedirectUrl: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&destination[latitude]=${endLat}&destination[longitude]=${endLng}`,
-                       uberUrl: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`,
-                       uberRedirectUrl: `uber://?client_id=<${KEYS.uberClientId}>&action=setPickup&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`})
-      }
+    if(this.state.startLng && this.state.startLat && this.state.endLng
+       && this.state.endLat) {
+      let startLat = this.state.startLat.toFixed(6);
+      let startLng = this.state.startLng.toFixed(6);
+      let endLat = this.state.endLat.toFixed(6);
+      let endLng = this.state.endLng.toFixed(6);
+
+      urls = API.generateUrls(startLat, startLng, endLat, endLng);
+
+      this.setState({
+        lyftUrl: urls.lyft,
+        lyftRedirectUrl: urls.lyftRedirect,
+        uberUrl: urls.uber,
+        uberRedirectUrl: urls.uberRedirect
+      })
+    }
   }
 
   handleButtonPress(){
