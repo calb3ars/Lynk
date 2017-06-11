@@ -30,31 +30,31 @@ export default class Results extends Component {
   }
 
 
-  fetchLyftToken(){
-    let lyft_auth_token = KEYS.lyftAuthToken;
-    let url = 'https://api.lyft.com/oauth/token';
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic '+ lyft_auth_token
-      },
-      body: JSON.stringify({
-        "grant_type": "client_credentials",
-        "scope": "public"
-      })
-    }).then(response => {
-        if (response.status !== 200){
-          console.log('Looks like there was a problem. Status code: ' + response.status);
-          return;
-        }
-        response.json().then(data => {
-        this.setState({lyftToken:`${data.access_token}`});
-      });
-    }).catch(err => {
-      console.log('Fetch Error :-S', err);
-    });
-  }
+  // fetchLyftToken(){
+  //   let lyft_auth_token = KEYS.lyftAuthToken;
+  //   let url = 'https://api.lyft.com/oauth/token';
+  //   fetch(url, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Basic '+ lyft_auth_token
+  //     },
+  //     body: JSON.stringify({
+  //       "grant_type": "client_credentials",
+  //       "scope": "public"
+  //     })
+  //   }).then(response => {
+  //       if (response.status !== 200){
+  //         console.log('Looks like there was a problem. Status code: ' + response.status);
+  //         return;
+  //       }
+  //       response.json().then(data => {
+  //       this.setState({lyftToken:`${data.access_token}`});
+  //     });
+  //   }).catch(err => {
+  //     console.log('Fetch Error :-S', err);
+  //   });
+  // }
 
   fetchLyftList(){
 
@@ -83,7 +83,6 @@ export default class Results extends Component {
   }
 
   fetchUberRides(){
-    let counter = 0;
     let url = this.state.uberUrl;
     let serverToken = KEYS.uberServerToken;
     fetch(url, {

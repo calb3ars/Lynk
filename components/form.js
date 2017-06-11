@@ -71,7 +71,7 @@ class Form extends Component {
   }
 
   fetchLyftToken(){
-    let lyftToken = KEYS.lyftToken;
+    let lyftToken = KEYS.lyftAuthToken;
     let url = 'https://api.lyft.com/oauth/token';
     fetch(url, {
       method: 'POST',
