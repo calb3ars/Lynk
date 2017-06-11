@@ -51,10 +51,13 @@ export default class Results extends Component {
     API.fetchUberRides(url).then(response => {
       if (response.status !== 200){
         console.log('fetchUberRides. Status code: ' + response.status);
+        response.json().then(data => {
+          alert('Uber Error: ' + data.message);
+        })
         return;
       }
-      response.json().then(promise => {
-        this.setState({uberRides: Parsers.UberParser(promise, this.state.riders)});
+      response.json().then(data => {
+        this.setState({uberRides: Parsers.UberParser(data, this.state.riders)});
       });
     }).catch(err => {
       console.log('Fetch Uber Rides Error :-S', err);
