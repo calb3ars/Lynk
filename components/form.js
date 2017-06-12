@@ -57,7 +57,7 @@ class Form extends Component {
           startLat: position.coords.latitude,
           startLng: position.coords.longitude,
           error: "",
-        }, this.getAddress(position.coords.latitude, position.coords.longitude));
+        }, this.getStartAddress(position.coords.latitude, position.coords.longitude));
       },
       (error) => {
         this.setState({ error: error.message })
@@ -94,7 +94,10 @@ class Form extends Component {
     Geocoder.setApiKey(KEYS.googleApiKey);
     Geocoder.getFromLocation(address).then(json => {
         let location = json.results[0].geometry.location;
-        this.setState({startLat: location.lat, startLng: location.lng}, this.createUrl);
+        this.setState({startLat: location.lat, startLng: location.lng}, () => {
+          // this.getStartAddress(this.state.startLat, this.state.startLng);
+          this.createUrl();
+        });
       }
     ).catch(error => {
       this.setState( { error: "Invalid Pickup Location" } );
@@ -105,7 +108,10 @@ class Form extends Component {
     Geocoder.setApiKey(KEYS.googleApiKey);
     Geocoder.getFromLocation(address).then(json => {
         let location = json.results[0].geometry.location;
-        this.setState({endLat: location.lat, endLng: location.lng}, this.createUrl);
+        this.setState({endLat: location.lat, endLng: location.lng}, () => {
+          // this.getEndAddress(this.state.endLat, this.state.endLng);
+          this.createUrl();
+        });
       }
     ).catch(error => {
       this.setState( { error: "Invalid Destination" } );
@@ -121,7 +127,7 @@ class Form extends Component {
     }
   }
 
-  getAddress(lat,lng) {
+  getStartAddress(lat,lng) {
     API.fetchAddress(lat, lng).then(response => {
       if (response.status !== 200){
         console.log('getAddress. Status code: ' + response.status);
@@ -129,6 +135,20 @@ class Form extends Component {
       }
       response.json().then(data => {
         this.setState({ startAddress: data["results"][0]["formatted_address"] });
+      })
+    }).catch(err => {
+      console.log('Get Address Error: ', err);
+    })
+  }
+
+  getEndAddress(lat,lng) {
+    API.fetchAddress(lat, lng).then(response => {
+      if (response.status !== 200){
+        console.log('getAddress. Status code: ' + response.status);
+        return;
+      }
+      response.json().then(data => {
+        this.setState({ endAddress: data["results"][0]["formatted_address"] });
       })
     }).catch(err => {
       console.log('Get Address Error: ', err);
