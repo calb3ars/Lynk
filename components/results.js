@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   logos: {
     width: 375,
     height: 120,
+    alignSelf: 'center'
   },
 
   listingsList: {
