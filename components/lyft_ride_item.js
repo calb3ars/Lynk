@@ -27,12 +27,10 @@ export default class LyftRideItem extends Component {
   }
 
   _onShowUnderlay(){
-    console.log("Toggle Pressed");
     this.setState({ pressed: true });
   }
 
   _onHideUnderlay(){
-    console.log("Toggle Pressed");
     this.setState({ pressed: false });
   }
 
