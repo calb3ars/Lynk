@@ -1,8 +1,7 @@
 import * as KEYS from './key';
 
 export const fetchAddress = (lat,lng) => {
-  let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=
-             ${lat},${lng}&key=${KEYS.googleApiKey}`;
+  let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${KEYS.googleApiKey}`;
 
   return fetch(url);
 }
@@ -36,7 +35,7 @@ export const fetchLyftRides = (token, url) => {
 
 export const fetchUberRides = (url) => {
   let serverToken = KEYS.uberServerToken;
-  
+
   return fetch(url, {
     method: 'GET',
     headers: {
@@ -49,16 +48,9 @@ export const fetchUberRides = (url) => {
 
 export const generateUrls = (startLat, startLng, endLat, endLng) => {
   return {
-    lyft: `https://api.lyft.com/v1/cost?start_lat=${startLat}
-      &start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
-    lyftRedirect: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}
-      &pickup[longitude]=${startLng}&destination[latitude]=${endLat}
-      &destination[longitude]=${endLng}`,
-    uber: `https://api.uber.com/v1.2/estimates/price?start_latitude=
-      ${startLat}&start_longitude=${startLng}&end_latitude=${endLat}
-      &end_longitude=${endLng}`,
-    uberRedirect: `uber://?client_id=<${KEYS.uberClientId}>&action=
-      setPickup&pickup[latitude]=${startLat}&pickup[longitude]=
-      ${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`
+    lyft: `https://api.lyft.com/v1/cost?start_lat=${startLat}&start_lng=${startLng}&end_lat=${endLat}&end_lng=${endLng}`,
+    lyftRedirect: `lyft://ridetype?id=lyft&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&destination[latitude]=${endLat}&destination[longitude]=${endLng}`,
+    uber: `https://api.uber.com/v1.2/estimates/price?start_latitude=${startLat}&start_longitude=${startLng}&end_latitude=${endLat}&end_longitude=${endLng}`,
+    uberRedirect: `uber://?client_id=<${KEYS.uberClientId}>&actsetPickup&pickup[latitude]=${startLat}&pickup[longitude]=${startLng}&dropoff[latitude]=${endLat}&dropoff[longitude]=${endLng}`
   }
 }
