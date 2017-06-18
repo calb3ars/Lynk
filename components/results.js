@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
 
   logos: {
-    width: 375,
+    width: 414,
     height: 120,
     alignSelf: 'center'
   },
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   },
 
   loading: {
-    width: 390,
+    width: 414,
     height: 800,
   }
 });
