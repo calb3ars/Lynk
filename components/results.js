@@ -69,7 +69,7 @@ export default class Results extends Component {
     if (this.state.lyftRides && this.state.uberRides){
       return (
         <View style={styles.resultsContainer}>
-          <Image source={require('../assets/lyft_uber_2_large.png')} style={styles.logos}/>
+          <Image source={require('../assets/lyft_uber_2.png')} style={styles.logos}/>
           <RideResults lyftRides={this.state.lyftRides}
             uberRides={this.state.uberRides}
             lyftRedirectUrl={this.state.lyftRedirectUrl}
